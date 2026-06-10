@@ -1,0 +1,18 @@
+# Corpus data and virtualenv
+data/
+.venv/
+
+# Python
+__pycache__/
+*.py[codz]
+*.egg-info/
+
+# Tooling
+.ruff_cache/
+
+# Secrets / environment
+.env
+.envrc
+
+# macOS
+.DS_Store

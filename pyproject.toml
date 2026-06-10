@@ -1,0 +1,25 @@
+[project]
+name = "machina-pauliana"
+version = "0.1.0"
+requires-python = ">=3.11"
+dependencies = [
+    "asyncpg",
+    "aiolimiter",
+    "httpx[http2]",
+    "ijson",
+    "lxml",
+    "psycopg",
+    "tenacity",
+    "tqdm",
+    "openai",
+    "python-dotenv",
+]
+
+[tool.ruff]
+line-length = 80
+
+[tool.ruff.format]
+docstring-code-format = true
+
+[tool.ruff.lint]
+extend-select = ["E501"]
