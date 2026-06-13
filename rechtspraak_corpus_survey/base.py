@@ -93,10 +93,8 @@ class OverigSectie(BaseModel):
 
 
 class Annotatie(BaseModel):
-    ecli: str | None = Field(
-        description="ECLI-nummer zoals gevonden in de XML, of null."
-    )
-
+    # N.B. no `ecli` field: the ECLI is set deterministically from the XML
+    # metadata (see extract_ecli), never by the LLM.
     procesverloop: list[str] = Field(
         default_factory=list,
         description=(
@@ -166,10 +164,13 @@ class Profile:
 # ---------------------------------------------------------------------------
 
 
+NS = "http://www.rechtspraak.nl/schema/rechtspraak-1.0"
+DCTERMS = "http://purl.org/dc/terms/"
+
+
 def extract_uitspraak(xml_path: Path) -> str:
     """Return only the <uitspraak> element, stripping RDF metadata.
     Falls back to full file text if parsing fails."""
-    NS = "http://www.rechtspraak.nl/schema/rechtspraak-1.0"
     ET.register_namespace("", NS)
     try:
         root = ET.parse(xml_path).getroot()
@@ -179,6 +180,35 @@ def extract_uitspraak(xml_path: Path) -> str:
     except ET.ParseError:
         pass
     return xml_path.read_text(encoding="utf-8")
+
+
+def extract_ecli(xml_path: Path) -> str | None:
+    """Return the ECLI from the XML metadata, deterministically (never from the
+    LLM). Reads the bare <dcterms:identifier> in the RDF block; falls back to
+    the <uitspraak> id attribute, then to the filename stem."""
+    try:
+        root = ET.parse(xml_path).getroot()
+    except ET.ParseError:
+        return _ecli_from_name(xml_path)
+
+    for ident in root.iter(f"{{{DCTERMS}}}identifier"):
+        text = (ident.text or "").strip()
+        if text.startswith("ECLI:"):
+            return text
+
+    uitspraak = root.find(f"{{{NS}}}uitspraak")
+    if uitspraak is not None:
+        doc_id = uitspraak.get("id", "")
+        if doc_id.startswith("ECLI:"):
+            return doc_id.removesuffix(":DOC")
+
+    return _ecli_from_name(xml_path)
+
+
+def _ecli_from_name(xml_path: Path) -> str | None:
+    """Reconstruct the ECLI from a filename like ECLI_NL_HR_1992_ZC0615.xml."""
+    stem = xml_path.stem
+    return stem.replace("_", ":") if stem.startswith("ECLI") else None
 
 
 # ---------------------------------------------------------------------------
@@ -245,15 +275,17 @@ def _empty_result(identifier: str, error: str | None = None) -> dict:
 
 
 def process_file(xml_path: Path, profile: Profile) -> dict:
-    """Annotate one XML file tagging the result with its source filename.
-    Falls back to an empty result carrying the error message on failure."""
+    """Annotate one XML file tagging the result with its ECLI and source
+    filename. The ECLI is taken deterministically from the XML metadata, not
+    from the LLM. Falls back to an empty result carrying the error message on
+    failure."""
     xml_content = extract_uitspraak(xml_path)
+    ecli = extract_ecli(xml_path)
     try:
         result = call_llm(xml_content, profile)
     except Exception as e:
-        result = _empty_result(xml_path.stem, error=str(e))
-    result["source_file"] = xml_path.name
-    return result
+        result = _empty_result(ecli, error=str(e))
+    return {"ecli": ecli, **result, "source_file": xml_path.name}
 
 
 def in_court(path: Path, root: Path, prefix: str) -> bool:

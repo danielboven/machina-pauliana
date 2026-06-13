@@ -17,6 +17,7 @@ few-shot examples live in a `Profile` and are selected on the command line:
 - `base.py`: the shared pipeline, schema and batch runner.
 - `rechtbank.py`: the `RECHTBANK` profile (vonnis, eerste aanleg).
 - `gerechtshof.py`: the `GERECHTSHOF` profile (arrest, hoger beroep).
+- `hoge_raad.py`: the `HOGE_RAAD` profile (arrest, cassatie).
 - `cli.py` / `__init__.py`: argument parsing and the court, profile registry.
 
 ## The section model
@@ -55,7 +56,7 @@ loops with structured output.
 ## Usage
 
 Run it as a module from the main directory (`machina-pauliana/`), choosing a
-court with `--court` (`RB` = rechtbank, `GH` = gerechtshof):
+court with `--court` (`RB` = rechtbank, `GH` = gerechtshof, `HR` = Hoge Raad):
 
 ```
 python -m rechtspraak_corpus_survey \
@@ -77,9 +78,11 @@ You might be able to tweak the interval based on your API rate limits.
 
 ## Output
 
-A JSONL file, one object per document. Each object carries the `ecli`, the six
-section lists (each entry is the section's opening tag including its title) and
-the `source_file`.
+A JSONL file, one object per document. Each object carries the `ecli`, five
+standard section lists, `overig`, and the `source_file`. Entries in the five
+standard lists are opening tags including their title. Each `overig` entry is
+an object with a short `label` and the opening tag in `begin`. A failed request
+produces empty lists and an additional `error` field, so the batch can continue.
 
 ## Key references
 

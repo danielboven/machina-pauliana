@@ -7,10 +7,10 @@ Bundled into GERECHTSHOF a profile used in base.py.
 This is the hoger-beroep counterpart of the rechtbank profile. It keeps the
 same five-section model as RB but the recognition rules differ, such as:
 
-  procesverloop  — For appeal TWO sections are common: "Het geding in eerste
-                   aanleg" (pointer to the appealed vonnis) AND "Het geding in
+  procesverloop  — For appeal two sections are common: "Het geding in eerste
+                   aanleg" (pointer to the appealed vonnis) and "Het geding in
                    hoger beroep". Both go in the list.
-  geschil        — Mainly focused on GRIEVEN.
+  geschil        — Mainly focused on grieven.
   feiten         — Only when structurally separate. The hof may adopt the
                    RB facts, annotate only if it has its own heading.
 """
@@ -53,7 +53,6 @@ FEW_SHOT_XML_FLAT = """<parablock>
 <para>Het hof: bekrachtigt het vonnis waarvan beroep; [...]</para>"""
 
 FEW_SHOT_JSON_FLAT = {
-    "ecli": "ECLI:NL:GHSGR:2011:BU8981",
     "procesverloop": [
         "<para>1. Het geding in eerste aanleg (zaaknr. 68958 HA ZA 09-403)</para>",
         "<para>2. Het geding in hoger beroep</para>",
@@ -111,7 +110,6 @@ FEW_SHOT_XML_SECTION = """<section>
 </section>"""
 
 FEW_SHOT_JSON_SECTION = {
-    "ecli": "ECLI:NL:GHARL:2016:463",
     "procesverloop": [
         "<section>\n  <title><nr>1</nr>Het geding in eerste aanleg</title>",
         "<section>\n  <title><nr>2</nr>Het geding in hoger beroep</title>",

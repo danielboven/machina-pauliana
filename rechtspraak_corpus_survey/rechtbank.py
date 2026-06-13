@@ -49,7 +49,6 @@ FEW_SHOT_XML = """<parablock>
 <para>6.1. wijst de vorderingen af;</para>"""
 
 FEW_SHOT_JSON = {
-    "ecli": "ECLI:NL:RBSHE:2010:BM8082",
     "procesverloop": [
         "<para>1. De procedure</para>"
     ],
@@ -105,7 +104,6 @@ FEW_SHOT_XML_COMMON = """<section>
 </section>"""
 
 FEW_SHOT_JSON_COMMON = {
-    "ecli": "ECLI:NL:RBAMS:2018:6632",
     "procesverloop": [
         "<section>\n  <title><nr>1</nr>De procedure</title>"
     ],

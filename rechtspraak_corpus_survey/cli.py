@@ -1,6 +1,6 @@
 """Command-line program: argument parsing and dispatch.
 
-Selects a court Profile via --court (RB / GH) and hands it to the shared
+Selects a court Profile via --court (RB / GH / HR) and hands it to the shared
 batch runner in base.py.
 
 Usage:
@@ -22,7 +22,7 @@ def main():
         type=str.upper,
         choices=COURT_CHOICES,
         required=True,
-        help="Welk gerecht (RB=rechtbank, GH=gerechtshof).",
+        help="Welk gerecht (RB=rechtbank, GH=gerechtshof, HR=Hoge Raad).",
     )
     parser.add_argument(
         "--input_dir", required=True, help="Map met XML-bestanden"
