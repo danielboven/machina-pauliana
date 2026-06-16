@@ -1,6 +1,7 @@
-"""Command-line program: argument parsing and non-interactive ANSI renderer
-(full document with sections coloured). The interactive default goes to
-curses TUI in tui.py. Both modes draw the same view-model (render.py).
+"""Command-line program: argument parsing and the non-interactive renderer
+(full document, sections coloured). The interactive default goes to the Textual
+reviewer in tui.py. Both modes display the same rich renderable (render.py),
+meaning that `--print` and the TUI show identical output.
 """
 
 import argparse
@@ -8,61 +9,24 @@ import sys
 from pathlib import Path
 
 from lxml import etree
+from rich.console import Console
 
 from ..core.xmlutil import gather_xml, in_court
 from ..lexicon import UnknownCourtError
-from .render import render_document
+from .render import doc_renderable, render_doc
 from .tui import review_folder
-
-LABEL_COLORS = {
-    "procesverloop": "\033[36m",
-    "feiten": "\033[33m",
-    "geschil": "\033[35m",
-    "overwegingen": "\033[34m",
-    "beslissing": "\033[32m",
-    "overig": "\033[90m",
-    "preamble": "\033[90m",
-}
-RESET = "\033[0m"
-BOLD = "\033[1m"
 
 # Errors that are per-document (note, not fatal to a batch run)
 _DOC_ERRORS = (etree.XMLSyntaxError, UnknownCourtError, NotImplementedError)
 
 
-def supports_color() -> bool:
-    """Returns True if stdout is a real TTY and likely supports ANSI colors."""
-    return hasattr(sys.stdout, "isatty") and sys.stdout.isatty()
-
-
-def _banner(path, strategy, show_strategy):
-    """Helper that builds the separator banner printed above each document.
-    Includes the filename and optionally the segmentation strategy used."""
-    line = "─" * 64
-    head = f"{line}\n  {path.name}"
-    if show_strategy:
-        head += f"   (strategy: {strategy})"
-    return f"{head}\n{line}"
-
-
 def print_document(path, xml_bytes, color):
-    """Prints a rendered document to stdout one line at a time.
-    Each section gets its ANSI color from LABEL_COLORS when color isTrue."""
-    lines, meta = render_document(xml_bytes)
-    print(_banner(path, meta["strategy"], True))
-    for ln in lines:
-        if ln.kind == "blank":
-            print()
-            continue
-        prefix = "" if ln.kind == "banner" else "  │ "
-        text = prefix + ln.text
-        if color:
-            c = LABEL_COLORS.get(ln.label, "")
-            attr = BOLD if ln.kind == "banner" else ""
-            print(f"{attr}{c}{text}{RESET}")
-        else:
-            print(text)
-    print()
+    """Renders one document to stdout via rich."""
+    rd = render_doc(xml_bytes)
+    console = Console(no_color=not color)
+    console.rule(f"{path.name}   (strategy: {rd.meta['strategy']})")
+    console.print(doc_renderable(rd))
+    console.print()
 
 
 def _run_print(root, color, court):
@@ -107,8 +71,8 @@ def main():
         "--print",
         dest="dump",
         action="store_true",
-        help="Non-interactive: print each whole document, coloured "
-        "by section (ANSI).",
+        help="Non-interactive: render each whole document as Markdown, "
+        "with a banner per section.",
     )
     p.add_argument(
         "--no-color",
@@ -130,7 +94,8 @@ def main():
         print(f"Path not found: {root}", file=sys.stderr)
         sys.exit(1)
 
-    color = supports_color() and not args.no_color
+    # rich auto-detects a non-TTY and drops styling (note this was not tested).
+    color = not args.no_color
 
     if args.dump:
         _run_print(root, color, args.court)

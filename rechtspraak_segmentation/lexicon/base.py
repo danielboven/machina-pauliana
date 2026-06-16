@@ -32,6 +32,28 @@ _MAX_HEADING_WORDS = 16
 # Default for the optional "narrative facts": matches nothing
 _NEVER = re.compile(r"(?!x)x")
 
+# A bare statute citation as a standalone title ("Artikel 4") is embedded law,
+# not a logical section boundary.
+_STATUTE_CITE_RE = re.compile(
+    r"^\s*(de\s+|het\s+)?(artikel|art\.?|§)\s*\d", re.I
+)
+
+# A geschil heading that refers to first-instance proceedings is kept as
+# geschil even inside the reasoning region, not absorbed as overwegingen.
+_FIRST_INSTANCE_RECAP_RE = re.compile(
+    r"geschil.{0,40}(eerste\s+aanleg|eerste\s+instantie|"
+    r"van\s+de\s+(rechtbank|kantonrechter))",
+    re.I,
+)
+
+# The dictum heading is sometimes followed by its operative sentence
+# ("Het hof, recht doende ..."), which also passes the beslissing label gate.
+_DICTUM_SENTENCE_RE = re.compile(
+    r"(recht\s*doende|^\s*(het\s+hof|het\s+gerechtshof|de\s+rechtbank|"
+    r"de\s+kantonrechter|de\s+voorzieningenrechter)\b)",
+    re.I,
+)
+
 
 class UnknownCourtError(ValueError):
     """The ECLI court code maps to no segmentation lexicon (e.g PHR)."""
@@ -63,6 +85,18 @@ class Lexicon:
     # Forced to overig so the caption drop removes it and the real
     # "Het geding" actually opens procesverloop.
     caption_overig: re.Pattern = field(default=_NEVER)
+    # A sub-numbered facts recital embedded in the reasoning ("3.1 In cassatie
+    # kan ... worden uitgegaan").
+    embedded_feiten: re.Pattern = field(default=_NEVER)
+    # Statute citation as a standalone section title: embedded quoted law, not a
+    # logical boundary (e.g. "Artikel 4" inside a factual recital).
+    statute_cite: re.Pattern = field(default=_STATUTE_CITE_RE)
+    # Geschil title that names first-instance proceedings: kept as geschil
+    # rather than absorbed as overwegingen inside the reasoning region.
+    first_instance_recap: re.Pattern = field(default=_FIRST_INSTANCE_RECAP_RE)
+    # Operative dictum sentence ("Het hof, recht doende ...") that also passes
+    # the beslissing label gate but is not itself a heading.
+    dictum_sentence: re.Pattern = field(default=_DICTUM_SENTENCE_RE)
 
     def label(self, text: str) -> str:
         """Map a heading line to a canonical label, else 'overig'."""

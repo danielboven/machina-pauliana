@@ -56,11 +56,12 @@ def lexicon_for(uitspraak) -> Lexicon:
     return get_lexicon(detect_court(uitspraak))
 
 
-# TODO this one does not seem updated do we need to update it or remove?
 __all__ = [
     "Lexicon",
     "UnknownCourtError",
     "RECHTBANK",
+    "GERECHTSHOF",
+    "HOGE_RAAD",
     "court_of",
     "detect_court",
     "get_lexicon",

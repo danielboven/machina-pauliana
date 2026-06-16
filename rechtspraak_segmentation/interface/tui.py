@@ -1,73 +1,43 @@
-"""Interactive curses review: scroll a document, arror right is OK / arrow left
-is flag for review.
+"""TUI based on Textual: scroll a document rendered as Markdown, step between
+documents, and flag any with a note.
 
-It renders with the shared view-model (render.py) with a curses colour palette.
-A parse or court-detection error becomes a visible error line intead of a crash,
-so the reviewer can flag the file and go to the next.
+Navigation:
+    →/Enter   next document
+    ←         previous document
+    f         flag the current document (opens a required note)
+    ↑↓        scroll
+    q         quit
+
+The body is the shared rich renderable from render.py
+Flagging pushes a small modal note screen; while it is open ↑↓ still scroll the
+document underneath.
+A parse or court-detection error becomes a visible error page rather than a
+crash, so the file can still be flagged. Each flag is appended to the TSV log
+the moment its note is confirmed.
 
 Structure:
-    DocView       — one document on screen: scrolling, drawing, the flag-note
-                    editor, and the per-file key loop.
-    _run_review   — walk the file list, construct a DocView per file, log flags.
-    review_folder — public entry; runs _run_review inside curses.wrapper so the
-                    terminal is always restored, even on an unexpected error.
+    flag_file     — append one TSV row for a flagged document.
+    Body          — focusable scroll area.
+    NoteScreen    — modal note input (Enter saves, Esc cancels).
+    ReviewApp     — the Textual app: one document at a time, stepping, flags.
+    review_folder — public entry gathers files, runs the app, writes the log.
 """
 
-import curses
 import datetime
 import sys
 from pathlib import Path
 
+from textual import on
+from textual.app import App, ComposeResult
+from textual.binding import Binding
+from textual.containers import VerticalScroll
+from textual.screen import ModalScreen
+from textual.widgets import Footer, Header, Input, Static
+
 from ..core.xmlutil import gather_xml, in_court
-from .render import Line, render_document, wrap_lines
+from .render import doc_renderable, render_doc
 
-CURSES_PALETTE = {
-    "procesverloop": curses.COLOR_CYAN,
-    "feiten": curses.COLOR_YELLOW,
-    "geschil": curses.COLOR_MAGENTA,
-    "overwegingen": curses.COLOR_BLUE,
-    "beslissing": curses.COLOR_GREEN,
-    "overig": curses.COLOR_WHITE,
-    "preamble": curses.COLOR_WHITE,
-}
-_PAIR = {}
-
-
-def _init_colors():
-    """Initializes curses color pairs from CURSES_PALETTE.
-    Tries a transparent background first, falls back to black."""
-    curses.start_color()
-    try:
-        curses.use_default_colors()
-        bg = -1
-    except curses.error:
-        bg = curses.COLOR_BLACK
-    for i, (label, col) in enumerate(CURSES_PALETTE.items(), start=1):
-        curses.init_pair(i, col, bg)
-        _PAIR[label] = i
-
-
-def _attr(label, kind):
-    """Returns the curses display attribute for a line.
-    Color comes from `label`. Banners get bold and underline,
-    preamble gets dim."""
-    pair = curses.color_pair(_PAIR.get(label, _PAIR["overig"]))
-    if kind == "banner":
-        return pair | curses.A_BOLD | curses.A_UNDERLINE
-    if label == "preamble":
-        return pair | curses.A_DIM
-    return pair
-
-
-def _addstr(stdscr, y, x, text, w, attr=0):
-    """Wraps addnstr to silently ignore writes to the last cell."""
-    try:
-        stdscr.addnstr(y, x, text, w, attr)
-    except curses.error:
-        pass
-
-
-# TSV columns written to the flag log, in order
+# TSV columns written to the flag log in this order
 FLAG_LOG_COLUMNS = (
     "timestamp",
     "path",
@@ -79,7 +49,7 @@ FLAG_LOG_COLUMNS = (
 
 
 def flag_file(root, path, meta, log_path, note):
-    """Append one tab-separated row. `note` is whitespace-collapsed so it can
+    """Append one tab-separated row. note is whitespace-collapsed so it can
     never contain a tab/newline that would break the TSV."""
     rel = path.relative_to(root) if path.is_relative_to(root) else path
     stamp = datetime.datetime.now().isoformat(timespec="seconds")
@@ -96,198 +66,192 @@ def flag_file(root, path, meta, log_path, note):
         fh.write("\t".join(row) + "\n")
 
 
-class DocView:
-    """One document on screen: scroll it, then approve, flag (with a required
-    note) or quit. Consumes the shared render model from render.py."""
+class Body(VerticalScroll):
+    """The document scroll area. Focusable, so ↑↓ scroll natively.
+    Only ←/→ are rebound (from horizontal scroll) to next/previous doc."""
 
-    VIEW_HINT = (
-        "→/Enter OK   ←/f Flag   ↑↓/PgUp/PgDn scroll   g/G top/end   q quit"
-    )
-    NOTE_HINT = (
-        "Enter save (required) · Esc cancel · ↑↓/PgUp/PgDn/Home/End scroll"
-    )
+    can_focus = True
 
-    def __init__(self, stdscr, path, root, idx, total):
-        self.stdscr = stdscr
-        self.path = path
+    BINDINGS = [
+        Binding("left", "app.prev", "Prev doc", key_display="←"),
+        Binding("right", "app.next", "Next doc", key_display="→"),
+    ]
+
+
+class NoteScreen(ModalScreen[str | None]):
+    """A flag note as a small modal docked at the bottom. It captures typing
+    (so the letter keys go into the note, not the app)."""
+
+    # No default border
+    CSS = """
+    NoteScreen { background: transparent; }
+    #note {
+        dock: bottom; width: 100%; height: 1;
+        border: none; background: $panel; padding: 0 1;
+    }
+    """
+
+    BINDINGS = [
+        Binding("escape", "cancel", "Cancel", show=False),
+        Binding("up", "scroll(-1)", "Scroll up", show=False),
+        Binding("down", "scroll(1)", "Scroll down", show=False),
+        Binding("pageup", "page(-1)", "Page up", show=False),
+        Binding("pagedown", "page(1)", "Page down", show=False),
+    ]
+
+    def compose(self) -> ComposeResult:
+        yield Input(
+            placeholder="flag note — Enter saves · Esc cancels", id="note"
+        )
+
+    def on_mount(self) -> None:
+        self.query_one("#note", Input).focus()
+
+    def _body(self) -> Body:
+        return self.app.query_one("#body", Body)
+
+    def action_scroll(self, dy: int) -> None:
+        body = self._body()
+        (body.scroll_down if dy > 0 else body.scroll_up)(animate=False)
+
+    def action_page(self, dy: int) -> None:
+        body = self._body()
+        (body.scroll_page_down if dy > 0 else body.scroll_page_up)(
+            animate=False
+        )
+
+    def action_cancel(self) -> None:
+        self.dismiss(None)
+
+    @on(Input.Submitted, "#note")
+    def _submit(self, event: Input.Submitted) -> None:
+        # An empty note is rejected (required): dismiss(None) keeps the doc.
+        self.dismiss(event.value.strip() or None)
+
+
+class ReviewApp(App):
+    """One document at a time, go through the file list and flag docs."""
+
+    TITLE = "Rechtspraak segmentation review"
+    ENABLE_COMMAND_PALETTE = False  # disable default Ctrl+P of Textual
+
+    CSS = "#body { height: 1fr; padding: 0 1; }"
+
+    BINDINGS = [
+        Binding("right", "next", "Next doc", show=False),
+        Binding("enter", "next", "Next doc", show=False),
+        Binding("f", "flag", "Flag"),
+        Binding("q", "quit", "Quit"),
+    ]
+
+    def __init__(self, files, root, log_path):
+        # ansi_color=True disables Textual ANSIToTruecolor filter, so the
+        # palette ANSI colours are ussed
+        super().__init__(ansi_color=True)
+        self.files = files
         self.root = root
-        self.idx = idx
-        self.total = total
-        self.top = 0  # index of the first visible (wrapped) line
-        self.max_top = 0  # furthest you can scroll; set each draw
-        try:
-            self.lines, self.meta = render_document(path.read_bytes())
-        except Exception as e:  # parse / unknown-court -> show it, allow flag
-            self.lines = [Line(f"ERROR: {e}", "overig", "body")]
-            self.meta = {"strategy": "error", "nsec": 0, "ecli": ""}
+        self.log_path = log_path
+        self.idx = 0
+        self.meta: dict = {}
+        # idx -> {"note", "meta", "path"} for every flagged document
+        self.flags: dict[int, dict] = {}
+        self.visited: set[int] = set()
 
-    def scroll(self, key, page):
-        """Move the viewport. `page` is the body height (for PgUp/PgDn). Letter
-        shortcuts work in view mode. In note mode (on flagging) only the
-        KEY_* keys reach here, so the letters fall through as typed text."""
-        if key in (curses.KEY_DOWN, ord("j")):
-            self.top += 1
-        elif key in (curses.KEY_UP, ord("k")):
-            self.top -= 1
-        elif key == curses.KEY_NPAGE:
-            self.top += page
-        elif key == curses.KEY_PPAGE:
-            self.top -= page
-        elif key in (curses.KEY_HOME, ord("g")):
-            self.top = 0
-        elif key in (curses.KEY_END, ord("G")):
-            self.top = self.max_top
+    def compose(self) -> ComposeResult:
+        yield Header()
+        # One persistent Static lives inside the scroll area for the whole
+        # session. Each document just calls `.update()` on it.
+        yield Body(Static(id="content"), id="body")
+        yield Footer()
 
-    def _draw(self, note):
-        """Render a frame. When `note` is not None the sticky two-row editor is
-        drawn just above the status bar (and the body shrinks to fit). Returns
-        the visible body height so callers can size PgUp/PgDn paging."""
-        stdscr = self.stdscr
-        h, w = stdscr.getmaxyx()
-        body_h = max(1, h - 2 - (2 if note is not None else 0))
+    async def on_mount(self) -> None:
+        await self._load()
 
-        visual = wrap_lines(self.lines, w - 1)
-        self.max_top = max(0, len(visual) - body_h)
-        self.top = max(0, min(self.top, self.max_top))
-
-        stdscr.erase()
+    def _update_header(self) -> None:
+        path = self.files[self.idx]
         rel = (
-            self.path.relative_to(self.root)
-            if self.path.is_relative_to(self.root)
-            else self.path.name
+            path.relative_to(self.root)
+            if path.is_relative_to(self.root)
+            else path.name
         )
-        title = (
-            f"[{self.idx + 1}/{self.total}] {rel}   "
-            f"{self.meta['strategy']} · {self.meta['nsec']} sections"
+        flag = "  ·  ⚑ flagged" if self.idx in self.flags else ""
+        self.title = str(rel)
+        self.sub_title = (
+            f"[{self.idx + 1}/{len(self.files)}]  ·  "
+            f"{self.meta.get('strategy', '?')} · "
+            f"{self.meta.get('nsec', 0)} sections{flag}"
         )
-        _addstr(stdscr, 0, 0, title.ljust(w - 1), w - 1, curses.A_REVERSE)
 
-        for row in range(body_h):
-            li = self.top + row
-            if li >= len(visual):
-                break
-            ln = visual[li]
-            if ln.kind == "blank":
-                continue
-            prefix = "" if ln.kind == "banner" else "  "
-            _addstr(
-                stdscr,
-                row + 1,
-                0,
-                (prefix + ln.text)[: w - 1],
-                w - 1,
-                _attr(ln.label, ln.kind),
-            )
-
-        if note is not None:
-            sep = " FLAG NOTE — what is wrong with the segmentation? "
-            _addstr(
-                stdscr, h - 3, 0, sep.ljust(w - 1, "─"), w - 1, curses.A_BOLD
-            )
-            shown = "note> " + note
-            if len(shown) > w - 1:  # keep the typing end in view
-                shown = shown[len(shown) - (w - 1) :]
-            _addstr(stdscr, h - 2, 0, shown.ljust(w - 1), w - 1, curses.A_BOLD)
-
-        pct = 100 if self.max_top == 0 else int(100 * self.top / self.max_top)
-        hint = self.NOTE_HINT if note is not None else self.VIEW_HINT
-        _addstr(
-            stdscr,
-            h - 1,
-            0,
-            f" {pct:3d}%  {hint}".ljust(w - 1),
-            w - 1,
-            curses.A_REVERSE,
-        )
-        stdscr.refresh()
-        return body_h
-
-    def review(self):
-        """View-mode loop. Returns (action, note) with action in
-        {'next', 'flag', 'quit'}; note is set only for 'flag'."""
-        while True:
-            page = self._draw(note=None)
-            k = self.stdscr.getch()
-            if k in (curses.KEY_RIGHT, 10, 13, curses.KEY_ENTER):
-                return "next", None
-            if k in (curses.KEY_LEFT, ord("f")):
-                note = self._prompt_note()
-                if note is not None:
-                    return "flag", note  # else Esc cancelled -> keep viewing
-            elif k == ord("q"):
-                return "quit", None
-            else:
-                self.scroll(k, page)
-
-    def _prompt_note(self):
-        """Sticky-editor loop. Returns a non-empty note on Enter, or None if
-        cancelled with Esc. The document stays scrollable while typing:
-        printable keys build the note, KEY_* keys scroll the body underneath."""
-        note = ""
-        while True:
-            page = self._draw(note=note)
-            try:
-                # get_wch -> str for normal chars (incl. accented), int for keys
-                ch = self.stdscr.get_wch()
-            except curses.error:
-                continue
-            if isinstance(ch, str):
-                if ch in ("\n", "\r"):
-                    if note.strip():
-                        return note.strip()  # empty note is rejected (required)
-                elif ch == "\x1b":
-                    return None
-                elif ch in ("\x7f", "\b"):
-                    note = note[:-1]
-                elif ch.isprintable():
-                    note += ch
-            elif ch == curses.KEY_BACKSPACE:
-                note = note[:-1]
-            else:
-                self.scroll(ch, page)
-
-
-def _run_review(stdscr, files, root, log_path):
-    """Helper that runs the review loop inside a curses session.
-    Walks files in order and returns (approved, flagged, reached) counts."""
-    # curses waits after \x1b to decide: bare Esc or start of a key sequence?
-    # 25ms is enough for sequences to arrive but feels instant on Esc press
-    curses.set_escdelay(25)
-    curses.curs_set(0)
-    stdscr.keypad(True)
-    _init_colors()
-
-    idx = approved = flagged = 0
-    while 0 <= idx < len(files):
-        view = DocView(stdscr, files[idx], root, idx, len(files))
-        action, note = view.review()
-        if action == "quit":
-            break
-        if action == "flag":
-            flag_file(root, files[idx], view.meta, log_path, note)
-            flagged += 1
+    async def _load(self) -> None:
+        path = self.files[self.idx]
+        self.visited.add(self.idx)
+        body = self.query_one("#body", Body)
+        try:
+            rd = render_doc(path.read_bytes())
+        except Exception as e:  # parse / unknown-court error, show these
+            self.meta = {"strategy": "error", "nsec": 0, "ecli": ""}
+            renderable = f"ERROR: {e}"
         else:
-            approved += 1
-        idx += 1
-    return approved, flagged, idx
+            self.meta = rd.meta
+            renderable = doc_renderable(rd)
+        # Header and body update together: the renderable is built first, then
+        # both the title (below) and content swap in the same frame.
+        self._update_header()
+        self.query_one("#content", Static).update(renderable)
+        body.scroll_home(animate=False)
+        body.focus()
+
+    # Next and previous document
+    async def action_next(self) -> None:
+        if self.idx + 1 < len(self.files):
+            self.idx += 1
+            await self._load()
+        else:
+            self.exit()  # review is complete
+
+    async def action_prev(self) -> None:
+        if self.idx > 0:
+            self.idx -= 1
+            await self._load()
+
+    # Flagging a document
+    def action_flag(self) -> None:
+        async def _save(note: str | None) -> None:
+            if note:
+                path = self.files[self.idx]
+                meta = dict(self.meta)
+                self.flags[self.idx] = {
+                    "note": note,
+                    "meta": meta,
+                    "path": path,
+                }
+                # Write TSV line immediately
+                flag_file(self.root, path, meta, self.log_path, note)
+                await self.action_next()  # saved -> step to the next document
+            else:  # cancelled / empty: stay on this document
+                self.query_one("#body", Body).focus()
+
+        self.push_screen(NoteScreen(), _save)
 
 
 def review_folder(root: Path, log_path: Path, court: str = None):
     """Public entry point for the interactive review. Gathers XML files from
-    `root` and runs the loop via curses.wrapper so the terminal is always
-    restored on exit or crash."""
+    root and runs the Textual app, which appends each flag to the TSV log as
+    it is confirmed."""
     files = gather_xml(root)
     if court:
         files = [f for f in files if in_court(f, root, court)]
     if not files:
         print(f"No .xml files found under {root}", file=sys.stderr)
         return
-    approved, flagged, reached = curses.wrapper(
-        _run_review, files, root, log_path
-    )
+
+    app = ReviewApp(files, root, log_path)
+    app.run()
+
+    flagged = len(app.flags)
     print(
-        f"\nReviewed {reached}/{len(files)} file(s): "
-        f"{approved} OK, {flagged} flagged."
+        f"\nReviewed {len(app.visited)}/{len(files)} file(s): "
+        f"{flagged} flagged."
     )
     if flagged:
         print(f"Flagged files logged to: {log_path}")

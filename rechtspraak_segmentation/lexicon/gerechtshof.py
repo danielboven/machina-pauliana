@@ -16,10 +16,8 @@ from .rechtbank import RECHTBANK
 # Label rules (ordered: first matching pattern wins)
 # ---------------------------------------------------------------------------
 _LABEL_RULES = (
-    # TODO check the ones below why are these here when its regex is also included below?
     # Unambiguous dictum opener, as in rechtbank
     ("beslissing", re.compile(r"recht\s*doende", re.I)),
-    # TODO same for here
     # "Feiten" and "Inleiding" is considered feiten unambiguously.
     ("feiten", re.compile(r"^\s*inleiding\b", re.I)),
     # Overwegingen/Beoordeling: reasoning by court. More variations of it listed
@@ -47,7 +45,7 @@ _LABEL_RULES = (
         re.compile(
             r"(vaststaande\s+feiten|vastgestelde\s+feiten|\bfeiten\b|"
             r"feitelijk(?!e\s+instanti)|"
-            r"uitgangspunten|achtergrond)",
+            r"achtergrond)",
             re.I,
         ),
     ),
@@ -60,7 +58,7 @@ _LABEL_RULES = (
             r"geschil|vordering|verzoek(?:en|schrift)?\b|verweer|standpunt|stellingen|"
             r"(oordeel|beslissing(?:en)?)\s+van\s+de\s+"
             r"(rechtbank|kantonrechter|voorzieningenrechter)|"
-            r"omvang\s+van\s+(het\s+)?(geschil|appel)|"
+            r"omvang\s+van\s+(het\s+)?geschil|"
             r"inzet|verzet)",
             re.I,
         ),

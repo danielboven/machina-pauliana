@@ -1,33 +1,24 @@
-"""Finding the lines that can open a section.
+"""Finding the blocks that can open a section.
 
-One idea spans every court era: a section boundary is a short line that reads as
-a heading.
+One idea spans every court era: a section boundary is a short block that reads
+as a heading.
 
-structured docs (post ~2013)  a <section>'s <title>
-older flat docs               a <bridgehead>, a numbered <para> ("3. De
-                              feiten"), a bare keyword <para> ("PROCESVERLOOP")
-                              or a bold <emphasis> on its own line inside a
-                              paragraph.
+structured docs (post ~2013)  a <section>'s <title> (a Heading, kind='title')
+older flat docs               a <bridgehead> Heading, a numbered Para ("3. De
+                              feiten"), a bare keyword Para ("PROCESVERLOOP")
+                              or a bold <emphasis> run starting its own line
+                              inside a paragraph.
 
-`candidate_lines` collects that uniform stream once (every <para>/<title>/
-<bridgehead>, plus each line-starting <emphasis>); the era detectors below and
-recovery passes in refine.py are then thin filters over it.
-Deciding what a line means is left to the lexicon.
-here.
+`candidate_lines` collects that uniform stream once from the typed block tree
+The era detectors below and the recovery passes in refine.py are thin filters
+over it. Deciding what a line means is left to the lexicon.
 """
 
 import re
 from dataclasses import dataclass
 
+from ..core.blocks import Emph, Heading, Para, iter_blocks
 from ..core.model import Section
-from ..core.xmlutil import (
-    el_text,
-    find_child,
-    has_section_ancestor,
-    iter_tag,
-    local_tag,
-    title_text,
-)
 
 # Separator after the number is required but flexible: "1.De procedure",
 # "1. ...", "1) ...", "1: ..." and the older without dots "1 Het verloop ..."
@@ -40,67 +31,57 @@ SUBNUMBER_RE = re.compile(r"^\s*\d+\.\d+")
 
 @dataclass
 class Line:
-    """A candidate heading line. tag is element's local name. emphasis is
-    True for a bold/underline run that starts its own line inside a <para>."""
+    """A candidate heading line. `element` is the block (Para/Heading) or Emph
+    run it came from. Every candidate carries pos (index).
+    `emphasis` is True for a bold/underline run that starts its own line."""
 
     element: object
     text: str
     pos: int  # document-order index
-    tag: str
+    tag: str  # 'para' | 'title' | 'bridgehead' | 'emphasis'
     emphasis: bool = False
 
 
-def _starts_line(el) -> bool:
-    """Checks whether `el` starts a visual line — either preceded by a
-    <?linebreak?> PI, or the first child of its parent with no leading text."""
-    prev = el.getprevious()
-    if prev is not None and not isinstance(prev.tag, str):
-        return (
-            getattr(prev, "target", None) == "linebreak"
-            and not (prev.tail or "").strip()
-        )
-    p = el.getparent()
-    return (
-        p is not None and len(p) and p[0] is el and not (p.text or "").strip()
-    )
-
-
-def candidate_lines(uitspraak) -> list[Line]:
-    """Collects all candidate heading lines from `uitspraak` in document order.
-    Includes <para>, <title>, <bridgehead>, and any line-starting <emphasis>."""
+def candidate_lines(doc) -> list[Line]:
+    """Collects all candidate heading lines from `doc` in document order:
+    every Para and Heading, plus any line-starting Emph run inside a Para."""
     out = []
-    for pos, el in enumerate(uitspraak.iter()):
-        tag = local_tag(el)
-        if tag in ("para", "title", "bridgehead"):
-            text = el_text(el)
-            if text:
-                out.append(Line(el, text, pos, tag))
-        elif tag == "emphasis" and _starts_line(el):
-            text = el_text(el)
-            if text:
-                out.append(Line(el, text, pos, tag, emphasis=True))
+    for b in iter_blocks(doc.blocks):
+        if isinstance(b, Heading):
+            if b.text:
+                out.append(Line(b, b.text, b.pos, b.kind))
+        elif isinstance(b, Para):
+            if b.text:
+                out.append(Line(b, b.text, b.pos, "para"))
+            for run in b.runs:
+                if isinstance(run, Emph) and run.starts_line and run.text():
+                    out.append(
+                        Line(
+                            run, run.text(), run.pos, "emphasis", emphasis=True
+                        )
+                    )
+    out.sort(key=lambda ln: ln.pos)
     return out
 
 
-def detect_structured(uitspraak, lex) -> list[Section]:
-    """Strategy 1: top-level <section> elements (non-overlapping boundaries).
+def detect_structured(doc, lex) -> list[Section]:
+    """Strategy 1: top-level <section> blocks (non-overlapping boundaries).
 
-    The section's own <title> is a more specific signal than role on section,
+    The section's own <title> is a more specific signal than role on section
     (role is often dirty data) so trust the title whenever it yields a label
     and fall back to the role only when the title is uninformative.
     """
     out = []
-    for sec in iter_tag(uitspraak, "section"):
-        if has_section_ancestor(sec):
+    for sec in doc.sections:
+        if sec.parent is not None:
             continue  # subsection: a sub-boundary, not a top-level one
-        title_el = find_child(sec, "title")
-        if title_el is None:
+        if sec.title is None:
             continue
-        raw = title_text(title_el)
+        raw = sec.title.text
         if not raw:
             continue
 
-        role = sec.get("role", "")
+        role = sec.role
         title_label = lex.label(raw)
         if lex.recap_overig.search(raw) or lex.caption_overig.search(raw):
             label = "overig"
@@ -111,14 +92,9 @@ def detect_structured(uitspraak, lex) -> list[Section]:
         else:
             label = "overig"
 
-        number = None
-        nr_el = find_child(title_el, "nr")
-        if nr_el is not None and nr_el.text:
-            try:
-                number = int(nr_el.text.strip())
-            except ValueError:
-                pass
-        out.append(Section(label, raw, sec, number, strategy="section"))
+        out.append(
+            Section(label, raw, sec, sec.title.number, strategy="section")
+        )
     return out
 
 
@@ -127,7 +103,7 @@ def detect_bridgehead(lines, lex) -> list[Section]:
     nested in a <section> is a sub-heading."""
     out = []
     for ln in lines:
-        if ln.tag != "bridgehead" or has_section_ancestor(ln.element):
+        if ln.tag != "bridgehead" or ln.element.section is not None:
             continue
         if len(ln.text) > 120 or lex.caption_overig.search(ln.text):
             continue
@@ -174,10 +150,10 @@ def detect_numbered(lines, lex) -> list[Section]:
 
 
 def detect_keyword(lines, lex) -> list[Section]:
-    """Strategy 4: flat docs with no <section>/<bridgehead>/numbering.=
+    """Strategy 4: flat docs with no <section>/<bridgehead>/numbering.
     Promote any stand-alone <para> that is a heading in the controlled heading
-    language. The closed-vocabulary gate helsp to prevent firing on short body
-    sentences."""
+    language. The closed-vocabulary gate helps to prevent accidentally firing
+    on short body sentences."""
     out = []
     for ln in lines:
         if ln.tag != "para" or len(ln.text) > 90:

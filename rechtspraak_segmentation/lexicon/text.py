@@ -16,9 +16,14 @@ _LEAD_ENUM_RE = re.compile(r"^\s*\d{1,2}(?:\s*[.):]\s*|\s+)")
 # Include unicode letters only (word chars minus digits and underscores)
 _WORD_RE = re.compile(r"[^\W\d_]+", re.UNICODE)
 
-# A parenthetical qualifier on a heading, e.g. "Feiten (alles kort samengevat en
-# voor zover van belang)". These are dropped before the vocabulary gate.
-_PAREN_RE = re.compile(r"\([^)]*\)")
+# Parentheses on a heading, e.g. "Feiten (alles kort samengevat en voor zover
+# van belang)". These are dropped before the vocabulary gate.
+_PARENTHESES_RE = re.compile(r"\([^)]*\)")
+
+# A colon qualifier on a heading narrows the heading to a topic ("De beoordeling
+# van het geschil: bestuurdersaansprakelijkheid"). Like a parenthetical,
+# it is dropped so the heading is judged on its head alone.
+_COLON_RE = re.compile(r":.*$", re.S)
 
 
 def collapse_spaced_caps(text: str) -> str:
@@ -27,8 +32,10 @@ def collapse_spaced_caps(text: str) -> str:
 
 
 def strip_parentheticals(text: str) -> str:
-    """Removes parenthetical qualifiers from `text`."""
-    return _PAREN_RE.sub(" ", text)
+    """Removes parentheses and trailing colon qualifiers from `text`, so a
+    heading is judged on its head ("Feiten (...)" -> "Feiten ", "De beoordeling
+    van het geschil: pauliana" -> "De beoordeling van het geschil")."""
+    return _COLON_RE.sub("", _PARENTHESES_RE.sub(" ", text))
 
 
 def strip_leading_enum(text: str) -> str:

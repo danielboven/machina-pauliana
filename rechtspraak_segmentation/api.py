@@ -16,6 +16,7 @@ from pathlib import Path
 from lxml import etree
 
 from .core.model import CANON_LABELS, Section
+from .core.parse import build_document
 from .core.xmlutil import doc_ecli, get_uitspraak
 from .lexicon import Lexicon, get_lexicon, lexicon_for
 from .strategies.headings import (
@@ -28,9 +29,11 @@ from .strategies.headings import (
 from .strategies.refine import (
     close_boundaries,
     recover_dictum_tail,
+    recover_embedded_feiten,
     recover_emphasis,
     recover_leading,
     recover_reasoning_opener,
+    recover_region_resumption,
     refine_feiten,
     refine_structured,
 )
@@ -55,50 +58,62 @@ def resolve_lexicon(
     return lexicon_for(uitspraak)
 
 
-def _refine_flat(uitspraak, lines, order, secs, lex) -> list[Section]:
+def _refine_flat(doc, lines, secs, lex) -> list[Section]:
     """Call refinement strategies for flat docs: recover the headings the chosen
     detector could not see (bold emphasis, the unnumbered opener/reasoning/
     dictum), apply the oblique-feiten fallback, then close every boundary."""
     secs += recover_emphasis(lines, secs, lex)
-    secs += recover_leading(lines, secs, lex, order)
+    secs += recover_leading(lines, secs, lex)
     secs += recover_reasoning_opener(lines, secs, lex)
-    secs += recover_dictum_tail(lines, secs, lex, order)
+    secs += recover_dictum_tail(lines, secs, lex)
+    secs += recover_embedded_feiten(lines, secs, lex)
+    secs += recover_region_resumption(lines, secs, lex)
     refine_feiten(secs, lex)
-    return close_boundaries(uitspraak, secs, lex)
+    return close_boundaries(doc, secs, lex)
 
 
-def detect_boundaries(uitspraak, lex: Lexicon) -> tuple[list[Section], str]:
+def detect_boundaries(doc, lex: Lexicon) -> tuple[list[Section], str]:
     """Run the four detection strategies in priority order, falling back until
     one works, then call the refinement/recoveries. All strategies and
     recoveries read one stream of candidate heading lines (headings.py)."""
-    order = {el: i for i, el in enumerate(uitspraak.iter())}
-    lines = candidate_lines(uitspraak)
+    lines = candidate_lines(doc)
 
-    secs = detect_structured(uitspraak, lex)
+    secs = detect_structured(doc, lex)
     # Only commit to the structured era if the <section> markup actually carries
     # content structure (>=1 actual section). Some casees wrap each caption
     # party in its own <section> (titles = party names -> all 'overig'); those
     # must fall through to the flat strategies, that works better on those.
     if any(s.label in CANON_LABELS for s in secs):
         secs += detect_bridgehead(lines, lex)
-        secs += refine_structured(uitspraak, secs, lex)
+        secs += refine_structured(doc, secs, lex)
         secs += recover_emphasis(lines, secs, lex)
-        secs += recover_leading(lines, secs, lex, order)
-        secs += recover_dictum_tail(lines, secs, lex, order)
+        secs += recover_leading(lines, secs, lex)
+        secs += recover_dictum_tail(lines, secs, lex)
+        secs += recover_embedded_feiten(lines, secs, lex)
+        secs += recover_region_resumption(lines, secs, lex)
         refine_feiten(secs, lex)
-        return close_boundaries(uitspraak, secs, lex), "section"
+        return close_boundaries(doc, secs, lex), "section"
 
-    # Flat fallback: accept a strategy only if it gives >=1 actual section
-    for detect, name in (
-        (detect_bridgehead, "bridgehead"),
-        (detect_numbered, "numbered-para"),
-    ):
-        secs = detect(lines, lex)
-        if any(s.label in CANON_LABELS for s in secs):
-            return _refine_flat(uitspraak, lines, order, secs, lex), name
+    # Flat fallback: bridgehead first, accepted only if it gives >=1 section.
+    secs = detect_bridgehead(lines, lex)
+    if any(s.label in CANON_LABELS for s in secs):
+        return _refine_flat(doc, lines, secs, lex), "bridgehead"
 
-    secs = detect_keyword(lines, lex)
-    return _refine_flat(uitspraak, lines, order, secs, lex), "keyword"
+    # Numbered-para vs keyword. Commit to numbered-para only when the numbering
+    # is the section structure (>=1 numbered line is itself a clean heading).
+    # Older docs number their paragraphs, not the sections: there the numbered
+    # "headings" are body sentences, and when the unnumbered headings instead
+    # form a real section spine (>=3 of the canonical labels) those are used.
+    numbered = detect_numbered(lines, lex)
+    keyword = detect_keyword(lines, lex)
+    numbered_canon = [s for s in numbered if s.label in CANON_LABELS]
+    numbered_heads_sections = any(
+        lex.heading_label(s.raw_title) for s in numbered_canon
+    )
+    keyword_spine = {s.label for s in keyword if s.label in CANON_LABELS}
+    if numbered_canon and (numbered_heads_sections or len(keyword_spine) < 3):
+        return _refine_flat(doc, lines, numbered, lex), "numbered-para"
+    return _refine_flat(doc, lines, keyword, lex), "keyword"
 
 
 def _read_bytes(source) -> bytes:
@@ -115,5 +130,7 @@ def segment(
     root = etree.fromstring(_read_bytes(source))
     uitspraak = get_uitspraak(root)
     lex = resolve_lexicon(uitspraak, lexicon, court)
-    sections, strategy = detect_boundaries(uitspraak, lex)
-    return SegmentationResult(sections, strategy, doc_ecli(root), lex.name)
+    ecli = doc_ecli(root)
+    doc = build_document(uitspraak, ecli)
+    sections, strategy = detect_boundaries(doc, lex)
+    return SegmentationResult(sections, strategy, ecli, lex.name)
