@@ -1,0 +1,528 @@
+
+\textbf{This defines the catala module \texttt{Faillissementspauliana}}
+
+\section{Faillissementspauliana}
+
+
+
+\subsection{Artikel 42 Faillissementswet}
+
+
+
+\begin{tcolorbox}[colframe=OliveGreen, breakable, title=\textcolor{black}{\texttt{Metadata}},title after break=\textcolor{black}{\texttt{Metadata}},before skip=1em, after skip=1em, left=0.6em, right=0.6em]
+\begin{Verbatim}[commandchars=\\\{\},numbers=left,firstnumber=8,stepnumber=1,label={\hspace*{\fill}\texttt{faillissementspauliana.catala\_en}},numbersep=9mm]
+```catala
+\PY{k+kr}{declaration} \PY{k+kt}{structure} \PY{n+nc}{Handeling}\PY{o}{:}
+\PY{c+c1}{  \PYZsh{} Handeling kan ook feitelijke handeling zijn, valt dan buiten scope}
+\PY{c+c1}{  \PYZsh{} Zie in dit kader ook HR 21 juni 2013 (Eringa q.q./ABN AMRO)}
+  \PY{k+kr}{data} \PY{n+nv}{is\PYZus{}rechtshandeling} \PY{k+kr}{content} \PY{k+kt}{boolean}
+  \PY{k+kr}{data} \PY{n+nv}{datum\PYZus{}rechtshandeling} \PY{k+kr}{content} \PY{k+kt}{date}
+  \PY{k+kr}{data} \PY{n+nv}{verricht\PYZus{}door\PYZus{}de\PYZus{}schuldenaar} \PY{k+kr}{content} \PY{k+kt}{boolean}
+  \PY{k+kr}{data} \PY{n+nv}{onverplicht} \PY{k+kr}{content} \PY{k+kt}{boolean}
+\PY{c+c1}{  \PYZsh{} \PYZdq{}anders dan om niet\PYZdq{} (om baat) wordt gemodelleerd als negatie: not om\PYZus{}niet}
+  \PY{k+kr}{data} \PY{n+nv}{om\PYZus{}niet} \PY{k+kr}{content} \PY{k+kt}{boolean}
+
+\PY{k+kr}{declaration} \PY{k+kt}{structure} \PY{n+nc}{Faillissement}\PY{o}{:}
+  \PY{k+kr}{data} \PY{n+nv}{datum\PYZus{}faillietverklaring} \PY{k+kr}{content} \PY{k+kt}{date}
+
+\PY{k+kr}{declaration} \PY{k+kr}{scope} \PY{n+nc}{FaillissementspaulianaArt42}\PY{o}{:}
+  \PY{k+kd}{input}\PY{+w}{ }\PY{n+nv}{handeling} \PY{k+kr}{content} \PY{n+nc}{Handeling}
+  \PY{k+kd}{input}\PY{+w}{ }\PY{n+nv}{faillissement} \PY{k+kr}{content} \PY{n+nc}{Faillissement}
+
+  \PY{k+kd}{input}\PY{+w}{ }\PY{n+nv}{benadeling\PYZus{}schuldeisers} \PY{k+kr}{condition}
+  \PY{k+kd}{input}\PY{+w}{ }\PY{n+nv}{wetenschap\PYZus{}schuldenaar\PYZus{}aangetoond} \PY{k+kr}{condition}
+\PY{c+c1}{  \PYZsh{} Schuldenaar\PYZhy{}wetenschap komt bij elke redenering terug maar bij de}
+\PY{c+c1}{  \PYZsh{} wederpartij niet altijd.}
+  \PY{k+kd}{context}\PY{+w}{ }\PY{n+nv}{wetenschap\PYZus{}wederpartij\PYZus{}aangetoond} \PY{k+kr}{condition}
+
+\PY{c+c1}{  \PYZsh{} Hieronder wordt context gebruikt omdat deze dan niet voor iedere redenering}
+\PY{c+c1}{  \PYZsh{} verplicht zijn om in te vullen.}
+
+\PY{c+c1}{  \PYZsh{} \PYZdq{}behoudens tegenbewijs\PYZdq{}: geslaagd tegenbewijs ontkracht het bewijsvermoeden,}
+\PY{c+c1}{  \PYZsh{} dan valt de wetenschap terug op de hoofdregel van art. 42 (de curator draagt}
+\PY{c+c1}{  \PYZsh{} het bewijsrisico). Per zijde 1 conditie: art. 43 vermoedt aan beide}
+\PY{c+c1}{  \PYZsh{} zijden, art. 45 enkel bij de schuldenaar.}
+  \PY{k+kd}{context}\PY{+w}{ }\PY{n+nv}{vermoeden\PYZus{}wetenschap\PYZus{}schuldenaar\PYZus{}tegenbewijs} \PY{k+kr}{condition}
+  \PY{k+kd}{context}\PY{+w}{ }\PY{n+nv}{vermoeden\PYZus{}wetenschap\PYZus{}wederpartij\PYZus{}tegenbewijs} \PY{k+kr}{condition}
+
+\PY{c+c1}{  \PYZsh{} Gronden (\PYZdq{}verdachte categorieën\PYZdq{}) van het bewijsvermoeden van art. 43 lid 1.}
+  \PY{k+kd}{context}\PY{+w}{ }\PY{n+nv}{tegen\PYZus{}onderwaarde} \PY{k+kr}{condition}
+  \PY{k+kd}{context}\PY{+w}{ }\PY{n+nv}{voldoening\PYZus{}of\PYZus{}zekerheid\PYZus{}niet\PYZus{}opeisbare\PYZus{}schuld} \PY{k+kr}{condition}
+  \PY{k+kd}{context}\PY{+w}{ }\PY{n+nv}{gelieerde\PYZus{}partij} \PY{k+kr}{condition}
+\PY{c+c1}{  \PYZsh{} Art. 43 lid 1 aanvullende vereiste: de schuldenaar had zich niet reeds voor}
+\PY{c+c1}{  \PYZsh{} de aanvang van de jaartermijn tot de handeling verplicht.}
+  \PY{k+kd}{context}\PY{+w}{ }\PY{n+nv}{reeds\PYZus{}verplicht\PYZus{}voor\PYZus{}aanvang\PYZus{}termijn} \PY{k+kr}{condition}
+
+\PY{c+c1}{  \PYZsh{} Bewijsvermoeden bij een rechtshandeling om niet (art. 45).}
+  \PY{n+nv}{bewijsvermoeden\PYZus{}art45} \PY{k+kr}{scope} \PY{n+nc}{BewijsvermoedenArt45}
+
+\PY{c+c1}{  \PYZsh{} Bewijsvermoeden van art. 43 (voornamelijk om baat).}
+  \PY{n+nv}{bewijsvermoeden\PYZus{}art43} \PY{k+kr}{scope} \PY{n+nc}{BewijsvermoedenArt43}
+
+  \PY{k+kd}{internal}\PY{+w}{ }\PY{n+nv}{voor\PYZus{}faillietverklaring} \PY{k+kr}{condition}
+  \PY{k+kd}{internal}\PY{+w}{ }\PY{n+nv}{wetenschap\PYZus{}schuldenaar} \PY{k+kr}{condition}
+  \PY{k+kd}{internal}\PY{+w}{ }\PY{n+nv}{wetenschap\PYZus{}wederpartij} \PY{k+kr}{condition}
+  \PY{k+kd}{internal}\PY{+w}{ }\PY{n+nv}{wetenschapsvereiste} \PY{k+kr}{condition}
+
+  \PY{k+kd}{output}\PY{+w}{ }\PY{n+nv}{vernietigbaar} \PY{k+kr}{condition}
+```
+\end{Verbatim}
+
+\end{tcolorbox}
+
+
+
+\subsubsection{Lid 1}
+
+
+
+De curator kan ten behoeve van de boedel elke rechtshandeling die de
+schuldenaar vóór de faillietverklaring onverplicht heeft verricht en
+waarvan deze bij dit verrichten wist of behoorde te weten dat daarvan
+benadeling van de schuldeisers het gevolg zou zijn, door een
+buitengerechtelijke verklaring vernietigen. Artikel 50, tweede lid, van
+Boek 3 van het Burgerlijk Wetboek is niet van toepassing.
+
+
+
+\begin{Verbatim}[commandchars=\\\{\},numbers=left,firstnumber=68,stepnumber=1,label={\hspace*{\fill}\texttt{faillissementspauliana.catala\_en}}]
+```catala
+\PY{k+kr}{scope} \PY{n+nc}{FaillissementspaulianaArt42}\PY{o}{:}
+\PY{c+c1}{  \PYZsh{} Fixatiebeginsel (art. 23 Fw)}
+  \PY{k+kr}{rule} \PY{n+nv}{voor\PYZus{}faillietverklaring}
+  \PY{k+kr}{under condition}
+    \PY{n+nv}{handeling}\PY{o}{.}datum\PYZus{}rechtshandeling \PY{o}{\PYZlt{}} \PY{n+nv}{faillissement}\PY{o}{.}datum\PYZus{}faillietverklaring
+  \PY{k+kr}{consequence} \PY{k+kr}{fulfilled}
+
+  \PY{k+kr}{rule} \PY{n+nv}{wetenschap\PYZus{}schuldenaar}
+  \PY{k+kr}{under condition} \PY{n+nv}{wetenschap\PYZus{}schuldenaar\PYZus{}aangetoond}
+  \PY{k+kr}{consequence} \PY{k+kr}{fulfilled}
+
+\PY{c+c1}{  \PYZsh{} Lid 1 verlangt steeds wetenschap bij de schuldenaar. Lid 2 scherpt dit}
+\PY{c+c1}{  \PYZsh{} aan voor rechtshandelingen anders dan om niet.}
+  \PY{k+kr}{rule} \PY{n+nv}{wetenschapsvereiste}
+  \PY{k+kr}{under condition} \PY{n+nv}{wetenschap\PYZus{}schuldenaar}
+  \PY{k+kr}{consequence} \PY{k+kr}{fulfilled}
+
+\PY{c+c1}{  \PYZsh{} De rechtshandeling is vernietigbaar indien aan alle vereisten van lid 1}
+\PY{c+c1}{  \PYZsh{} is voldaan.}
+  \PY{k+kr}{rule} \PY{n+nv}{vernietigbaar}
+  \PY{k+kr}{under condition}
+    \PY{n+nv}{handeling}\PY{o}{.}is\PYZus{}rechtshandeling
+    \PY{o}{and} \PY{n+nv}{handeling}\PY{o}{.}verricht\PYZus{}door\PYZus{}de\PYZus{}schuldenaar
+    \PY{o}{and} \PY{n+nv}{voor\PYZus{}faillietverklaring}
+    \PY{o}{and} \PY{n+nv}{handeling}\PY{o}{.}onverplicht
+    \PY{o}{and} \PY{n+nv}{benadeling\PYZus{}schuldeisers}
+    \PY{o}{and} \PY{n+nv}{wetenschapsvereiste}
+  \PY{k+kr}{consequence} \PY{k+kr}{fulfilled}
+```
+\end{Verbatim}
+
+
+
+
+\subsubsection{Lid 2}
+
+
+
+Een rechtshandeling anders dan om niet, die hetzij meerzijdig is, hetzij
+eenzijdig en tot een of meer bepaalde personen gericht, kan wegens
+benadeling slechts worden vernietigd, indien ook degenen met of jegens
+wie de schuldenaar de rechtshandeling verrichtte, wisten of behoorden te
+weten dat daarvan benadeling van de schuldeisers het gevolg zou zijn.
+
+
+
+\begin{Verbatim}[commandchars=\\\{\},numbers=left,firstnumber=103,stepnumber=1,label={\hspace*{\fill}\texttt{faillissementspauliana.catala\_en}}]
+```catala
+\PY{k+kr}{scope} \PY{n+nc}{FaillissementspaulianaArt42}\PY{o}{:}
+\PY{c+c1}{  \PYZsh{} Wetenschapsvereiste wederpartij vereist bij \PYZdq{}anders dan om niet\PYZdq{}.}
+  \PY{k+kr}{rule} \PY{n+nv}{wetenschap\PYZus{}wederpartij}
+  \PY{k+kr}{under condition} \PY{n+nv}{wetenschap\PYZus{}wederpartij\PYZus{}aangetoond}
+  \PY{k+kr}{consequence} \PY{k+kr}{fulfilled}
+
+\PY{c+c1}{  \PYZsh{} Bij een rechtshandeling om niet is wetenschap bij wederpartij niet vereist.}
+  \PY{k+kr}{exception}
+  \PY{k+kr}{rule} \PY{n+nv}{wetenschapsvereiste}
+  \PY{k+kr}{under condition}
+    \PY{o}{(}\PY{o}{not} \PY{n+nv}{handeling}\PY{o}{.}om\PYZus{}niet\PY{o}{)}
+    \PY{o}{and} \PY{o}{(}\PY{o}{not} \PY{n+nv}{wetenschap\PYZus{}wederpartij}\PY{o}{)}
+  \PY{k+kr}{consequence} \PY{o}{not} \PY{k+kr}{fulfilled}
+```
+\end{Verbatim}
+
+
+
+
+\subsubsection{Lid 3}
+
+
+
+Wordt een rechtshandeling om niet wegens benadeling vernietigd, dan
+heeft de vernietiging ten aanzien van de bevoordeelde, die wist noch
+behoorde te weten dat van de rechtshandeling benadeling van de
+schuldeisers het gevolg zou zijn, geen werking, voorzover hij aantoont
+dat hij ten tijde van de faillietverklaring niet ten gevolge van de
+rechtshandeling gebaat was.
+
+
+
+\begin{Verbatim}[commandchars=\\\{\},numbers=left,firstnumber=123,stepnumber=1,label={\hspace*{\fill}\texttt{faillissementspauliana.catala\_en}}]
+```catala
+\PY{c+c1}{\PYZsh{} Bij rechtshandelingen om niet geldt de wetenschapseis aan de zijde van de}
+\PY{c+c1}{\PYZsh{} wederpartij niet. Dit is al bij lid 1 gemodelleerd.}
+\PY{c+c1}{\PYZsh{} Bescherming van derden (lid 3) is voor nu bewust buiten het model gelaten.}
+```
+\end{Verbatim}
+
+
+
+
+\subsection{Artikel 43 Faillissementswet}
+
+
+
+\begin{tcolorbox}[colframe=OliveGreen, breakable, title=\textcolor{black}{\texttt{Metadata}},title after break=\textcolor{black}{\texttt{Metadata}},before skip=1em, after skip=1em, left=0.6em, right=0.6em]
+\begin{Verbatim}[commandchars=\\\{\},numbers=left,firstnumber=131,stepnumber=1,label={\hspace*{\fill}\texttt{faillissementspauliana.catala\_en}},numbersep=9mm]
+```catala
+\PY{k+kr}{declaration} \PY{k+kr}{scope} \PY{n+nc}{BewijsvermoedenArt43}\PY{o}{:}
+  \PY{k+kd}{input}\PY{+w}{ }\PY{n+nv}{handeling} \PY{k+kr}{content} \PY{n+nc}{Handeling}
+  \PY{k+kd}{input}\PY{+w}{ }\PY{n+nv}{faillissement} \PY{k+kr}{content} \PY{n+nc}{Faillissement}
+
+  \PY{k+kd}{input}\PY{+w}{ }\PY{n+nv}{tegen\PYZus{}onderwaarde} \PY{k+kr}{condition}
+  \PY{k+kd}{input}\PY{+w}{ }\PY{n+nv}{voldoening\PYZus{}of\PYZus{}zekerheid\PYZus{}niet\PYZus{}opeisbare\PYZus{}schuld} \PY{k+kr}{condition}
+\PY{c+c1}{  \PYZsh{} Derde verdachte categorie gelieerde\PYZus{}partij. Sub 3\PYZhy{}6 wijzen, met de}
+\PY{c+c1}{  \PYZsh{} begripsbepalingen van lid 2\PYZhy{}5, een reeks gelieerde partijen aan. Deze}
+\PY{c+c1}{  \PYZsh{} gronden zijn sterk talig, ze worden samengevat in 1 conditie in plaats van}
+\PY{c+c1}{  \PYZsh{} in een groot aantal afzonderlijke booleans uitgewerkt. Het verder modelleren}
+\PY{c+c1}{  \PYZsh{} zou de neurale verwerking mogelijk met veel context belasten}
+\PY{c+c1}{  \PYZsh{} (\PYZdq{}information overload\PYZdq{}, zie ook RAG\PYZhy{}survey Gao et al. 2024).}
+\PY{c+c1}{  \PYZsh{} De kwalificatie als gelieerde partij wordt daarom neuraal bepaald.}
+  \PY{k+kd}{input}\PY{+w}{ }\PY{n+nv}{gelieerde\PYZus{}partij} \PY{k+kr}{condition}
+  \PY{k+kd}{input}\PY{+w}{ }\PY{n+nv}{reeds\PYZus{}verplicht\PYZus{}voor\PYZus{}aanvang\PYZus{}termijn} \PY{k+kr}{condition}
+
+\PY{c+c1}{  \PYZsh{} Per zijde één weerlegbaar vermoeden (\PYZdq{}vermoed aan beide zijden te bestaan,}
+\PY{c+c1}{  \PYZsh{} behoudens tegenbewijs\PYZdq{}). Ontzenuwen van bewijsvermoeden aan beide zijden}
+\PY{c+c1}{  \PYZsh{} lossen we neuraal op (beide condities op False).}
+  \PY{k+kd}{input}\PY{+w}{ }\PY{n+nv}{vermoeden\PYZus{}wetenschap\PYZus{}schuldenaar\PYZus{}tegenbewijs} \PY{k+kr}{condition}
+  \PY{k+kd}{input}\PY{+w}{ }\PY{n+nv}{vermoeden\PYZus{}wetenschap\PYZus{}wederpartij\PYZus{}tegenbewijs} \PY{k+kr}{condition}
+
+  \PY{k+kd}{internal}\PY{+w}{ }\PY{n+nv}{binnen\PYZus{}een\PYZus{}jaar\PYZus{}voor\PYZus{}faillietverklaring} \PY{k+kr}{condition}
+  \PY{k+kd}{internal}\PY{+w}{ }\PY{n+nv}{niet\PYZus{}reeds\PYZus{}verplicht\PYZus{}voor\PYZus{}aanvang\PYZus{}termijn} \PY{k+kr}{condition}
+  \PY{k+kd}{internal}\PY{+w}{ }\PY{n+nv}{verdachte\PYZus{}categorie} \PY{k+kr}{condition}
+  \PY{k+kd}{internal}\PY{+w}{ }\PY{n+nv}{vermoeden\PYZus{}van\PYZus{}toepassing} \PY{k+kr}{condition}
+
+  \PY{k+kd}{output}\PY{+w}{ }\PY{n+nv}{vermoeden\PYZus{}wetenschap\PYZus{}schuldenaar} \PY{k+kr}{condition}
+  \PY{k+kd}{output}\PY{+w}{ }\PY{n+nv}{vermoeden\PYZus{}wetenschap\PYZus{}wederpartij} \PY{k+kr}{condition}
+```
+\end{Verbatim}
+
+\end{tcolorbox}
+
+
+
+\subsubsection{Lid 1}
+
+
+
+Indien de rechtshandeling waardoor de schuldeisers zijn benadeeld, is
+verricht binnen een jaar voor de faillietverklaring en de schuldenaar
+zich niet reeds voor de aanvang van die termijn daartoe had verplicht,
+wordt de aan het slot van artikel 42, eerste lid, eerste zin, bedoelde
+wetenschap, behoudens tegenbewijs, vermoed aan beide zijden te bestaan:
+
+
+
+\subsubsubsection{Sub 1°}
+
+
+
+bij overeenkomsten, waarbij de waarde der verbintenis aan de zijde van
+de schuldenaar aanmerkelijk die der verbintenis aan de andere zijde
+overtreft;
+
+
+
+\subsubsubsection{Sub 2°}
+
+
+
+bij rechtshandelingen ter voldoening van of zekerheidstelling voor een
+niet opeisbare schuld;
+
+
+
+\subsubsubsection{Sub 3°}
+
+
+
+bij rechtshandelingen, door de schuldenaar die een natuurlijk persoon
+is, verricht met of jegens: a) zijn echtgenoot, zijn pleegkind of een
+bloed- of aanverwant tot in de derde graad; b) een rechtspersoon waarin
+hij, zijn echtgenoot, zijn pleegkind of een bloed- of aanverwant tot in
+de derde graad bestuurder of commissaris is, dan wel waarin deze
+personen, afzonderlijk of tezamen, als aandeelhouder rechtstreeks of
+middellijk voor ten minste de helft van het geplaatste kapitaal
+deelnemen;
+
+
+
+\subsubsubsection{Sub 4°}
+
+
+
+bij rechtshandelingen, door de schuldenaar die rechtspersoon is,
+verricht met of jegens een natuurlijk persoon, a) die bestuurder of
+commissaris van de rechtspersoon is, dan wel met of jegens diens
+echtgenoot, pleegkind of bloed- of aanverwant tot in de derde graad: b)
+die al dan niet tezamen met zijn echtgenoot, zijn pleegkinderen en zijn
+bloed- of aanverwanten tot in de derde graad, als aandeelhouder
+rechtstreeks of middellijk voor ten minste de helft van het geplaatste
+kapitaal deelneemt; c) wiens echtgenoot, pleegkinderen of bloed- of
+aanverwanten tot in de derde graad, afzonderlijk of tezamen, als
+aandeelhouder rechtstreeks of middellijk voor tenminste de helft van het
+geplaatste kapitaal deelnemen;
+
+
+
+\subsubsubsection{Sub 5°}
+
+
+
+bij rechtshandelingen, door de schuldenaar die rechtspersoon is,
+verricht met of jegens een andere rechtspersoon, indien a) een van deze
+rechtspersonen bestuurder is van de andere; b) een bestuurder,
+natuurlijk persoon, van een van deze rechtspersonen, of diens
+echtgenoot, pleegkind of bloed- of aanverwant tot in de derde graad,
+bestuurder is van de andere; c) een bestuurder, natuurlijk persoon, of
+een commissaris van een van deze rechtspersonen, of diens echtgenoot,
+pleegkind of bloed- of aanverwant tot in de derde graad, afzonderlijk of
+tezamen, als aandeelhouder rechtstreeks of middellijk voor ten minste de
+helft van het geplaatste kapitaal deelneemt in de andere; d) in beide
+rechtspersonen voor ten minste de helft van het geplaatste kapitaal
+rechtstreeks of middellijk wordt deelgenomen door dezelfde
+rechtspersoon, dan wel dezelfde natuurlijke persoon, al dan niet tezamen
+met zijn echtgenoot, zijn pleegkinderen en zijn bloed- of aanverwanten
+tot in de derde graad;
+
+
+
+\subsubsubsection{Sub 6°}
+
+
+
+bij rechtshandelingen, door de schuldenaar die rechtspersoon is,
+verricht met of jegens een groepsmaatschappij.
+
+
+
+\subsubsection{Lid 2}
+
+
+
+Met een echtgenoot wordt een geregistreerde partner of een andere
+levensgezel gelijkgesteld.
+
+
+
+\subsubsubsection{Lid 3}
+
+
+
+Onder pleegkind wordt verstaan hij die duurzaam als eigen kind is
+verzorgd en opgevoed.
+
+
+
+\subsubsubsection{Lid 4}
+
+
+
+Onder bestuurder, commissaris of aandeelhouder wordt mede verstaan hij
+die minder dan een jaar vóór de rechtshandeling bestuurder, commissaris
+of aandeelhouder is geweest.
+
+
+
+\subsubsubsection{Lid 5}
+
+
+
+Indien de bestuurder van een rechtspersoon-bestuurder zelf een
+rechtspersoon is, wordt deze rechtspersoon met de
+rechtspersoon-bestuurder gelijkgesteld.
+
+
+
+\subsubsubsection{Lid 6}
+
+
+
+Artikel 138, tiende lid, van boek 2 van het Burgerlijk Wetboek is van
+toepassing ingeval de schuldenaar een rechtspersoon is.
+
+
+
+\begin{Verbatim}[commandchars=\\\{\},numbers=left,firstnumber=220,stepnumber=1,label={\hspace*{\fill}\texttt{faillissementspauliana.catala\_en}}]
+```catala
+\PY{k+kr}{scope} \PY{n+nc}{BewijsvermoedenArt43}\PY{o}{:}
+\PY{c+c1}{  \PYZsh{} Rekenen met data in een schrikkeljaar is complex (29 febr. in een}
+\PY{c+c1}{  \PYZsh{} schrikkeljaar minus 1 jaar?)}
+\PY{c+c1}{  \PYZsh{} De wetgever heeft zich hier niet duidelijk over uitgelaten tav de Fw.}
+\PY{c+c1}{  \PYZsh{} Voor nu is de optiek van de HR in het burgerlijk procesrecht overgenomen}
+\PY{c+c1}{  \PYZsh{} voor het datumrekenen. Zie HR 1 september 2017, ECLI:NL:HR:2017:2225}
+  \PY{k+kt}{date} \PY{k+kd}{round} \PY{k+kr}{down}
+
+\PY{c+c1}{  \PYZsh{} \PYZdq{}verricht binnen een jaar voor de faillietverklaring\PYZdq{}}
+  \PY{k+kr}{rule} \PY{n+nv}{binnen\PYZus{}een\PYZus{}jaar\PYZus{}voor\PYZus{}faillietverklaring}
+  \PY{k+kr}{under condition}
+    \PY{o}{(}\PY{n+nv}{handeling}\PY{o}{.}datum\PYZus{}rechtshandeling
+      \PY{o}{\PYZgt{}}\PY{o}{=} \PY{n+nv}{faillissement}\PY{o}{.}datum\PYZus{}faillietverklaring \PY{o}{\PYZhy{}} \PY{l+m+mi}{1} \PY{o}{year}\PY{o}{)}
+    \PY{o}{and} \PY{o}{(}\PY{n+nv}{handeling}\PY{o}{.}datum\PYZus{}rechtshandeling
+      \PY{o}{\PYZlt{}} \PY{n+nv}{faillissement}\PY{o}{.}datum\PYZus{}faillietverklaring\PY{o}{)}
+  \PY{k+kr}{consequence} \PY{k+kr}{fulfilled}
+
+\PY{c+c1}{  \PYZsh{} \PYZdq{}en de schuldenaar zich niet reeds voor de aanvang van die termijn daartoe}
+\PY{c+c1}{  \PYZsh{} had verplicht\PYZdq{}}
+  \PY{k+kr}{rule} \PY{n+nv}{niet\PYZus{}reeds\PYZus{}verplicht\PYZus{}voor\PYZus{}aanvang\PYZus{}termijn}
+  \PY{k+kr}{under condition} \PY{o}{not} \PY{n+nv}{reeds\PYZus{}verplicht\PYZus{}voor\PYZus{}aanvang\PYZus{}termijn}
+  \PY{k+kr}{consequence} \PY{k+kr}{fulfilled}
+
+\PY{c+c1}{  \PYZsh{} OF\PYZhy{}OF: het volstaat dat de handeling onder één van de drie categorieën valt.}
+  \PY{k+kr}{rule} \PY{n+nv}{verdachte\PYZus{}categorie}
+  \PY{k+kr}{under condition}
+    \PY{n+nv}{tegen\PYZus{}onderwaarde}
+    \PY{o}{or} \PY{n+nv}{voldoening\PYZus{}of\PYZus{}zekerheid\PYZus{}niet\PYZus{}opeisbare\PYZus{}schuld}
+    \PY{o}{or} \PY{n+nv}{gelieerde\PYZus{}partij}
+  \PY{k+kr}{consequence} \PY{k+kr}{fulfilled}
+
+\PY{c+c1}{  \PYZsh{} Anders dan bij art. 45 is hier geen `not om\PYZus{}niet` vereist: ook bij een}
+\PY{c+c1}{  \PYZsh{} rechtshandeling om niet kunnen de vermoedens van art. 43 worden ingeroepen}
+\PY{c+c1}{  \PYZsh{} zie in dit kader r.o. 3.5.7 \PYZhy{} 3.5.8 van HR 23 september 2016,}
+\PY{c+c1}{  \PYZsh{} ECLI:NL:HR:2016:2172 (Hage q.q./Kelderman).}
+  \PY{k+kr}{rule} \PY{n+nv}{vermoeden\PYZus{}van\PYZus{}toepassing}
+  \PY{k+kr}{under condition}
+    \PY{n+nv}{binnen\PYZus{}een\PYZus{}jaar\PYZus{}voor\PYZus{}faillietverklaring}
+    \PY{o}{and} \PY{n+nv}{niet\PYZus{}reeds\PYZus{}verplicht\PYZus{}voor\PYZus{}aanvang\PYZus{}termijn}
+    \PY{o}{and} \PY{n+nv}{verdachte\PYZus{}categorie}
+  \PY{k+kr}{consequence} \PY{k+kr}{fulfilled}
+
+\PY{c+c1}{  \PYZsh{} geslaagd tegenbewijs onthoudt enkel die zijde het vermoeden, waarna de}
+\PY{c+c1}{  \PYZsh{} wetenschap terugvalt op de hoofdregel van art. 42.}
+  \PY{k+kr}{rule} \PY{n+nv}{vermoeden\PYZus{}wetenschap\PYZus{}schuldenaar}
+  \PY{k+kr}{under condition}
+    \PY{n+nv}{vermoeden\PYZus{}van\PYZus{}toepassing}
+    \PY{o}{and} \PY{o}{not} \PY{n+nv}{vermoeden\PYZus{}wetenschap\PYZus{}schuldenaar\PYZus{}tegenbewijs}
+  \PY{k+kr}{consequence} \PY{k+kr}{fulfilled}
+
+  \PY{k+kr}{rule} \PY{n+nv}{vermoeden\PYZus{}wetenschap\PYZus{}wederpartij}
+  \PY{k+kr}{under condition}
+    \PY{n+nv}{vermoeden\PYZus{}van\PYZus{}toepassing}
+    \PY{o}{and} \PY{o}{not} \PY{n+nv}{vermoeden\PYZus{}wetenschap\PYZus{}wederpartij\PYZus{}tegenbewijs}
+  \PY{k+kr}{consequence} \PY{k+kr}{fulfilled}
+
+\PY{k+kr}{scope} \PY{n+nc}{FaillissementspaulianaArt42}\PY{o}{:}
+\PY{c+c1}{  \PYZsh{} Invoer van de subscope}
+  \PY{k+kr}{definition} \PY{n+nv}{bewijsvermoeden\PYZus{}art43}\PY{o}{.}handeling \PY{k+kr}{equals} \PY{n+nv}{handeling}
+  \PY{k+kr}{definition} \PY{n+nv}{bewijsvermoeden\PYZus{}art43}\PY{o}{.}faillissement \PY{k+kr}{equals} \PY{n+nv}{faillissement}
+  \PY{k+kr}{definition} \PY{n+nv}{bewijsvermoeden\PYZus{}art43}\PY{o}{.}tegen\PYZus{}onderwaarde \PY{k+kr}{equals} \PY{n+nv}{tegen\PYZus{}onderwaarde}
+  \PY{k+kr}{definition} \PY{n+nv}{bewijsvermoeden\PYZus{}art43}\PY{o}{.}voldoening\PYZus{}of\PYZus{}zekerheid\PYZus{}niet\PYZus{}opeisbare\PYZus{}schuld \PY{k+kr}{equals}
+    \PY{n+nv}{voldoening\PYZus{}of\PYZus{}zekerheid\PYZus{}niet\PYZus{}opeisbare\PYZus{}schuld}
+  \PY{k+kr}{definition} \PY{n+nv}{bewijsvermoeden\PYZus{}art43}\PY{o}{.}gelieerde\PYZus{}partij \PY{k+kr}{equals} \PY{n+nv}{gelieerde\PYZus{}partij}
+  \PY{k+kr}{definition} \PY{n+nv}{bewijsvermoeden\PYZus{}art43}\PY{o}{.}reeds\PYZus{}verplicht\PYZus{}voor\PYZus{}aanvang\PYZus{}termijn \PY{k+kr}{equals}
+    \PY{n+nv}{reeds\PYZus{}verplicht\PYZus{}voor\PYZus{}aanvang\PYZus{}termijn}
+  \PY{k+kr}{definition} \PY{n+nv}{bewijsvermoeden\PYZus{}art43}\PY{o}{.}vermoeden\PYZus{}wetenschap\PYZus{}schuldenaar\PYZus{}tegenbewijs \PY{k+kr}{equals}
+    \PY{n+nv}{vermoeden\PYZus{}wetenschap\PYZus{}schuldenaar\PYZus{}tegenbewijs}
+  \PY{k+kr}{definition} \PY{n+nv}{bewijsvermoeden\PYZus{}art43}\PY{o}{.}vermoeden\PYZus{}wetenschap\PYZus{}wederpartij\PYZus{}tegenbewijs \PY{k+kr}{equals}
+    \PY{n+nv}{vermoeden\PYZus{}wetenschap\PYZus{}wederpartij\PYZus{}tegenbewijs}
+
+\PY{c+c1}{  \PYZsh{} Art. 43 vervult de wetenschap aan beide zijden.}
+  \PY{k+kr}{exception}
+  \PY{k+kr}{rule} \PY{n+nv}{wetenschap\PYZus{}schuldenaar}
+  \PY{k+kr}{under condition} \PY{n+nv}{bewijsvermoeden\PYZus{}art43}\PY{o}{.}vermoeden\PYZus{}wetenschap\PYZus{}schuldenaar
+  \PY{k+kr}{consequence} \PY{k+kr}{fulfilled}
+
+  \PY{k+kr}{exception}
+  \PY{k+kr}{rule} \PY{n+nv}{wetenschap\PYZus{}wederpartij}
+  \PY{k+kr}{under condition} \PY{n+nv}{bewijsvermoeden\PYZus{}art43}\PY{o}{.}vermoeden\PYZus{}wetenschap\PYZus{}wederpartij
+  \PY{k+kr}{consequence} \PY{k+kr}{fulfilled}
+```
+\end{Verbatim}
+
+
+
+
+\subsection{Artikel 45 Faillissementswet}
+
+
+
+In geval van benadeling door een rechtshandeling om niet, die de
+schuldenaar heeft verricht binnen één jaar vóór de faillietverklaring,
+wordt vermoed dat hij wist of behoorde te weten dat benadeling van de
+schuldeisers het gevolg van de rechtshandeling zou zijn.
+
+
+
+\begin{tcolorbox}[colframe=OliveGreen, breakable, title=\textcolor{black}{\texttt{Metadata}},title after break=\textcolor{black}{\texttt{Metadata}},before skip=1em, after skip=1em, left=0.6em, right=0.6em]
+\begin{Verbatim}[commandchars=\\\{\},numbers=left,firstnumber=309,stepnumber=1,label={\hspace*{\fill}\texttt{faillissementspauliana.catala\_en}},numbersep=9mm]
+```catala
+\PY{k+kr}{declaration} \PY{k+kr}{scope} \PY{n+nc}{BewijsvermoedenArt45}\PY{o}{:}
+  \PY{k+kd}{input}\PY{+w}{ }\PY{n+nv}{handeling} \PY{k+kr}{content} \PY{n+nc}{Handeling}
+  \PY{k+kd}{input}\PY{+w}{ }\PY{n+nv}{faillissement} \PY{k+kr}{content} \PY{n+nc}{Faillissement}
+  \PY{k+kd}{input}\PY{+w}{ }\PY{n+nv}{vermoeden\PYZus{}wetenschap\PYZus{}schuldenaar\PYZus{}tegenbewijs} \PY{k+kr}{condition}
+  \PY{k+kd}{internal}\PY{+w}{ }\PY{n+nv}{binnen\PYZus{}een\PYZus{}jaar\PYZus{}voor\PYZus{}faillietverklaring} \PY{k+kr}{condition}
+  \PY{k+kd}{internal}\PY{+w}{ }\PY{n+nv}{vermoeden\PYZus{}van\PYZus{}toepassing} \PY{k+kr}{condition}
+  \PY{k+kd}{output}\PY{+w}{ }\PY{n+nv}{vermoeden\PYZus{}wetenschap\PYZus{}schuldenaar} \PY{k+kr}{condition}
+```
+\end{Verbatim}
+
+\end{tcolorbox}
+
+
+
+\begin{Verbatim}[commandchars=\\\{\},numbers=left,firstnumber=319,stepnumber=1,label={\hspace*{\fill}\texttt{faillissementspauliana.catala\_en}}]
+```catala
+\PY{k+kr}{scope} \PY{n+nc}{BewijsvermoedenArt45}\PY{o}{:}
+\PY{c+c1}{  \PYZsh{} Zelfde datumrekening als bij art. 43 Fw.}
+  \PY{k+kt}{date} \PY{k+kd}{round} \PY{k+kr}{down}
+
+\PY{c+c1}{  \PYZsh{} \PYZdq{}binnen één jaar vóór de faillietverklaring\PYZdq{}}
+  \PY{k+kr}{rule} \PY{n+nv}{binnen\PYZus{}een\PYZus{}jaar\PYZus{}voor\PYZus{}faillietverklaring}
+  \PY{k+kr}{under condition}
+    \PY{o}{(}\PY{n+nv}{handeling}\PY{o}{.}datum\PYZus{}rechtshandeling
+      \PY{o}{\PYZgt{}}\PY{o}{=} \PY{n+nv}{faillissement}\PY{o}{.}datum\PYZus{}faillietverklaring \PY{o}{\PYZhy{}} \PY{l+m+mi}{1} \PY{o}{year}\PY{o}{)}
+    \PY{o}{and} \PY{o}{(}\PY{n+nv}{handeling}\PY{o}{.}datum\PYZus{}rechtshandeling
+      \PY{o}{\PYZlt{}} \PY{n+nv}{faillissement}\PY{o}{.}datum\PYZus{}faillietverklaring\PY{o}{)}
+  \PY{k+kr}{consequence} \PY{k+kr}{fulfilled}
+
+\PY{c+c1}{  \PYZsh{} Grondslag van het vermoeden: een rechtshandeling om niet binnen 1 jaar.}
+  \PY{k+kr}{rule} \PY{n+nv}{vermoeden\PYZus{}van\PYZus{}toepassing}
+  \PY{k+kr}{under condition}
+    \PY{n+nv}{handeling}\PY{o}{.}om\PYZus{}niet
+    \PY{o}{and} \PY{n+nv}{binnen\PYZus{}een\PYZus{}jaar\PYZus{}voor\PYZus{}faillietverklaring}
+  \PY{k+kr}{consequence} \PY{k+kr}{fulfilled}
+
+\PY{c+c1}{  \PYZsh{} Weerlegbaar vermoeden: is het ontzenuwd (geslaagd tegenbewijs door de}
+\PY{c+c1}{  \PYZsh{} wederpartij), dan vervalt het en valt de wetenschap terug op de hoofdregel}
+\PY{c+c1}{  \PYZsh{} van art. 42 Fw (curator moet dan wetenschap aantonen zonder vermoeden).}
+  \PY{k+kr}{rule} \PY{n+nv}{vermoeden\PYZus{}wetenschap\PYZus{}schuldenaar}
+  \PY{k+kr}{under condition}
+    \PY{n+nv}{vermoeden\PYZus{}van\PYZus{}toepassing}
+    \PY{o}{and} \PY{o}{not} \PY{n+nv}{vermoeden\PYZus{}wetenschap\PYZus{}schuldenaar\PYZus{}tegenbewijs}
+  \PY{k+kr}{consequence} \PY{k+kr}{fulfilled}
+
+\PY{k+kr}{scope} \PY{n+nc}{FaillissementspaulianaArt42}\PY{o}{:}
+\PY{c+c1}{  \PYZsh{} Invoer van de subscope}
+  \PY{k+kr}{definition} \PY{n+nv}{bewijsvermoeden\PYZus{}art45}\PY{o}{.}handeling \PY{k+kr}{equals} \PY{n+nv}{handeling}
+  \PY{k+kr}{definition} \PY{n+nv}{bewijsvermoeden\PYZus{}art45}\PY{o}{.}faillissement \PY{k+kr}{equals} \PY{n+nv}{faillissement}
+  \PY{k+kr}{definition} \PY{n+nv}{bewijsvermoeden\PYZus{}art45}\PY{o}{.}vermoeden\PYZus{}wetenschap\PYZus{}schuldenaar\PYZus{}tegenbewijs \PY{k+kr}{equals}
+    \PY{n+nv}{vermoeden\PYZus{}wetenschap\PYZus{}schuldenaar\PYZus{}tegenbewijs}
+
+\PY{c+c1}{  \PYZsh{} Het bewijsvermoeden van art. 45 Fw kan de wetenschap schuldenaar vervullen}
+  \PY{k+kr}{exception}
+  \PY{k+kr}{rule} \PY{n+nv}{wetenschap\PYZus{}schuldenaar}
+  \PY{k+kr}{under condition} \PY{n+nv}{bewijsvermoeden\PYZus{}art45}\PY{o}{.}vermoeden\PYZus{}wetenschap\PYZus{}schuldenaar
+  \PY{k+kr}{consequence} \PY{k+kr}{fulfilled}
+```
+\end{Verbatim}
+

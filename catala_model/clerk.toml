@@ -1,0 +1,8 @@
+[project]
+include_dirs = ["src"]
+
+[[target]]
+name     = "faillissementspauliana"
+modules  = [ "Faillissementspauliana" ]
+tests    = [ "tests/test_faillissementspauliana.catala_en" ]
+backends = [ "ocaml", "python" ] 

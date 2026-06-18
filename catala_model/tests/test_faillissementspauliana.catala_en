@@ -1,0 +1,237 @@
+# Tests faillissementspauliana
+
+> Using Faillissementspauliana as FP
+
+## Test gebaseerd op ECLI:NL:RBZWB:2013:7542
+
+Kwijtschelding van een geldlening (16.000 EUR), een rechtshandeling om niet,
+ca. acht weken vóór het faillissement. Het vermoeden van art. 45 Fw is niet
+ontzenuwd, de benadeling staat vast: de kwijtschelding is vernietigbaar.
+
+```catala
+#[test]
+declaration scope TestKwijtscheldingGeldlening:
+  beoordeling scope FP.FaillissementspaulianaArt42
+
+scope TestKwijtscheldingGeldlening:
+  definition beoordeling.handeling equals FP.Handeling {
+    -- is_rechtshandeling: true
+    -- datum_rechtshandeling: |2011-03-04|
+    -- verricht_door_de_schuldenaar: true
+    -- onverplicht: true
+    -- om_niet: true
+  }
+  definition beoordeling.faillissement equals FP.Faillissement {
+    -- datum_faillietverklaring: |2011-04-26|
+  }
+  definition beoordeling.benadeling_schuldeisers equals true
+  definition beoordeling.wetenschap_schuldenaar_aangetoond equals false
+  assertion beoordeling.vernietigbaar = true
+```
+
+## Test gebaseerd op ECLI:NL:GHAMS:2017:822
+
+Schenkingen (maandelijkse toelagen), een rechtshandeling om niet, maar meer dan één
+jaar vóór het faillissement van 24 januari 2012 verricht. Het vermoeden van art.
+45 Fw gaat daarom niet op en wetenschap van benadeling is niet aangetoond:
+de schenkingen zijn niet vernietigbaar.
+
+```catala
+#[test]
+declaration scope TestSchenkingBuitenEenJaar:
+  beoordeling scope FP.FaillissementspaulianaArt42
+
+scope TestSchenkingBuitenEenJaar:
+  definition beoordeling.handeling equals FP.Handeling {
+    -- is_rechtshandeling: true
+    # datum synthetisch: de bron vermeldt slechts "in de periode tot juni 2009"
+    -- datum_rechtshandeling: |2009-06-01|
+    -- verricht_door_de_schuldenaar: true
+    -- onverplicht: true
+    -- om_niet: true
+  }
+  definition beoordeling.faillissement equals FP.Faillissement {
+    -- datum_faillietverklaring: |2012-01-24|
+  }
+  definition beoordeling.benadeling_schuldeisers equals false
+  definition beoordeling.wetenschap_schuldenaar_aangetoond equals false
+  assertion beoordeling.vernietigbaar = false
+```
+
+## Test gebaseerd op ECLI:NL:HR:2016:2172 (Hage q.q./Kelderman)
+
+Een tussentijdse dividenduitkering (165.000 EUR) van 29 februari 2008, door het hof
+en de Hoge Raad als een onverplichte rechtshandeling om niet in de zin van art. 42
+Fw aangemerkt, ruim binnen één jaar vóór het faillissement van 24 juni 2008. De
+schuldenaar (de vennootschap) en de bevoordeelde aandeelhouder zijn gelieerde
+partijen (art. 43 lid 1, aanhef en onder 5°, onderdelen a en d, Fw).
+
+De crux van dit arrest: óók bij een rechtshandeling om niet kan het bewijsvermoeden
+van art. 43 Fw worden ingeroepen (zie HR r.o. 3.5.7-3.5.8), naast
+het vermoeden van art. 45 Fw. De wetenschap van benadeling aan de zijde van de
+schuldenaar wordt daardoor vermoed (behoudens tegenbewijs), zodat aan het
+wetenschapsvereiste van art. 42 is voldaan. Uitgaande van benadeling is de
+dividenduitkering vernietigbaar.
+
+```catala
+#[test]
+declaration scope TestHageKelderman:
+  beoordeling scope FP.FaillissementspaulianaArt42
+
+scope TestHageKelderman:
+  definition beoordeling.handeling equals FP.Handeling {
+    -- is_rechtshandeling: true
+    -- datum_rechtshandeling: |2008-02-29|
+    -- verricht_door_de_schuldenaar: true
+    -- onverplicht: true
+    -- om_niet: true
+  }
+  definition beoordeling.faillissement equals FP.Faillissement {
+    -- datum_faillietverklaring: |2008-06-24|
+  }
+  definition beoordeling.gelieerde_partij equals true
+  # benadeling_schuldeisers synthetisch op true: de Hoge Raad heeft verwezen
+  # zonder de benadeling zelf vast te stellen
+  definition beoordeling.benadeling_schuldeisers equals true
+  definition beoordeling.wetenschap_schuldenaar_aangetoond equals false
+  assertion beoordeling.vernietigbaar = true
+```
+
+## Test gebaseerd op ECLI:NL:RBAMS:2015:6008 (Ditel/ABN AMRO)
+
+De verpanding van de handelsvorderingen van Ditel aan ABN AMRO was géén onverplicht
+verrichte rechtshandeling: Ditel had zich tot die verpanding reeds verplicht in de
+kredietovereenkomst van 11 april 2012. De rechtbank: de verpanding "valt op zichzelf
+beschouwd dus niet onder het bereik van artikel 42 Fw". Het faillissement volgde op
+23 mei 2013. Omdat de onverplicht-voorwaarde van art. 42 lid 1 niet is vervuld, is
+de rechtshandeling niet vernietigbaar.
+
+```catala
+#[test]
+declaration scope TestDitelVerplichteVerpanding:
+  beoordeling scope FP.FaillissementspaulianaArt42
+
+scope TestDitelVerplichteVerpanding:
+  definition beoordeling.handeling equals FP.Handeling {
+    -- is_rechtshandeling: true
+    -- datum_rechtshandeling: |2012-04-11|
+    -- verricht_door_de_schuldenaar: true
+    # Kern van de zaak: de verpanding was verplicht (reeds vastgelegd in de
+    # kredietovereenkomst)
+    -- onverplicht: false
+    -- om_niet: false
+  }
+  definition beoordeling.faillissement equals FP.Faillissement {
+    -- datum_faillietverklaring: |2013-05-23|
+  }
+  definition beoordeling.benadeling_schuldeisers equals true
+  definition beoordeling.wetenschap_schuldenaar_aangetoond equals false
+  assertion beoordeling.vernietigbaar = false
+```
+
+## Test gebaseerd op ECLI:NL:RBAMS:2014:5661 (Thieme)
+
+Een overwaardearrangement, een rechtshandeling anders dan om niet, aangegaan tussen
+gelieerde rechtspersonen (art. 43 lid 1, aanhef en onder 5°c, Fw) en getekend op
+20 september 2010, binnen één jaar vóór het faillissement van Thieme Groep van
+5 november 2010. Het bewijsvermoeden van art. 43 Fw is van toepassing, maar wordt
+ontzenuwd (geslaagd tegenbewijs aan beide zijden): de rechtbank oordeelt dat de
+wetenschap van benadeling niet is komen vast te staan. Daarmee valt de wetenschap
+terug op de hoofdregel van art. 42, die is hier niet aangetoond en wordt het
+beroep op art. 42 Fw verworpen: niet vernietigbaar.
+
+```catala
+#[test]
+declaration scope TestThiemeOntzenuwdVermoeden:
+  beoordeling scope FP.FaillissementspaulianaArt42
+
+scope TestThiemeOntzenuwdVermoeden:
+  definition beoordeling.handeling equals FP.Handeling {
+    -- is_rechtshandeling: true
+    -- datum_rechtshandeling: |2010-09-20|
+    -- verricht_door_de_schuldenaar: true
+    -- onverplicht: true
+    -- om_niet: false
+  }
+  definition beoordeling.faillissement equals FP.Faillissement {
+    -- datum_faillietverklaring: |2010-11-05|
+  }
+  definition beoordeling.gelieerde_partij equals true
+  # Geslaagd tegenbewijs ontzenuwt het vermoeden aan beide zijden.
+  definition beoordeling.vermoeden_wetenschap_schuldenaar_tegenbewijs equals true
+  definition beoordeling.vermoeden_wetenschap_wederpartij_tegenbewijs equals true
+  definition beoordeling.benadeling_schuldeisers equals true
+  definition beoordeling.wetenschap_schuldenaar_aangetoond equals false
+  assertion beoordeling.vernietigbaar = false
+```
+
+## Test gebaseerd op ECLI:NL:GHARL:2021:3039
+
+Een koopovereenkomst (een rechtshandeling anders dan om niet) van 15 juni 2015,
+binnen één jaar vóór het faillissement van Vikariën van 15 juli 2015. De curator
+beroept zich op het bewijsvermoeden van art. 43 lid 1 sub 1° Fw, maar de wetenschap
+van benadeling aan de zijde van de wederpartij (Bemi Kalf) is niet komen vast te
+staan: het vermoeden houdt aan de zijde van de schuldenaar stand, maar valt aan de
+zijde van de wederpartij weg (eenzijdig ontzenuwd). Omdat het om een rechtshandeling
+anders dan om niet gaat, eist art. 42 lid 2 óók wetenschap bij de wederpartij; die
+ontbreekt, zodat de handeling niet vernietigbaar is.
+
+```catala
+#[test]
+declaration scope TestWederpartijWetenschap:
+  beoordeling scope FP.FaillissementspaulianaArt42
+
+scope TestWederpartijWetenschap:
+  definition beoordeling.handeling equals FP.Handeling {
+    -- is_rechtshandeling: true
+    -- datum_rechtshandeling: |2015-06-15|
+    -- verricht_door_de_schuldenaar: true
+    -- onverplicht: true
+    -- om_niet: false
+  }
+  definition beoordeling.faillissement equals FP.Faillissement {
+    -- datum_faillietverklaring: |2015-07-15|
+  }
+  definition beoordeling.tegen_onderwaarde equals true
+  # Alleen aan de zijde van de wederpartij is het vermoeden ontzenuwd.
+  definition beoordeling.vermoeden_wetenschap_wederpartij_tegenbewijs equals true
+  definition beoordeling.benadeling_schuldeisers equals true
+  definition beoordeling.wetenschap_schuldenaar_aangetoond equals false
+  assertion beoordeling.vernietigbaar = false
+```
+
+## Test gebaseerd op ECLI:NL:GHDHA:2020:2468
+
+Verkoop van een woning aanmerkelijk beneden de waarde (de koopprijs ligt aanmerkelijk
+onder de aankoopprijs van 215.000 EUR, de WOZ-waarde van 190.000 EUR en een taxatie
+van 180.000 EUR) door Hops aan haar uittredend bestuurder op 11 november 2016,
+binnen één jaar vóór het faillissement van Hops van 21 februari 2017. Het is een
+rechtshandeling anders dan om niet waarbij de waarde aan de zijde van de schuldenaar
+die aan de andere zijde aanmerkelijk overtreft (art. 43 lid 1 sub 1 Fw). Het
+bewijsvermoeden wordt niet ontzenuwd, zodat de wetenschap van benadeling aan beide
+zijden wordt vermoed en aan het wetenschapsvereiste (ook van lid 2) is voldaan:
+uitgaande van benadeling is de rechtshandeling vernietigbaar.
+
+```catala
+#[test]
+declaration scope TestOnderwaardeWoningVermoeden:
+  beoordeling scope FP.FaillissementspaulianaArt42
+
+scope TestOnderwaardeWoningVermoeden:
+  definition beoordeling.handeling equals FP.Handeling {
+    -- is_rechtshandeling: true
+    -- datum_rechtshandeling: |2016-11-11|
+    -- verricht_door_de_schuldenaar: true
+    -- onverplicht: true
+    -- om_niet: false
+  }
+  definition beoordeling.faillissement equals FP.Faillissement {
+    -- datum_faillietverklaring: |2017-02-21|
+  }
+  definition beoordeling.tegen_onderwaarde equals true
+  # Geen tegenbewijs: het vermoeden houdt aan beide zijden stand.
+  definition beoordeling.benadeling_schuldeisers equals true
+  definition beoordeling.wetenschap_schuldenaar_aangetoond equals false
+  definition beoordeling.wetenschap_wederpartij_aangetoond equals false
+  assertion beoordeling.vernietigbaar = true
+```

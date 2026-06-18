@@ -1,0 +1,360 @@
+> Module Faillissementspauliana
+
+# Faillissementspauliana
+
+## Artikel 42 Faillissementswet
+
+```catala-metadata
+declaration structure Handeling:
+  # Handeling kan ook feitelijke handeling zijn, valt dan buiten scope
+  # Zie in dit kader ook HR 21 juni 2013 (Eringa q.q./ABN AMRO)
+  data is_rechtshandeling content boolean
+  data datum_rechtshandeling content date
+  data verricht_door_de_schuldenaar content boolean
+  data onverplicht content boolean
+  # "anders dan om niet" (om baat) wordt gemodelleerd als negatie: not om_niet
+  data om_niet content boolean
+
+declaration structure Faillissement:
+  data datum_faillietverklaring content date
+
+declaration scope FaillissementspaulianaArt42:
+  input handeling content Handeling
+  input faillissement content Faillissement
+
+  input benadeling_schuldeisers condition
+  input wetenschap_schuldenaar_aangetoond condition
+  # Schuldenaar-wetenschap komt bij elke redenering terug maar bij de
+  # wederpartij niet altijd.
+  context wetenschap_wederpartij_aangetoond condition
+
+  # Hieronder wordt context gebruikt omdat deze dan niet voor iedere redenering
+  # verplicht zijn om in te vullen.
+
+  # "behoudens tegenbewijs": geslaagd tegenbewijs ontkracht het bewijsvermoeden,
+  # dan valt de wetenschap terug op de hoofdregel van art. 42 (de curator draagt
+  # het bewijsrisico). Per zijde 1 conditie: art. 43 vermoedt aan beide
+  # zijden, art. 45 enkel bij de schuldenaar.
+  context vermoeden_wetenschap_schuldenaar_tegenbewijs condition
+  context vermoeden_wetenschap_wederpartij_tegenbewijs condition
+
+  # Gronden ("verdachte categorieën") van het bewijsvermoeden van art. 43 lid 1.
+  context tegen_onderwaarde condition
+  context voldoening_of_zekerheid_niet_opeisbare_schuld condition
+  context gelieerde_partij condition
+  # Art. 43 lid 1 aanvullende vereiste: de schuldenaar had zich niet reeds voor
+  # de aanvang van de jaartermijn tot de handeling verplicht.
+  context reeds_verplicht_voor_aanvang_termijn condition
+
+  # Bewijsvermoeden bij een rechtshandeling om niet (art. 45).
+  bewijsvermoeden_art45 scope BewijsvermoedenArt45
+
+  # Bewijsvermoeden van art. 43 (voornamelijk om baat).
+  bewijsvermoeden_art43 scope BewijsvermoedenArt43
+
+  internal voor_faillietverklaring condition
+  internal wetenschap_schuldenaar condition
+  internal wetenschap_wederpartij condition
+  internal wetenschapsvereiste condition
+
+  output vernietigbaar condition
+```
+
+### Lid 1
+
+De curator kan ten behoeve van de boedel elke rechtshandeling die de schuldenaar vóór de faillietverklaring onverplicht heeft verricht en waarvan deze bij dit verrichten wist of behoorde te weten dat daarvan benadeling van de schuldeisers het gevolg zou zijn, door een buitengerechtelijke verklaring vernietigen. Artikel 50, tweede lid, van Boek 3 van het Burgerlijk Wetboek is niet van toepassing.
+
+```catala
+scope FaillissementspaulianaArt42:
+  # Fixatiebeginsel (art. 23 Fw)
+  rule voor_faillietverklaring
+  under condition
+    handeling.datum_rechtshandeling < faillissement.datum_faillietverklaring
+  consequence fulfilled
+
+  rule wetenschap_schuldenaar
+  under condition wetenschap_schuldenaar_aangetoond
+  consequence fulfilled
+
+  # Lid 1 verlangt steeds wetenschap bij de schuldenaar. Lid 2 scherpt dit
+  # aan voor rechtshandelingen anders dan om niet.
+  rule wetenschapsvereiste
+  under condition wetenschap_schuldenaar
+  consequence fulfilled
+
+  # De rechtshandeling is vernietigbaar indien aan alle vereisten van lid 1
+  # is voldaan.
+  rule vernietigbaar
+  under condition
+    handeling.is_rechtshandeling
+    and handeling.verricht_door_de_schuldenaar
+    and voor_faillietverklaring
+    and handeling.onverplicht
+    and benadeling_schuldeisers
+    and wetenschapsvereiste
+  consequence fulfilled
+```
+
+### Lid 2
+
+Een rechtshandeling anders dan om niet, die hetzij meerzijdig is, hetzij eenzijdig en tot een of meer bepaalde personen gericht, kan wegens benadeling slechts worden vernietigd, indien ook degenen met of jegens wie de schuldenaar de rechtshandeling verrichtte, wisten of behoorden te weten dat daarvan benadeling van de schuldeisers het gevolg zou zijn.
+
+```catala
+scope FaillissementspaulianaArt42:
+  # Wetenschapsvereiste wederpartij vereist bij "anders dan om niet".
+  rule wetenschap_wederpartij
+  under condition wetenschap_wederpartij_aangetoond
+  consequence fulfilled
+
+  # Bij een rechtshandeling om niet is wetenschap bij wederpartij niet vereist.
+  exception
+  rule wetenschapsvereiste
+  under condition
+    (not handeling.om_niet)
+    and (not wetenschap_wederpartij)
+  consequence not fulfilled
+```
+
+### Lid 3
+
+Wordt een rechtshandeling om niet wegens benadeling vernietigd, dan heeft de vernietiging ten aanzien van de bevoordeelde, die wist noch behoorde te weten dat van de rechtshandeling benadeling van de schuldeisers het gevolg zou zijn, geen werking, voorzover hij aantoont dat hij ten tijde van de faillietverklaring niet ten gevolge van de rechtshandeling gebaat was.
+
+```catala
+# Bij rechtshandelingen om niet geldt de wetenschapseis aan de zijde van de
+# wederpartij niet. Dit is al bij lid 1 gemodelleerd.
+# Bescherming van derden (lid 3) is voor nu bewust buiten het model gelaten.
+```
+
+## Artikel 43 Faillissementswet
+
+```catala-metadata
+declaration scope BewijsvermoedenArt43:
+  input handeling content Handeling
+  input faillissement content Faillissement
+
+  input tegen_onderwaarde condition
+  input voldoening_of_zekerheid_niet_opeisbare_schuld condition
+  # Derde verdachte categorie gelieerde_partij. Sub 3-6 wijzen, met de
+  # begripsbepalingen van lid 2-5, een reeks gelieerde partijen aan. Deze
+  # gronden zijn sterk talig, ze worden samengevat in 1 conditie in plaats van
+  # in een groot aantal afzonderlijke booleans uitgewerkt. Het verder modelleren
+  # zou de neurale verwerking mogelijk met veel context belasten
+  # ("information overload", zie ook RAG-survey Gao et al. 2024).
+  # De kwalificatie als gelieerde partij wordt daarom neuraal bepaald.
+  input gelieerde_partij condition
+  input reeds_verplicht_voor_aanvang_termijn condition
+
+  # Per zijde één weerlegbaar vermoeden ("vermoed aan beide zijden te bestaan,
+  # behoudens tegenbewijs"). Ontzenuwen van bewijsvermoeden aan beide zijden
+  # lossen we neuraal op (beide condities op False).
+  input vermoeden_wetenschap_schuldenaar_tegenbewijs condition
+  input vermoeden_wetenschap_wederpartij_tegenbewijs condition
+
+  internal binnen_een_jaar_voor_faillietverklaring condition
+  internal niet_reeds_verplicht_voor_aanvang_termijn condition
+  internal verdachte_categorie condition
+  internal vermoeden_van_toepassing condition
+
+  output vermoeden_wetenschap_schuldenaar condition
+  output vermoeden_wetenschap_wederpartij condition
+```
+
+### Lid 1
+
+Indien de rechtshandeling waardoor de schuldeisers zijn benadeeld, is verricht binnen een jaar voor de faillietverklaring en de schuldenaar zich niet reeds voor de aanvang van die termijn daartoe had verplicht, wordt de aan het slot van artikel 42, eerste lid, eerste zin, bedoelde wetenschap, behoudens tegenbewijs, vermoed aan beide zijden te bestaan:
+
+#### Sub 1°
+
+bij overeenkomsten, waarbij de waarde der verbintenis aan de zijde van de schuldenaar aanmerkelijk die der verbintenis aan de andere zijde overtreft;
+
+#### Sub 2°
+
+bij rechtshandelingen ter voldoening van of zekerheidstelling voor een niet opeisbare schuld;
+
+#### Sub 3°
+
+bij rechtshandelingen, door de schuldenaar die een natuurlijk persoon is, verricht met of jegens:
+a) zijn echtgenoot, zijn pleegkind of een bloed- of aanverwant tot in de derde graad;
+b) een rechtspersoon waarin hij, zijn echtgenoot, zijn pleegkind of een bloed- of aanverwant tot in de derde graad bestuurder of commissaris is, dan wel waarin deze personen, afzonderlijk of tezamen, als aandeelhouder rechtstreeks of middellijk voor ten minste de helft van het geplaatste kapitaal deelnemen;
+
+#### Sub 4°
+
+bij rechtshandelingen, door de schuldenaar die rechtspersoon is, verricht met of jegens een natuurlijk persoon,
+a) die bestuurder of commissaris van de rechtspersoon is, dan wel met of jegens diens echtgenoot, pleegkind of bloed- of aanverwant tot in de derde graad:
+b) die al dan niet tezamen met zijn echtgenoot, zijn pleegkinderen en zijn bloed- of aanverwanten tot in de derde graad, als aandeelhouder rechtstreeks of middellijk voor ten minste de helft van het geplaatste kapitaal deelneemt;
+c) wiens echtgenoot, pleegkinderen of bloed- of aanverwanten tot in de derde graad, afzonderlijk of tezamen, als aandeelhouder rechtstreeks of middellijk voor tenminste de helft van het geplaatste kapitaal deelnemen;
+
+#### Sub 5°
+
+bij rechtshandelingen, door de schuldenaar die rechtspersoon is, verricht met of jegens een andere rechtspersoon, indien
+a) een van deze rechtspersonen bestuurder is van de andere;
+b) een bestuurder, natuurlijk persoon, van een van deze rechtspersonen, of diens echtgenoot, pleegkind of bloed- of aanverwant tot in de derde graad, bestuurder is van de andere;
+c) een bestuurder, natuurlijk persoon, of een commissaris van een van deze rechtspersonen, of diens echtgenoot, pleegkind of bloed- of aanverwant tot in de derde graad, afzonderlijk of tezamen, als aandeelhouder rechtstreeks of middellijk voor ten minste de helft van het geplaatste kapitaal deelneemt in de andere;
+d) in beide rechtspersonen voor ten minste de helft van het geplaatste kapitaal rechtstreeks of middellijk wordt deelgenomen door dezelfde rechtspersoon, dan wel dezelfde natuurlijke persoon, al dan niet tezamen met zijn echtgenoot, zijn pleegkinderen en zijn bloed- of aanverwanten tot in de derde graad;
+
+#### Sub 6°
+
+bij rechtshandelingen, door de schuldenaar die rechtspersoon is, verricht met of jegens een groepsmaatschappij.
+
+### Lid 2
+
+Met een echtgenoot wordt een geregistreerde partner of een andere levensgezel gelijkgesteld.
+
+#### Lid 3
+
+Onder pleegkind wordt verstaan hij die duurzaam als eigen kind is verzorgd en opgevoed.
+
+#### Lid 4
+
+Onder bestuurder, commissaris of aandeelhouder wordt mede verstaan hij die minder dan een jaar vóór de rechtshandeling bestuurder, commissaris of aandeelhouder is geweest.
+
+#### Lid 5
+
+Indien de bestuurder van een rechtspersoon-bestuurder zelf een rechtspersoon is, wordt deze rechtspersoon met de rechtspersoon-bestuurder gelijkgesteld.
+
+#### Lid 6
+
+Artikel 138, tiende lid, van boek 2 van het Burgerlijk Wetboek is van toepassing ingeval de schuldenaar een rechtspersoon is.
+
+```catala
+scope BewijsvermoedenArt43:
+  # Rekenen met data in een schrikkeljaar is complex (29 febr. in een
+  # schrikkeljaar minus 1 jaar?)
+  # De wetgever heeft zich hier niet duidelijk over uitgelaten tav de Fw.
+  # Voor nu is de optiek van de HR in het burgerlijk procesrecht overgenomen
+  # voor het datumrekenen. Zie HR 1 september 2017, ECLI:NL:HR:2017:2225
+  date round down
+
+  # "verricht binnen een jaar voor de faillietverklaring"
+  rule binnen_een_jaar_voor_faillietverklaring
+  under condition
+    (handeling.datum_rechtshandeling
+      >= faillissement.datum_faillietverklaring - 1 year)
+    and (handeling.datum_rechtshandeling
+      < faillissement.datum_faillietverklaring)
+  consequence fulfilled
+
+  # "en de schuldenaar zich niet reeds voor de aanvang van die termijn daartoe
+  # had verplicht"
+  rule niet_reeds_verplicht_voor_aanvang_termijn
+  under condition not reeds_verplicht_voor_aanvang_termijn
+  consequence fulfilled
+
+  # OF-OF: het volstaat dat de handeling onder één van de drie categorieën valt.
+  rule verdachte_categorie
+  under condition
+    tegen_onderwaarde
+    or voldoening_of_zekerheid_niet_opeisbare_schuld
+    or gelieerde_partij
+  consequence fulfilled
+
+  # Anders dan bij art. 45 is hier geen `not om_niet` vereist: ook bij een
+  # rechtshandeling om niet kunnen de vermoedens van art. 43 worden ingeroepen
+  # zie in dit kader r.o. 3.5.7 - 3.5.8 van HR 23 september 2016,
+  # ECLI:NL:HR:2016:2172 (Hage q.q./Kelderman).
+  rule vermoeden_van_toepassing
+  under condition
+    binnen_een_jaar_voor_faillietverklaring
+    and niet_reeds_verplicht_voor_aanvang_termijn
+    and verdachte_categorie
+  consequence fulfilled
+
+  # geslaagd tegenbewijs onthoudt enkel die zijde het vermoeden, waarna de
+  # wetenschap terugvalt op de hoofdregel van art. 42.
+  rule vermoeden_wetenschap_schuldenaar
+  under condition
+    vermoeden_van_toepassing
+    and not vermoeden_wetenschap_schuldenaar_tegenbewijs
+  consequence fulfilled
+
+  rule vermoeden_wetenschap_wederpartij
+  under condition
+    vermoeden_van_toepassing
+    and not vermoeden_wetenschap_wederpartij_tegenbewijs
+  consequence fulfilled
+
+scope FaillissementspaulianaArt42:
+  # Invoer van de subscope
+  definition bewijsvermoeden_art43.handeling equals handeling
+  definition bewijsvermoeden_art43.faillissement equals faillissement
+  definition bewijsvermoeden_art43.tegen_onderwaarde equals tegen_onderwaarde
+  definition bewijsvermoeden_art43.voldoening_of_zekerheid_niet_opeisbare_schuld equals
+    voldoening_of_zekerheid_niet_opeisbare_schuld
+  definition bewijsvermoeden_art43.gelieerde_partij equals gelieerde_partij
+  definition bewijsvermoeden_art43.reeds_verplicht_voor_aanvang_termijn equals
+    reeds_verplicht_voor_aanvang_termijn
+  definition bewijsvermoeden_art43.vermoeden_wetenschap_schuldenaar_tegenbewijs equals
+    vermoeden_wetenschap_schuldenaar_tegenbewijs
+  definition bewijsvermoeden_art43.vermoeden_wetenschap_wederpartij_tegenbewijs equals
+    vermoeden_wetenschap_wederpartij_tegenbewijs
+
+  # Art. 43 vervult de wetenschap aan beide zijden.
+  exception
+  rule wetenschap_schuldenaar
+  under condition bewijsvermoeden_art43.vermoeden_wetenschap_schuldenaar
+  consequence fulfilled
+
+  exception
+  rule wetenschap_wederpartij
+  under condition bewijsvermoeden_art43.vermoeden_wetenschap_wederpartij
+  consequence fulfilled
+```
+
+
+## Artikel 45 Faillissementswet
+
+In geval van benadeling door een rechtshandeling om niet, die de schuldenaar heeft verricht binnen één jaar vóór de faillietverklaring, wordt vermoed dat hij wist of behoorde te weten dat benadeling van de schuldeisers het gevolg van de rechtshandeling zou zijn.
+
+```catala-metadata
+declaration scope BewijsvermoedenArt45:
+  input handeling content Handeling
+  input faillissement content Faillissement
+  input vermoeden_wetenschap_schuldenaar_tegenbewijs condition
+  internal binnen_een_jaar_voor_faillietverklaring condition
+  internal vermoeden_van_toepassing condition
+  output vermoeden_wetenschap_schuldenaar condition
+```
+
+```catala
+scope BewijsvermoedenArt45:
+  # Zelfde datumrekening als bij art. 43 Fw.
+  date round down
+
+  # "binnen één jaar vóór de faillietverklaring"
+  rule binnen_een_jaar_voor_faillietverklaring
+  under condition
+    (handeling.datum_rechtshandeling
+      >= faillissement.datum_faillietverklaring - 1 year)
+    and (handeling.datum_rechtshandeling
+      < faillissement.datum_faillietverklaring)
+  consequence fulfilled
+
+  # Grondslag van het vermoeden: een rechtshandeling om niet binnen 1 jaar.
+  rule vermoeden_van_toepassing
+  under condition
+    handeling.om_niet
+    and binnen_een_jaar_voor_faillietverklaring
+  consequence fulfilled
+
+  # Weerlegbaar vermoeden: is het ontzenuwd (geslaagd tegenbewijs door de
+  # wederpartij), dan vervalt het en valt de wetenschap terug op de hoofdregel
+  # van art. 42 Fw (curator moet dan wetenschap aantonen zonder vermoeden).
+  rule vermoeden_wetenschap_schuldenaar
+  under condition
+    vermoeden_van_toepassing
+    and not vermoeden_wetenschap_schuldenaar_tegenbewijs
+  consequence fulfilled
+
+scope FaillissementspaulianaArt42:
+  # Invoer van de subscope
+  definition bewijsvermoeden_art45.handeling equals handeling
+  definition bewijsvermoeden_art45.faillissement equals faillissement
+  definition bewijsvermoeden_art45.vermoeden_wetenschap_schuldenaar_tegenbewijs equals
+    vermoeden_wetenschap_schuldenaar_tegenbewijs
+
+  # Het bewijsvermoeden van art. 45 Fw kan de wetenschap schuldenaar vervullen
+  exception
+  rule wetenschap_schuldenaar
+  under condition bewijsvermoeden_art45.vermoeden_wetenschap_schuldenaar
+  consequence fulfilled
+```
