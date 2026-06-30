@@ -1,0 +1,48 @@
+[
+  {
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "title": "Coroutine FaillissementspaulianaArt42 input",
+    "description": "Neural coroutine that resolves primarily factual inputs and legal considerations that do not require case-based reasoning (RAG).",
+    "$ref": "#/definitions/FaillissementspaulianaArt42_in",
+    "definitions": {
+      "Faillissement": {
+        "type": "object",
+        "properties": {
+          "datum_faillietverklaring": { "type": "string" }
+        },
+        "required": [ "datum_faillietverklaring" ],
+        "additionalProperties": false
+      },
+      "FaillissementspaulianaArt42_in": {
+        "type": "object",
+        "properties": {
+          "handeling": { "$ref": "#/definitions/Handeling" },
+          "faillissement": { "$ref": "#/definitions/Faillissement" }
+        },
+        "required": [
+          "faillissement", "handeling"
+        ],
+        "additionalProperties": false
+      },
+      "Handeling": {
+        "type": "object",
+        "properties": {
+          "is_rechtshandeling_overwegingen": { "type": "string" },
+          "is_rechtshandeling": { "type": "boolean" },
+          "datum_rechtshandeling": { "type": "string" },
+          "verricht_door_de_schuldenaar_overwegingen": { "type": "string" },
+          "verricht_door_de_schuldenaar": { "type": "boolean" },
+          "om_niet_overwegingen": { "type": "string" },
+          "om_niet": { "type": "boolean" }
+        },
+        "required": [
+          "om_niet", "om_niet_overwegingen",
+          "verricht_door_de_schuldenaar", "verricht_door_de_schuldenaar_overwegingen",
+          "datum_rechtshandeling",
+          "is_rechtshandeling", "is_rechtshandeling_overwegingen"
+        ],
+        "additionalProperties": false
+      }
+    }
+  }
+]

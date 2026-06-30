@@ -1,0 +1,230 @@
+{
+  "model": "gemini-3.5-flash",
+  "k": 5,
+  "results": {
+    "ECLI_NL_GHAMS_2015_5433": {
+      "wetenschap_overwegingen": "De curatoren hebben de verlenging van de overeenkomst van opdracht en de depotovereenkomst (inclusief verlengingen) onterecht vernietigd. Hoewel de bewijsvermoedens van art. 43 lid 1 sub 5 onder b Fw (gemeenschappelijke bestuurder) en art. 43 lid 1 sub 2 Fw (zekerheidstelling voor niet-opeisbare schuld) van toepassing waren, heeft gedaagde deze vermoedens met succes ontzenuwd. Gedaagde toonde aan dat er ten tijde van de rechtshandelingen nog reële overlevingskansen waren voor de groep en dat het faillissement van B.V. 2 niet voorzienbaar was. De curatoren hebben vervolgens niet rechtstreeks aangetoond dat de wetenschap van benadeling op de relevante data bestond.",
+      "wetenschap_schuldenaar_aangetoond": false,
+      "wetenschap_wederpartij_aangetoond": false,
+      "vermoeden_wetenschap_schuldenaar_tegenbewijs": true,
+      "vermoeden_wetenschap_wederpartij_tegenbewijs": true,
+      "tegen_onderwaarde": null,
+      "voldoening_of_zekerheid_niet_opeisbare_schuld": true,
+      "gelieerde_partij": true,
+      "reeds_verplicht_voor_aanvang_termijn": null,
+      "benadeling_schuldeisers_overwegingen": "Om te bepalen of er sprake is van benadeling van de schuldeisers in de zin van artikel 42 Fw, moet een vermogensvergelijking worden gemaakt tussen de hypothetische situatie waarin de schuldeisers zouden hebben verkeerd zonder het overwaarde-arrangement en de feitelijke situatie waarin zij verkeren nu dit arrangement in stand blijft. Zonder het overwaarde-arrangement zou de overwaarde van de door Thieme-groep aan de bank verstrekte zekerheden (tot een bedrag van € 500.000,-) na uitwinning in de faillissementsboedel zijn gevallen. Dit bedrag zou dan beschikbaar zijn geweest voor de gezamenlijke schuldeisers en volgens de wettelijke rangorde (en met aftrek van de boedelkosten) zijn verdeeld. Door het overwaarde-arrangement is deze overwaarde echter aangewend om Drieakker te voldoen ter dekking van de door haar aan PGB betaalde bankgarantie. Hierdoor is het actief van de boedel met € 500.000,- verminderd en is de wettelijke rangorde van schuldeisers doorbroken. Zelfs als PGB (of Drieakker via subrogatie/regres) een preferente positie zou hebben gehad, is er sprake van benadeling omdat de overwaarde buiten de boedel om is geleid, waardoor andere schuldeisers (zoals de fiscus of andere preferente crediteuren) en de boedel (ter dekking van de hoogrentende boedelkosten) zijn benadeeld. De benadeling is actueel en aanwezig op het moment dat de curator zijn rechten geldend maakt. Er is derhalve voldaan aan het vereiste van benadeling van schuldeisers.",
+      "benadeling_schuldeisers": true,
+      "handeling": {
+        "onverplicht_overwegingen": "Uit de casus (onder 3.3) blijkt dat tussen partijen niet in geschil is dat het overwaarde-arrangement, althans hetgeen daartoe op 29 juli 2010 mondeling is afgesproken, een onverplicht verrichte rechtshandeling is (anders dan om niet), voor zover het Thieme-groep en Drieakker betreft. Er bestond voor Thieme-groep geen reeds bestaande wettelijke of contractuele verplichting om de contragarantie te verstrekken of deel te nemen aan het overwaarde-arrangement ten behoeve van Drieakker en de bank.",
+        "onverplicht": true,
+        "is_rechtshandeling_overwegingen": "Het overwaarde-arrangement is een meerzijdige overeenkomst waarbij partijen over en weer verplichtingen op zich hebben genomen met het oog op het tot stand brengen van rechtsgevolgen (zoals het verstrekken van een contragarantie en borgstelling).",
+        "is_rechtshandeling": true,
+        "datum_rechtshandeling": "2010-07-29",
+        "verricht_door_de_schuldenaar_overwegingen": "De schuldenaar (Thieme-groep) heeft de rechtshandeling (het overwaarde-arrangement) zelf verricht door zich op 29 juli 2010 daartoe te verbinden.",
+        "verricht_door_de_schuldenaar": true,
+        "om_niet_overwegingen": "Uit de feiten (onder 3.3) volgt dat tussen partijen niet in geschil is dat het overwaarde-arrangement een rechtshandeling anders dan om niet (dus om baat) is.",
+        "om_niet": false
+      },
+      "faillissement": {
+        "datum_faillietverklaring": "2010-12-05"
+      },
+      "vernietigbaar": false
+    },
+    "ECLI_NL_GHARL_2013_822": {
+      "wetenschap_overwegingen": "De rechtshandelingen (de borgtocht en de verpanding) zijn verricht op 30 december 2005, terwijl het faillissement van de Vennootschap pas op 23 juni 2009 is uitgesproken. Omdat de periode tussen de rechtshandelingen en de faillietverklaring ruim drieënhalf jaar bedraagt, is de jaartermijn van de artikelen 43 en 45 Fw ruimschoots overschreden. De wettelijke bewijsvermoedens zijn derhalve niet van toepassing. De curator draagt de volledige stelplicht en bewijslast om de wetenschap van benadeling rechtstreeks aan te tonen op grond van de hoofdregel van artikel 42 Fw. Hiervoor moet worden bewezen dat ten tijde van de rechtshandelingen in december 2005 het faillissement en een tekort daarin met een redelijke mate van waarschijnlijkheid waren te voorzien. Gelet op het lange tijdsverloop en het ontbreken van feiten die wijzen op de voorzienbaarheid van het faillissement in 2005, is deze wetenschap aan beide zijden niet aangetoond.",
+      "wetenschap_schuldenaar_aangetoond": false,
+      "wetenschap_wederpartij_aangetoond": false,
+      "vermoeden_wetenschap_schuldenaar_tegenbewijs": null,
+      "vermoeden_wetenschap_wederpartij_tegenbewijs": null,
+      "tegen_onderwaarde": null,
+      "voldoening_of_zekerheid_niet_opeisbare_schuld": null,
+      "gelieerde_partij": null,
+      "reeds_verplicht_voor_aanvang_termijn": null,
+      "benadeling_schuldeisers_overwegingen": "Op basis van de casus kan worden vastgesteld dat de schuldeisers van de Vennootschap zijn benadeeld door de aangevochten rechtshandelingen (de borgtocht en de verpanding van 30 december 2005). Om te bepalen of er sprake is van benadeling in de zin van artikel 42 Faillissementswet (Fw), dient een vermogensvergelijking te worden gemaakt tussen de hypothetische situatie waarin de schuldeisers zouden hebben verkeerd zonder de rechtshandelingen en de feitelijke situatie waarin zij verkeren nu de handelingen zijn verricht. In de hypothetische situatie zonder de borgtocht en verpanding zou het vermogen van de Vennootschap niet zijn bezwaard met een pandrecht op haar bedrijfsinventaris en debiteuren ten behoeve van Van Doorn Beheer. Deze activa zouden onbezwaard in de faillissementsboedel zijn gevallen en beschikbaar zijn geweest voor verhaal door de gezamenlijke schuldeisers. Daarnaast zou de Vennootschap in de periode oktober 2007 tot en met januari 2009 niet een bedrag van € 49.500,- hebben betaald aan Van Doorn Beheer ter aflossing van de schuld van Vewa, waardoor dit bedrag behouden zou zijn gebleven voor de Vennootschap en haar schuldeisers. In de feitelijke situatie is het actief van de Vennootschap echter substantieel verminderd. De bedrijfsinventaris en debiteuren zijn verpand aan Van Doorn Beheer ter zekerheid van een lening van € 150.000,- die door Van Doorn Beheer aan Vewa (de koper van de aandelen) is verstrekt. De Vennootschap heeft zich bovendien als borg verbonden voor deze schuld van haar nieuwe moedermaatschappij. De Vennootschap heeft zelf geen enkele reële tegenprestatie of economisch voordeel ontvangen voor het aangaan van deze verplichtingen; de lening diende uitsluitend ter financiering van de aandelenoverdracht tussen Van Doorn Beheer en Vewa. Door de verpanding en de daaropvolgende uitwinning en inning van de debiteuren door Van Doorn Beheer na het faillissement, is het voor de overige schuldeisers beschikbare verhaalsactief ernstig beperkt. Tevens is er € 49.500,- aan het vermogen van de Vennootschap onttrokken ten gunste van Van Doorn Beheer. Er is derhalve sprake van zowel een vermindering van het actief als een vermeerdering van de passiva, zonder dat hiertegenover enig voordeel voor de Vennootschap stond. De schuldeisers zijn hierdoor feitelijk en rechtstreeks in hun verhaalsmogelijkheden benadeeld.",
+      "benadeling_schuldeisers": true,
+      "handeling": {
+        "onverplicht_overwegingen": "De aangevochten rechtshandelingen betreffen de door de Vennootschap verstrekte borgtocht en de vestiging van pandrechten op haar activa ten behoeve van Van Doorn Beheer, tot zekerheid van de geldlening die Van Doorn Beheer aan Vewa heeft verstrekt voor de aankoop van de aandelen in de Vennootschap. Een rechtshandeling is onverplicht wanneer daartoe geen op de wet of een overeenkomst berustende rechtsplicht bestond die in rechte afdwingbaar was. De Vennootschap had geen voorafgaande rechtsplicht om zich borg te stellen of zekerheid te verstrekken voor de schulden van de koper (Vewa). De verplichting is pas bij de transactie zelf overeengekomen. Bovendien is het verstrekken van zekerheid en borgtocht door de Vennootschap ter financiering van de overdracht van haar eigen aandelen in strijd met het destijds geldende financieel steunverbod van artikel 2:207c BW. Zoals ook overwogen in ECLI:NL:RBARN:2011:BQ8538, is de nakoming van verplichtingen die in strijd met dit verbod zijn aangegaan onverplicht. Er bestond derhalve geen in rechte afdwingbare verplichting voor de Vennootschap om deze rechtshandelingen te verrichten, waardoor deze als onverplicht moeten worden aangemerkt.",
+        "onverplicht": true,
+        "is_rechtshandeling_overwegingen": "De rechtshandelingen betreffen het aangaan van een borgtocht en het verstrekken van een pandrecht op de inventaris en debiteuren door de Vennootschap aan Van Doorn Beheer. Dit zijn handelingen gericht op rechtsgevolg en kwalificeren derhalve als rechtshandelingen.",
+        "is_rechtshandeling": true,
+        "datum_rechtshandeling": "2005-12-30",
+        "verricht_door_de_schuldenaar_overwegingen": "De borgtocht en de verpanding zijn aangegaan en verricht door de Vennootschap (de latere failliet) zelf, blijkens de overeenkomst van verpanding van 30 december 2005.",
+        "verricht_door_de_schuldenaar": true,
+        "om_niet_overwegingen": "De Vennootschap heeft zich borg gesteld en haar activa verpand ten behoeve van een schuld van een derde (Vewa Beheer B.V.) aan Van Doorn Beheer. Nu de Vennootschap hiervoor zelf geen tegenprestatie heeft bedongen of ontvangen, is de rechtshandeling aan te merken als om niet.",
+        "om_niet": true
+      },
+      "faillissement": {
+        "datum_faillietverklaring": "2009-06-23"
+      },
+      "vernietigbaar": false
+    },
+    "ECLI_NL_GHARL_2025_4787": {
+      "wetenschap_overwegingen": "De betalingen zijn verricht binnen een jaar voor de faillietverklaring aan een groepsmaatschappij (Mevriet Vastgoed), waardoor het bewijsvermoeden van art. 43 lid 1 sub 6° Fw van toepassing is. De wetenschap van benadeling wordt derhalve aan beide zijden vermoed. Dit vermoeden is niet ontzenuwd. Bovendien is de wetenschap ook rechtstreeks aangetoond, nu de activa van Durisol kort voor de betalingen waren verkocht en de gemeenschappelijke bestuurders wisten dat een faillissement met een tekort onafwendbaar was.",
+      "wetenschap_schuldenaar_aangetoond": true,
+      "wetenschap_wederpartij_aangetoond": true,
+      "vermoeden_wetenschap_schuldenaar_tegenbewijs": false,
+      "vermoeden_wetenschap_wederpartij_tegenbewijs": false,
+      "tegen_onderwaarde": null,
+      "voldoening_of_zekerheid_niet_opeisbare_schuld": null,
+      "gelieerde_partij": true,
+      "reeds_verplicht_voor_aanvang_termijn": false,
+      "benadeling_schuldeisers_overwegingen": "De aangevochten rechtshandeling betreft de overboeking van in totaal € 293.143,81 door Durisol aan Mevriet Vastgoed. Dit bedrag was door Rabobank per vergissing op de rekening van Durisol gestort, terwijl het feitelijk toekwam aan Mevriet Vastgoed als eigenaar en hypotheekgever van het verkochte vastgoed. Door deze foutieve betaling vóór het faillissement is het geld gaan behoren tot het vermogen van Durisol. Mevriet Vastgoed verkreeg hierdoor een vordering uit onverschuldigde betaling op Durisol. Omdat deze vordering vóór de faillietverklaring is ontstaan, kwalificeert deze na faillissement slechts als een concurrente faillissementsvordering (overeenkomstig ECLI:NL:GHSHE:2014:4568). In de hypothetische situatie waarin de betalingen achterwege waren gebleven, had het bedrag van € 293.143,81 zich bij het uitspreken van het faillissement nog in het vermogen van Durisol bevonden. Dit bedrag had dan tot het actieve boedelvermogen behoord ten behoeve van de gezamenlijke schuldeisers, terwijl Mevriet Vastgoed haar vordering als concurrent had moeten indienen. Door de feitelijke betalingen is het actieve boedelactief met € 293.143,81 verminderd en is Mevriet Vastgoed als concurrente schuldeiser volledig voldaan. Dit leidt tot een directe vermindering van de verhaalsmogelijkheden voor de overige schuldeisers en een verstoring van de paritas creditorum. Het loutere wegvallen van de concurrente schuld aan Mevriet Vastgoed brengt voor de gezamenlijke schuldeisers geen voordeel met zich mee dat de vermindering van het actief compenseert. Er is derhalve sprake van benadeling van de schuldeisers in de zin van artikel 42 Fw.",
+      "benadeling_schuldeisers": true,
+      "handeling": {
+        "onverplicht_overwegingen": "In de uitspraak ECLI:NL:RBOVE:2024:1822, die direct betrekking heeft op deze casus, heeft de rechtbank geoordeeld dat de betalingen van Durisol (in de uitspraak genoemd als [bedrijf 1] B.V.) aan Mevriet Vastgoed B.V. (genoemd als [gedaagde 1] B.V.) niet als onverplicht kunnen worden aangemerkt. Rabobank had per vergissing het surplus van de verkoopopbrengst van het bedrijfsterrein van Mevriet Vastgoed overgemaakt naar de rekening van Durisol. Durisol verkreeg hierdoor een opeisbare schuld aan de Rabobank uit hoofde van onverschuldigde betaling. Durisol heeft dit surplus vervolgens doorbetaald aan Mevriet Vastgoed, die de daadwerkelijke rechthebbende op de verkoopopbrengst was. De rechtbank oordeelde dat Durisol op grond van artikel 6:34 BW redelijke gronden had om aan te nemen dat Mevriet Vastgoed gerechtigd was tot de betaling. Door deze betaling heeft Durisol haar opeisbare schuld aan de Rabobank bevrijdend voldaan. Omdat de betalingen strekten tot het voldoen van een opeisbare schuld, is er geen sprake van een onverplichte rechtshandeling in de zin van artikel 42 Fw.",
+        "onverplicht": false,
+        "is_rechtshandeling_overwegingen": "De overboekingen van in totaal € 293.143,81 door Durisol naar de rekening van Mevriet Vastgoed B.V. betreffen betalingen. Een betaling is een rechtshandeling, aangezien deze gericht is op het teweegbrengen van een rechtsgevolg, te weten het overdragen van geldmiddelen en het voldoen aan een (vermeende) verbintenis.",
+        "is_rechtshandeling": true,
+        "datum_rechtshandeling": "2022-02-04",
+        "verricht_door_de_schuldenaar_overwegingen": "De overboekingen zijn verricht door Durisol, de schuldenaar die naderhand failliet is verklaard, vanaf haar eigen bankrekening.",
+        "verricht_door_de_schuldenaar": true,
+        "om_niet_overwegingen": "De betalingen zijn verricht ter terugbetaling van het surplus dat Rabobank abusievelijk naar Durisol had overgemaakt in plaats van naar Mevriet Vastgoed. De betalingen dienden ter aflossing van een vordering uit onverschuldigde betaling. Omdat de betalingen strekten tot bevrijding van een schuld (en dus niet zonder tegenprestatie/om niet geschiedden), is er sprake van een rechtshandeling om baat (anders dan om niet).",
+        "om_niet": false
+      },
+      "faillissement": {
+        "datum_faillietverklaring": "2022-05-02"
+      },
+      "vernietigbaar": false
+    },
+    "JOR_2009_46": {
+      "wetenschap_overwegingen": "De overboekingen van in totaal € 70.217,83 van ECPE naar haar meerderheidsaandeelhouder ECP vonden plaats in januari 2004, minder dan een maand voor het faillissement op 4 februari 2004. Uit de verklaring van interim-manager Fontijn blijkt dat de gelden bewust zijn overgeboekt 'uit voorzorg voor het geval crediteuren beslag zouden leggen'. Hieruit volgt dat de schuldenaar (ECPE) wist dat schuldeisers hierdoor zouden worden benadeeld in hun verhaalsmogelijkheden. De wederpartij (ECP) wist dit eveneens, nu haar bestuurder Hoeksema nauw betrokken was bij het bepalen van de betalingen en de overboekingen naar ECP. De wetenschap van benadeling is derhalve aan beide zijden rechtstreeks aangetoond. Daarnaast is ECP als groepsmaatschappij (65% aandeelhouder) aan te merken als een gelieerde partij in de zin van art. 43 lid 1 sub 6° Fw, waardoor ook het wettelijk bewijsvermoeden van wetenschap van benadeling aan beide zijden geldt, welk vermoeden niet is ontzenuwd.",
+      "wetenschap_schuldenaar_aangetoond": true,
+      "wetenschap_wederpartij_aangetoond": true,
+      "vermoeden_wetenschap_schuldenaar_tegenbewijs": false,
+      "vermoeden_wetenschap_wederpartij_tegenbewijs": false,
+      "tegen_onderwaarde": null,
+      "voldoening_of_zekerheid_niet_opeisbare_schuld": null,
+      "gelieerde_partij": true,
+      "reeds_verplicht_voor_aanvang_termijn": false,
+      "benadeling_schuldeisers_overwegingen": "De overboekingen van in totaal € 70.217,83 van de bankrekening van ECPE naar de bankrekening van ECP hebben geleid tot een directe vermindering van het actieve vermogen van ECPE vlak voor het faillissement. In de hypothetische situatie waarin deze betalingen niet zouden zijn verricht, zou dit bedrag op de bankrekening van ECPE hebben gestaan ten tijde van de faillietverklaring en aldus in de boedel zijn gevallen ten behoeve van de gezamenlijke schuldeisers. Door de overboekingen is dit verhaalsactief aan de boedel onttrokken. De omstandigheid dat de gelden (deels) zijn gebruikt om selectief 'urgente' crediteuren te betalen ter voortzetting van de onderneming, heft de benadeling niet op. Dit levert immers een verstoring van de rangorde van schuldeisers op (paritas creditorum) waarbij bepaalde schuldeisers ten nadele van de overige schuldeisers zijn bevoordeeld. De schuldeisers zijn derhalve in hun verhaalsmogelijkheden benadeeld.",
+      "benadeling_schuldeisers": true,
+      "handeling": {
+        "onverplicht_overwegingen": "De overboekingen van in totaal € 70.217,83 van de bankrekening van ECPE naar de bankrekening van haar aandeelhouder ECP zijn onverplicht verricht. Uit de casus blijkt dat deze overboekingen zijn gedaan 'uit voorzorg voor het geval crediteuren beslag zouden leggen' en met het doel dat ECP vervolgens urgente crediteuren van ECPE zou betalen. Er bestond geen enkele op de wet of een overeenkomst berustende rechtsplicht die ECPE verplichtte om haar beschikbare banksaldo aan ECP over te dragen. Nu de prestatie niet in rechte kon worden afgedwongen, zijn de overboekingen aan te merken als onverplichte rechtshandelingen in de zin van artikel 42 Fw.",
+        "onverplicht": true,
+        "is_rechtshandeling_overwegingen": "De girale overboekingen van de bankrekening van ECPE naar ECP zijn rechtshandelingen, aangezien deze gericht zijn op het teweegbrengen van een rechtsgevolg, namelijk de overdracht van girale gelden.",
+        "is_rechtshandeling": true,
+        "datum_rechtshandeling": "2004-01-08",
+        "verricht_door_de_schuldenaar_overwegingen": "De overboekingen zijn verricht vanaf de bankrekening van de schuldenaar (ECPE) in opdracht van haar interim-manager Fontijn, waardoor deze handelingen aan de schuldenaar zelf worden toegerekend.",
+        "verricht_door_de_schuldenaar": true,
+        "om_niet_overwegingen": "De overboekingen zijn gedaan 'uit voorzorg' om te voorkomen dat crediteuren beslag zouden leggen. Er is geen sprake van een reële tegenprestatie die door ECPE is bedongen, waardoor de rechtshandeling als 'om niet' moet worden aangemerkt.",
+        "om_niet": true
+      },
+      "faillissement": {
+        "datum_faillietverklaring": "2004-02-04"
+      },
+      "vernietigbaar": true
+    },
+    "JOR_2010_210": {
+      "wetenschap_overwegingen": "De verkoop van de BMW vond plaats in april/mei 2002, terwijl het faillissement van Brand op 19 november 2003 is uitgesproken. Omdat de transactie meer dan een jaar vóór de faillietverklaring heeft plaatsgevonden, zijn de bewijsvermoedens van art. 43 Fw en art. 45 Fw niet van toepassing. De curator draagt de bewijslast om de wetenschap van benadeling rechtstreeks aan te tonen op grond van art. 42 Fw. Hoewel Van Deursen bestuurder en aandeelhouder was van zowel de schuldenaar (Brand) als de wederpartij (John West), is niet aangetoond dat ten tijde van de transactie (april/mei 2002) het faillissement en een tekort daarin met een redelijke mate van waarschijnlijkheid te voorzien waren. Brand was destijds net gestart met een doorstart en de financiering werd pas in 2003 beëindigd. De wetenschap van benadeling is derhalve niet aangetoond.",
+      "wetenschap_schuldenaar_aangetoond": false,
+      "wetenschap_wederpartij_aangetoond": false,
+      "vermoeden_wetenschap_schuldenaar_tegenbewijs": null,
+      "vermoeden_wetenschap_wederpartij_tegenbewijs": null,
+      "tegen_onderwaarde": null,
+      "voldoening_of_zekerheid_niet_opeisbare_schuld": null,
+      "gelieerde_partij": null,
+      "reeds_verplicht_voor_aanvang_termijn": null,
+      "benadeling_schuldeisers_overwegingen": "In deze casus heeft Brand Station B.V. een BMW verkocht en geleverd aan John West B.V., een gelieerde vennootschap waarvan Van Deursen eveneens de enig bestuurder en aandeelhouder is. De curator stelt dat deze verkoop heeft plaatsgevonden voor een bedrag dat beneden de reële marktwaarde van de auto lag. Door een actiefbestanddeel onder de reële waarde over te dragen, is het vermogen van de schuldenaar verminderd. Indien deze rechtshandeling niet had plaatsgevonden (de hypothetische situatie), zou de BMW nog in het vermogen van Brand Station B.V. aanwezig zijn geweest en in de faillissementsboedel zijn gevallen, dan wel voor een hogere, marktconforme prijs zijn verkocht. Hierdoor is er sprake van een vermindering van het actief, wat leidt tot een feitelijke verslechtering van de verhaalsmogelijkheden van de gezamenlijke schuldeisers ten tijde van het geldend maken van de rechten door de curator. De schuldeisers zijn derhalve benadeeld in de zin van artikel 42 Fw.",
+      "benadeling_schuldeisers": true,
+      "handeling": {
+        "onverplicht_overwegingen": "De aangevochten rechtshandeling betreft de verkoop en levering van de BMW (kenteken XX-PG-65) door Brand Station B.V. aan John West B.V. (destijds History Division B.V.) in april/mei 2002. Een rechtshandeling is onverplicht in de zin van artikel 42 Fw wanneer er geen op de wet of een overeenkomst berustende rechtsplicht bestond om deze te verrichten. Uit de casus blijkt niet dat er voor Brand Station B.V. enige wettelijke verplichting of een voorafgaande contractuele verbintenis bestond om de BMW aan John West B.V. te verkopen of over te dragen. De verkoop en levering van de auto zijn dan ook onverplicht verricht.",
+        "onverplicht": true,
+        "is_rechtshandeling_overwegingen": "De verkoop van de BMW door Brand aan Jon West betreft een koopovereenkomst. Dit is een meerzijdige rechtshandeling gericht op het scheppen van verbintenissen, te weten de levering van de auto tegen betaling van de koopprijs.",
+        "is_rechtshandeling": true,
+        "datum_rechtshandeling": "2002-04-01",
+        "verricht_door_de_schuldenaar_overwegingen": "De koopovereenkomst is aangegaan en verricht door Brand Station B.V. zelf, de schuldenaar die naderhand failliet is verklaard.",
+        "verricht_door_de_schuldenaar": true,
+        "om_niet_overwegingen": "De BMW is verkocht voor een overeengekomen prijs van € 10.584,09 inclusief btw. Omdat er een tegenprestatie is bedongen, is de rechtshandeling anders dan om niet (om baat).",
+        "om_niet": false
+      },
+      "faillissement": {
+        "datum_faillietverklaring": "2003-11-19"
+      },
+      "vernietigbaar": false
+    },
+    "JOR_2011_20": {
+      "wetenschap_overwegingen": "De verkoop van de machines op 19 augustus 2009 vond plaats binnen een jaar voor het faillissement van Trend (30 november 2009). De overeengekomen koopprijs van € 45.000,- voor alle machines en onderdelen tezamen was aanmerkelijk lager dan de werkelijke waarde, hetgeen blijkt uit de latere concrete biedingen van € 60.000,- en € 50.000,- voor slechts delen van de activa. Hierdoor is het bewijsvermoeden van art. 43 lid 1 sub 1° Fw (onderwaarde) van toepassing. Dit vermoeden is niet ontzenuwd; de wetenschap van benadeling is aan beide zijden ook rechtstreeks aangetoond. Trend wist dat zij na het faillissement van haar zustervennootschap Drent (waarvan zij volledig afhankelijk was voor personeel en machines) in ernstige problemen verkeerde. Veldkamp, als nauw betrokken partner in de grafische industrie, wist of behoorde te weten dat deze transactie onder de marktprijs de schuldeisers van Trend zou benadelen en dat een faillissement met een tekort voorzienbaar was.",
+      "wetenschap_schuldenaar_aangetoond": true,
+      "wetenschap_wederpartij_aangetoond": true,
+      "vermoeden_wetenschap_schuldenaar_tegenbewijs": false,
+      "vermoeden_wetenschap_wederpartij_tegenbewijs": false,
+      "tegen_onderwaarde": true,
+      "voldoening_of_zekerheid_niet_opeisbare_schuld": null,
+      "gelieerde_partij": null,
+      "reeds_verplicht_voor_aanvang_termijn": false,
+      "benadeling_schuldeisers_overwegingen": "Om te bepalen of er sprake is van benadeling van schuldeisers in de zin van artikel 42 Faillissementswet (Fw), dient een vermogensvergelijking te worden gemaakt tussen de hypothetische situatie waarin de schuldeisers zouden hebben verkeerd zonder de gewraakte rechtshandeling en de feitelijke situatie waarin zij verkeren nu de handeling is verricht. In de feitelijke situatie zijn de machines en machineonderdelen door Trend aan Veldkamp verkocht en geleverd voor een totaalbedrag van € 45.000,-. In de hypothetische situatie waarin deze verkoop niet had plaatsgevonden, zouden de activa nog in de boedel van Trend zijn gevallen. Uit de feiten blijkt dat de curatoren na de beslaglegging concrete en reële biedingen hebben ontvangen van DG Press Services B.V. voor deze activa: een bod van € 60.000,- voor de Drent Vision US 512 en een bod van € 95.000,- voor de overige componenten en druktorens (in totaal € 155.000,-). Nu de werkelijke marktwaarde van de activa ten tijde van het geldend maken van de rechten door de curator aanzienlijk hoger bleek te zijn dan de overeengekomen koopprijs van € 45.000,-, heeft de rechtshandeling geleid tot een substantiële vermindering van het actief van de boedel. De schuldeisers zijn hierdoor rechtstreeks in hun verhaalsmogelijkheden benadeeld.",
+      "benadeling_schuldeisers": true,
+      "handeling": {
+        "onverplicht_overwegingen": "De aangevochten rechtshandeling betreft de verkoop en levering van diverse machines en machineonderdelen door Trend aan Veldkamp op of rond 19 augustus 2009. Een rechtshandeling is onverplicht wanneer er ten tijde van het verrichten ervan geen op de wet of een eerdere overeenkomst berustende rechtsplicht bestond die in rechte afdwingbaar was. Uit de casus blijkt dat de koopovereenkomst pas op of kort voor 19 augustus 2009 na onderhandelingen tot stand is gekomen ('Na een lange discussie (...) zijn we het eens geworden'). Er bestond vóór het sluiten van deze overeenkomst geen enkele eerdere verplichting voor Trend om deze specifieke activa aan Veldkamp te verkopen of te leveren. Het aangaan van de koopovereenkomst en de daaruit voortvloeiende levering zijn derhalve onverplichte rechtshandelingen.",
+        "onverplicht": true,
+        "is_rechtshandeling_overwegingen": "De gewraakte handeling betreft de verkoop van diverse machines en machineonderdelen door Trend aan Veldkamp. Een koopovereenkomst is een meerzijdige rechtshandeling omdat deze is gericht op het scheppen van verbintenissen (rechtsgevolg).",
+        "is_rechtshandeling": true,
+        "datum_rechtshandeling": "2009-08-19",
+        "verricht_door_de_schuldenaar_overwegingen": "De koopovereenkomst is gesloten tussen Trend Graphic Services B.V. (de latere failliet) en Veldkamp. De rechtshandeling is dus door de schuldenaar zelf verricht.",
+        "verricht_door_de_schuldenaar": true,
+        "om_niet_overwegingen": "Er is een totale koopprijs van € 45.000,00 overeengekomen voor de machines en onderdelen. Omdat er een tegenprestatie tegenover de levering staat, is de rechtshandeling anders dan om niet (om baat).",
+        "om_niet": false
+      },
+      "faillissement": {
+        "datum_faillietverklaring": "2009-11-30"
+      },
+      "vernietigbaar": true
+    },
+    "JOR_2012_196": {
+      "wetenschap_overwegingen": "De terugbetalingen door Nutriscience B.V. aan haar bestuurder Thomassen zijn onverplicht verricht binnen een jaar voor het faillissement. Omdat Thomassen zowel de enig statutair bestuurder van de schuldenaar als de wederpartij in privé was, is de wetenschap van benadeling aan beide zijden rechtstreeks aangetoond. Bovendien gelden de bewijsvermoedens van art. 43 lid 1 sub 2 Fw (voldoening van een niet-opeisbare schuld, aangezien de lening pas op 31 december 2006 opeisbaar was) en sub 4 Fw (transactie met een bestuurder). Er is geen succesvol tegenbewijs geleverd om deze vermoedens te ontzenuwen.",
+      "wetenschap_schuldenaar_aangetoond": true,
+      "wetenschap_wederpartij_aangetoond": true,
+      "vermoeden_wetenschap_schuldenaar_tegenbewijs": false,
+      "vermoeden_wetenschap_wederpartij_tegenbewijs": false,
+      "tegen_onderwaarde": null,
+      "voldoening_of_zekerheid_niet_opeisbare_schuld": true,
+      "gelieerde_partij": true,
+      "reeds_verplicht_voor_aanvang_termijn": false,
+      "benadeling_schuldeisers_overwegingen": "In deze casus heeft Nutriscience B.V. (de failliet) in de maanden september en oktober 2006 in totaal € 91.650,- terugbetaald aan haar bestuurder Thomassen ter aflossing van leningen. Om te bepalen of er sprake is van benadeling van de schuldeisers in de zin van artikel 42 Fw, moet een vergelijking worden gemaakt tussen de feitelijke situatie waarin de schuldeisers verkeren na de betalingen en de hypothetische situatie waarin zij zouden hebben verkeerd als de betalingen achterwege waren gebleven. Zonder deze terugbetalingen zou het bedrag van € 91.650,- in het vermogen van de vennootschap zijn gebleven en na het faillissement beschikbaar zijn geweest voor de gezamenlijke schuldeisers. Door de betalingen is het actief van de vennootschap met dit bedrag verminderd. Bovendien is de paritas creditorum (de gelijkheid van schuldeisers) verstoord, aangezien Thomassen (als bestuurder/schuldeiser) volledig is voldaan, terwijl andere schuldeisers, zoals de fiscus, het UWV, het ABP en de werknemers (die hun loon over november 2006 niet hebben ontvangen), onbetaald zijn gebleven. Er rustten geen zekerheidsrechten op de goederen van de failliet ten behoeve van Thomassen die deze benadeling zouden wegnemen. De schuldeisers zijn derhalve daadwerkelijk in hun verhaalsmogelijkheden benadeeld door de aangevochten rechtshandelingen.",
+      "benadeling_schuldeisers": true,
+      "handeling": {
+        "onverplicht_overwegingen": "De schriftelijke geldlening van € 70.000,- had een looptijd tot uiterlijk 31 december 2006. De terugbetalingen van € 51.250,- en € 20.400,- vonden plaats in oktober 2006, derhalve vóór de overeengekomen uiterste aflosdatum. Hoewel artikel 5 van de leningsovereenkomst vervroegde terugbetaling toestond, creëert dit slechts een bevoegdheid voor de schuldenaar en geen in rechte afdwingbare rechtsplicht. Omdat de schuldeiser (Thomassen) de terugbetaling op dat moment nog niet rechtens kon afdwingen, zijn deze vervroegde betalingen onverplicht verricht in de zin van artikel 42 Fw.",
+        "onverplicht": true,
+        "is_rechtshandeling_overwegingen": "De terugbetalingen van de leningen door de failliet aan Thomassen zijn rechtshandelingen, aangezien deze gericht zijn op het teweegbrengen van rechtsgevolg, te weten het voldoen en daarmee tenietgaan van de verbintenissen uit de geldleningsovereenkomsten en de overdracht van de geldsommen.",
+        "is_rechtshandeling": true,
+        "datum_rechtshandeling": "2006-09-05",
+        "verricht_door_de_schuldenaar_overwegingen": "De terugbetalingen zijn rechtstreeks verricht door de schuldenaar (Nutriscience B.V.) aan de schuldeiser (Thomassen).",
+        "verricht_door_de_schuldenaar": true,
+        "om_niet_overwegingen": "De betalingen zijn verricht ter aflossing van de leningen die Thomassen eerder aan de failliet had verstrekt. Omdat hier de eerdere ontvangst van de leensommen tegenover staat, zijn de rechtshandelingen om baat (anders dan om niet) verricht.",
+        "om_niet": false
+      },
+      "faillissement": {
+        "datum_faillietverklaring": "2006-12-13"
+      },
+      "vernietigbaar": true
+    },
+    "JOR_2014_76": {
+      "wetenschap_overwegingen": "In deze casus is de wetenschap van benadeling aan beide zijden rechtstreeks aangetoond op grond van artikel 42 Fw. Uit de brief van Menzis van 18 december 2008 blijkt dat Menzis wist dat TZG technisch failliet was, na periode 3 geen middelen meer zou hebben en substantiële schuldeisers had. TZG was hiervan eveneens op de hoogte en vroeg enkele dagen na de betaling (op 24 februari 2009) surseance van betaling aan. De bewijsvermoedens van artikel 43 Fw en artikel 45 Fw zijn niet van toepassing, nu er geen sprake is van een rechtshandeling om niet, onderwaarde, een niet-opeisbare schuld of een transactie met een gelieerde partij in de zin van deze artikelen.",
+      "wetenschap_schuldenaar_aangetoond": true,
+      "wetenschap_wederpartij_aangetoond": true,
+      "vermoeden_wetenschap_schuldenaar_tegenbewijs": null,
+      "vermoeden_wetenschap_wederpartij_tegenbewijs": null,
+      "tegen_onderwaarde": null,
+      "voldoening_of_zekerheid_niet_opeisbare_schuld": null,
+      "gelieerde_partij": null,
+      "reeds_verplicht_voor_aanvang_termijn": null,
+      "benadeling_schuldeisers_overwegingen": "De benadeling van de schuldeisers in de zin van artikel 42 Fw moet worden beoordeeld door de feitelijke situatie na de rechtshandeling te vergelijken met de hypothetische situatie waarin de schuldeisers zouden hebben verkeerd zonder die handeling. In de feitelijke situatie heeft TZG een bedrag van € 1.191.000,- overgemaakt aan CAK/Menzis ter terugbetaling van te veel ontvangen voorschotten. In de hypothetische situatie waarin deze betaling achterwege was gebleven, zou dit bedrag op de bankrekening van TZG zijn blijven staan en na de faillietverklaring (die kort daarna volgde) in de boedel zijn gevallen. Dit actieve vermogen zou dan beschikbaar zijn geweest voor de gezamenlijke schuldeisers. Door de betaling is het boedelactief met dit substantiële bedrag verminderd, waardoor de verhaalsmogelijkheden van de schuldeisers rechtstreeks zijn beperkt. Het verweer van Menzis dat het voorschot onverschuldigd was en niet bedoeld was om de verhaalsruimte van commune crediteuren te vergroten, doet hieraan niet af. De vordering tot terugbetaling van de voorschotten betreft in beginsel een concurrente vordering. Door deze vordering vlak voor het faillissement volledig te voldoen, is Menzis bevoordeeld en is de rangorde tussen schuldeisers verstoord (vergelijkbaar met de situatie in ECLI:NL:GHSHE:2009:BK7363, waarin onverplichte terugbetalingen van voorschotten eveneens tot benadeling leidden). Er is derhalve sprake van benadeling van de schuldeisers.",
+      "benadeling_schuldeisers": true,
+      "handeling": {
+        "onverplicht_overwegingen": "De aangevochten rechtshandeling betreft de betaling van € 1.191.000,- door TZG aan CAK op 19 februari 2009. Deze betaling werd verricht ter terugbetaling van een te hoog voorschot over de maanden januari en februari 2009. Op grond van de systematiek van de raamovereenkomst en de wet (artikel 6:203 BW wegens onverschuldigde betaling) bestond er voor TZG een rechtsplicht om het te veel ontvangen voorschot terug te betalen. Nadat Menzis bij brief van 18 februari 2009 de omvang van het te veel bevoorschotte bedrag had vastgesteld en om terugbetaling had verzocht, was deze vordering opeisbaar en in rechte afdwingbaar. De voldoening aan een opeisbare verplichting is een verplichte rechtshandeling in de zin van artikel 42 Fw. Er bestond derhalve een op de wet en overeenkomst berustende rechtsplicht tot betaling.",
+        "onverplicht": false,
+        "is_rechtshandeling_overwegingen": "De betaling van een bedrag van € 1.191.000,- door TZG aan CAK is een rechtshandeling, aangezien deze handeling is gericht op het rechtsgevolg van het tenietgaan van een verbintenis (de terugbetaling van te veel ontvangen voorschotten).",
+        "is_rechtshandeling": true,
+        "datum_rechtshandeling": "2009-02-19",
+        "verricht_door_de_schuldenaar_overwegingen": "De betaling is verricht vanaf een bankrekening van TZG, de schuldenaar zelf.",
+        "verricht_door_de_schuldenaar": true,
+        "om_niet_overwegingen": "De betaling is verricht ter terugbetaling van te veel ontvangen voorschotten (ter delging van een schuld), waardoor er sprake is van een rechtshandeling onder bezwarende titel (om baat) en dus anders dan om niet.",
+        "om_niet": false
+      },
+      "faillissement": {
+        "datum_faillietverklaring": "2009-03-09"
+      },
+      "vernietigbaar": false
+    }
+  }
+}

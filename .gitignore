@@ -1,11 +1,22 @@
-# Corpus data and virtualenv
-data/
+# Corpus data
+data/tmp/
+data/xml_output/
+data/xml_output_matches/
+
+# virtualenv
 .venv/
 
 # Python
 __pycache__/
 *.py[codz]
 *.egg-info/
+
+# Catala
+catala_model/_build
+catala_model/_targets
+
+# Temporary working directory
+tmp/
 
 # Tooling
 .ruff_cache/

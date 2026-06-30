@@ -1,0 +1,22 @@
+[
+  {
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "title": "Subroutine onverplicht FaillissementspaulianaArt42 input",
+    "description": "Neural subroutine that resolves whether the rechtshandeling is verplicht or onverplicht.",
+    "$ref": "#/definitions/FaillissementspaulianaArt42_in",
+    "definitions": {
+      "Handeling": {
+        "type": "object",
+        "properties": {
+          "onverplicht_overwegingen": { "type": "string" },
+          "onverplicht": { "type": "boolean" }
+        },
+        "required": [
+          "onverplicht",
+          "onverplicht_overwegingen"
+        ],
+        "additionalProperties": false
+      }
+    }
+  }
+]

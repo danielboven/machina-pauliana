@@ -1,0 +1,22 @@
+[
+  {
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "title": "Subroutine benadeling_schuldeisers FaillissementspaulianaArt42 input",
+    "description": "Neural subroutine that resolves the criterion benadeling van schuldeisers.",
+    "$ref": "#/definitions/FaillissementspaulianaArt42_in",
+    "definitions": {
+      "FaillissementspaulianaArt42_in": {
+        "type": "object",
+        "properties": {
+          "benadeling_schuldeisers_overwegingen": { "type": "string" },
+          "benadeling_schuldeisers": { "type": "boolean" }
+        },
+        "required": [
+          "benadeling_schuldeisers",
+          "benadeling_schuldeisers_overwegingen"
+        ],
+        "additionalProperties": false
+      }
+    }
+  }
+]

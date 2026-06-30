@@ -8,11 +8,18 @@ dependencies = [
     "httpx[http2]",
     "ijson",
     "lxml",
+    "matplotlib",
+    "numpy",
+    "pgvector",
     "psycopg",
+    "pyyaml",
+    "scikit-learn",
     "tenacity",
     "tqdm",
     "openai",
     "python-dotenv",
+    "rich",
+    "textual",
 ]
 
 [tool.ruff]

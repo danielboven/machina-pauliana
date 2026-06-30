@@ -1,0 +1,35 @@
+[
+  {
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "title": "Subroutine wetenschap FaillissementspaulianaArt42 input",
+    "description": "Neural subroutine that resolves all inputs/criteria for the wetenschap van benadeling.",
+    "$ref": "#/definitions/FaillissementspaulianaArt42_in",
+    "definitions": {
+      "FaillissementspaulianaArt42_in": {
+        "type": "object",
+        "properties": {
+          "wetenschap_overwegingen": { "type": "string" },
+          "wetenschap_schuldenaar_aangetoond": { "type": "boolean" },
+          "wetenschap_wederpartij_aangetoond": { "type": "boolean" },
+          "vermoeden_wetenschap_schuldenaar_tegenbewijs": {
+            "type": "boolean"
+          },
+          "vermoeden_wetenschap_wederpartij_tegenbewijs": {
+            "type": "boolean"
+          },
+          "tegen_onderwaarde": { "type": "boolean" },
+          "voldoening_of_zekerheid_niet_opeisbare_schuld": {
+            "type": "boolean"
+          },
+          "gelieerde_partij": { "type": "boolean" },
+          "reeds_verplicht_voor_aanvang_termijn": { "type": "boolean" }
+        },
+        "required": [
+          "wetenschap_schuldenaar_aangetoond",
+          "wetenschap_overwegingen"
+        ],
+        "additionalProperties": false
+      }
+    }
+  }
+]
