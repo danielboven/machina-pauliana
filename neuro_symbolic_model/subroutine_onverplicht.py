@@ -15,6 +15,8 @@ Sources used for writing the prompt:
         Insolventierecht. Deventer: Wolters Kluwer. ISBN 978-90-13-15314-9.
 """
 
+from collections.abc import Collection
+
 from pydantic import BaseModel, Field
 
 from . import model as nsm
@@ -65,12 +67,14 @@ async def run(
     model: str = nsm.DEFAULT_MODEL,
     k: int = nsm.DEFAULT_K,
     query_vec: list[float] | None = None,
+    exclude: Collection[str] = (),
 ) -> OnverplichtOutput:
     """Resolve voluntary performance (onverplicht) for the facts of one input
     case using case-based reasoning (RAG over judgments).
-    `query_vec` is the shared case embedding."""
+    `query_vec` is the shared case embedding; `exclude` ablates judgments from
+    retrieval."""
     rag_markdown = await nsm.subroutine_rag(
-        casus, query_vec, label=RAG_LABEL, k=k
+        casus, query_vec, label=RAG_LABEL, k=k, exclude=exclude
     )
     user_prompt = nsm.subroutine_prompt(casus, rag_markdown)
     return await nsm.complete(

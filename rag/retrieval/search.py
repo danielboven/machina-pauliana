@@ -9,6 +9,8 @@ Note that api re-exports `retrieve` and adds text wrapper, so callers should use
 rag.api.
 """
 
+from collections.abc import Collection
+
 from pgvector.psycopg import register_vector
 
 from .graph import eclis_with_propagated_label, related_eclis_by_date
@@ -18,10 +20,15 @@ from .similarity import score_document
 EMBED_LABELS = ("feiten", "overwegingen")
 
 
-def candidate_sections(conn, eclis=None) -> dict[str, dict[str, list]]:
+def candidate_sections(
+    conn, eclis=None, exclude: Collection[str] = ()
+) -> dict[str, dict[str, list]]:
     """The embedded feiten/overwegingen vectors of each judgment, grouped per
     ECLI.
-    register_vector makes pgvector return the embeddings as numpy arrays."""
+    register_vector makes pgvector return the embeddings as numpy arrays.
+
+    `exclude` drops judgments from the candidate pool before any ranking
+    happens, so an excluded judgment never occupies one of the top-k slots."""
     register_vector(conn)
     sql = (
         "SELECT ecli, label, embedding FROM section "
@@ -31,6 +38,9 @@ def candidate_sections(conn, eclis=None) -> dict[str, dict[str, list]]:
     if eclis is not None:
         sql += " AND ecli = ANY(%s)"
         params.append(list(eclis))
+    if exclude:
+        sql += " AND NOT (ecli = ANY(%s))"
+        params.append(list(exclude))
 
     grouped: dict[str, dict[str, list]] = {}
     with conn.cursor() as cur:
@@ -54,7 +64,11 @@ def render_judgment(conn, ecli: str) -> str:
 
 
 def retrieve(
-    conn, query_vec, label: str | None = None, k: int = 5
+    conn,
+    query_vec,
+    label: str | None = None,
+    k: int = 5,
+    exclude: Collection[str] = (),
 ) -> list[dict]:
     """Retrieve top-k judgments most similar to `query_vec`.
 
@@ -64,10 +78,14 @@ def retrieve(
     Post-retrieval: for every match, the related judgments are added and
     rendered as Markdown, ordered earliest -> latest by judgment_date.
 
+    Ablation: every ECLI in `exclude` is removed from the candidate pool before
+    ranking. Retrieval therefore still returns k judgments.
+
     Returns, ranked by score: [{"ecli", "score",
     "related": [{"ecli", "markdown"}, ...]}, ...]."""
+    excluded = frozenset(exclude)
     allowed = eclis_with_propagated_label(conn, label) if label else None
-    candidates = candidate_sections(conn, allowed)
+    candidates = candidate_sections(conn, allowed, excluded)
 
     scored = sorted(
         (
@@ -85,6 +103,7 @@ def retrieve(
         related = [
             {"ecli": rel, "markdown": render_judgment(conn, rel)}
             for rel in related_eclis_by_date(conn, ecli)
+            if rel not in excluded
         ]
         results.append({"ecli": ecli, "score": score, "related": related})
     return results

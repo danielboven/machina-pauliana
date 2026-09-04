@@ -108,7 +108,10 @@ def retrieve_onverplicht(casus: str) -> str:
         return to_markdown(hits)  # related judgments as one Markdown string
 ```
 
-`retrieve(conn, query_vec, label=None, k=5)` runs the three stages:
+`retrieve(conn, query_vec, label=None, k=5, exclude=())` runs the three stages.
+Every ECLI in `exclude` is removed from the candidate pool before ranking (and
+from the chain expansion), so an ablated judgment never takes one of the k
+slots; this is used to keep a case's own proceedings out of its context:
 
 - **Pre-retrieval (label filter).** When a `label` is given, only judgments for
   which that label is true are candidates. The rest are dropped for that

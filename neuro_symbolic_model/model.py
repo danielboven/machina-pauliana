@@ -21,6 +21,7 @@ Add the matching keys to the .env file in this repos root.
 
 import asyncio
 import os
+from collections.abc import Collection
 from pathlib import Path
 from typing import TypeVar
 
@@ -162,20 +163,35 @@ async def embed_casus_async(casus: str) -> list[float]:
     return await asyncio.to_thread(embed_casus, casus)
 
 
-def retrieve_examples(query_vec: list[float], *, label: str, k: int) -> str:
+def retrieve_examples(
+    query_vec: list[float],
+    *,
+    label: str,
+    k: int,
+    exclude: Collection[str] = (),
+) -> str:
     """Top-k example judgments for `label`, rendered as one Markdown context
     string (chronologically ordered per relation chain).
 
     `query_vec` is the shared case embedding from :func:`embed_casus`; `label` is
     one of the art. 42 Fw requirement columns (onverplicht,
-    benadeling_schuldeisers, wetenschap)."""
+    benadeling_schuldeisers, wetenschap). `exclude` ablates judgments from
+    retrieval: they are dropped before ranking, so k example judgments are
+    still returned."""
     with connect() as conn:
-        hits = rag_api.retrieve(conn, query_vec, label=label, k=k)
+        hits = rag_api.retrieve(
+            conn, query_vec, label=label, k=k, exclude=exclude
+        )
     return rag_api.to_markdown(hits)
 
 
 async def subroutine_rag(
-    casus: str, query_vec: list[float] | None, *, label: str, k: int
+    casus: str,
+    query_vec: list[float] | None,
+    *,
+    label: str,
+    k: int,
+    exclude: Collection[str] = (),
 ) -> str:
     """The RAG context for one subroutine: top-k judgments for `label` as one
     Markdown string. Empty when k < 1.
@@ -189,7 +205,7 @@ async def subroutine_rag(
     if query_vec is None:
         query_vec = await embed_casus_async(casus)
     return await asyncio.to_thread(
-        retrieve_examples, query_vec, label=label, k=k
+        retrieve_examples, query_vec, label=label, k=k, exclude=exclude
     )
 
 

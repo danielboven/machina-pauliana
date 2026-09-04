@@ -13,6 +13,7 @@ Two entry points:
 """
 
 import asyncio
+from collections.abc import Collection
 
 from . import catala, coroutine
 from . import subroutine_benadeling_schuldeisers as benadeling_mod
@@ -23,7 +24,11 @@ from .schema import FaillissementspaulianaInput, NeuroSymbolicResult
 
 
 async def resolve(
-    casus: str, *, model: str = DEFAULT_MODEL, k: int = DEFAULT_K
+    casus: str,
+    *,
+    model: str = DEFAULT_MODEL,
+    k: int = DEFAULT_K,
+    exclude: Collection[str] = (),
 ) -> NeuroSymbolicResult:
     """Resolve art. 42 Fw for the facts of one case (LLM routines + Catala).
 
@@ -31,14 +36,19 @@ async def resolve(
     about as long as the slowest one.
     The case is embedded once and that vector is shared by the three RAG
     subroutines.
+
+    `exclude` ablates judgments from retrieval by ECLI, for a case whose own
+    proceedings are part of the corpus. They are dropped before ranking, so
+    each subroutine still receives k example judgments.
     """
 
     async def run_subroutines():
         query_vec = await embed_casus_async(casus) if k >= 1 else None
+        common = {"model": model, "k": k, "query_vec": query_vec}
         return await asyncio.gather(
-            onverplicht_mod.run(casus, model=model, k=k, query_vec=query_vec),
-            benadeling_mod.run(casus, model=model, k=k, query_vec=query_vec),
-            wetenschap_mod.run(casus, model=model, k=k, query_vec=query_vec),
+            onverplicht_mod.run(casus, **common, exclude=exclude),
+            benadeling_mod.run(casus, **common, exclude=exclude),
+            wetenschap_mod.run(casus, **common, exclude=exclude),
         )
 
     (

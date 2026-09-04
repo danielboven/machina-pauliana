@@ -23,6 +23,10 @@ Catala. `resolve_symbolic(invoer)` runs just the Catala part on an already-resol
 and re-evaluated without re-querying all neural routines. Both are re-exported
 from the package `__init__.py`.
 
+`resolve(casus, model=DEFAULT_MODEL, k=DEFAULT_K, exclude=())` takes the LLM, the
+RAG top-k (`k = 0` disables retrieval) and an optional collection of ECLIs to
+ablate from retrieval, e.g. the other proceedings of the case being resolved.
+
 ## The four routines
 
 One coroutine and three RAG subroutines that use case-based reasoning.
