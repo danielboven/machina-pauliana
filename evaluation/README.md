@@ -71,7 +71,8 @@ python -m evaluation.evaluate_rechtspraak_annotation \
 The three labels are treated as separate binary classifiers/labels, with `True`
 as the positive class. The script prints a multilabel classification report and
 writes one confusion matrix pooling all judgment/requirement pairs. Gold ECLIs
-absent from the prediction file are reported and skipped.
+absent from the prediction file are reported and skipped. Pass `-s`/`--svg` to
+also write an SVG next to the PDF (same stem).
 
 ## Neuro-symbolic evaluation
 
@@ -88,6 +89,23 @@ python -m evaluation.build_neuro_symbolic_dataset \
 Cases are processed in filename order. The output records `model`, `k`,
 and one resolved result per input filename. Use `k = 0` for a run without
 retrieved examples.
+
+Each input MD file opens with a YAML block, only the text below the YAML block is
+sent to the LLM. Besides the case metadata (i.e. `ecli`,
+`jurisprudence_journal`, `judgment_date`), a case may declare:
+
+```yaml
+ablation: ECLI:NL:RBARN:2011:BQ8538
+```
+
+naming one ECLI (or a list) to remove from RAG retrieval for that case. This is
+for the other proceedings in the same case. Ablated judgments are dropped from
+the candidate pool *before* ranking, so each subroutine still receives `k`
+example judgments: the next-ranked judgment moves up. Pass `--no-ablation` to
+ignore the key and retrieve over the full corpus. At `k = 0` nothing is
+retrieved, so the key is ignored as well. When at least one case is ablated,
+the output JSON records this in a top-level `ablation` object, mapping each
+input filename to its ablated ECLIs.
 
 After generating one or more `(model, k)` files, evaluate the entire results
 directory:
@@ -108,4 +126,5 @@ this with `--gold`. The script prints two precision/recall/F1 tables:
 
 Missing and `null` booleans are interpreted as `False`, matching how Catala
 treats these. The generated PDF separately shows the number of correct final
-`vernietigbaar` verdicts per model and `k`.
+`vernietigbaar` verdicts per model and `k`. As with the annotation evaluation,
+`-s`/`--svg` also writes an SVG copy.

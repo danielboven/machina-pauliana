@@ -15,6 +15,9 @@ plus averages). One aggregated confusion matrix over all requirements pooled
 together is written to PDF. Run from the repo root:
 
     python -m evaluation.evaluate_rechtspraak_annotation DIR MODEL.jsonl [-o PDF]
+
+Pass -s/--svg to also write an SVG next to the PDF (same stem, .svg
+extension).
 """
 
 import argparse
@@ -51,9 +54,12 @@ def model_predictions(path: str) -> dict[str, list[bool]]:
     return preds
 
 
-def save_confusion(y_true: np.ndarray, y_pred: np.ndarray, path: str) -> None:
+def save_confusion(
+    y_true: np.ndarray, y_pred: np.ndarray, paths: list[str]
+) -> None:
     """One aggregated 2x2 confusion matrix over all requirements pooled.
-    Fonts are scaled 1.5x for legibility in print."""
+    Fonts are scaled 1.5x for legibility in print. Written once per path in
+    `paths`, format inferred from each extension."""
     with matplotlib.rc_context(
         {"font.size": 1.4 * matplotlib.rcParamsDefault["font.size"]}
     ):
@@ -64,7 +70,9 @@ def save_confusion(y_true: np.ndarray, y_pred: np.ndarray, path: str) -> None:
             display_labels=["False", "True"],
             cmap="Blues",
         )
-        disp.figure_.savefig(path)
+        disp.ax_.set_ylabel("Actual label")
+        for path in paths:
+            disp.figure_.savefig(path)
 
 
 def main(argv: list[str] | None = None) -> None:
@@ -80,6 +88,12 @@ def main(argv: list[str] | None = None) -> None:
         "--output",
         default="evaluation/output/annotation_confusion.pdf",
         help="PDF path for the confusion matrix.",
+    )
+    ap.add_argument(
+        "-s",
+        "--svg",
+        action="store_true",
+        help="Also write an SVG next to the PDF output (same stem).",
     )
     args = ap.parse_args(argv)
 
@@ -118,8 +132,11 @@ def main(argv: list[str] | None = None) -> None:
     )
 
     os.makedirs(os.path.dirname(args.output), exist_ok=True)
-    save_confusion(y_true, y_pred, args.output)
-    print(f"\nwrote aggregated confusion matrix to {args.output}")
+    out_paths = [args.output]
+    if args.svg:
+        out_paths.append(os.path.splitext(args.output)[0] + ".svg")
+    save_confusion(y_true, y_pred, out_paths)
+    print(f"\nwrote aggregated confusion matrix to {', '.join(out_paths)}")
 
 
 if __name__ == "__main__":

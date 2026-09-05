@@ -21,6 +21,9 @@ graph to PDF. Gold is extracted from MD files YAML opening. Run:
 
 python -m evaluation.evaluate_neuro_symbolic data/neuro_symbolic_model
     -o verdict.pdf
+
+Pass -s/--svg to also write an SVG next to the PDF (same stem, .svg
+extension).
 """
 
 import argparse
@@ -220,9 +223,12 @@ def verdict_counts(runs: dict, gold: dict) -> dict[str, dict[int, int]]:
     return counts
 
 
-def save_verdict_plot(counts: dict, ks: list[int], n: int, path: str) -> None:
+def save_verdict_plot(
+    counts: dict, ks: list[int], n: int, paths: list[str]
+) -> None:
     """Grouped bar chart of correct final verdicts:
-    a group per k, a bar per model."""
+    a group per k, a bar per model. Written once per path in `paths`,
+    format inferred from each extension."""
     models = sorted(counts, key=lambda m: model_style(m)[0])
     width = 0.8 / len(models)
     x = list(range(len(ks)))
@@ -244,7 +250,8 @@ def save_verdict_plot(counts: dict, ks: list[int], n: int, path: str) -> None:
     ax.set_ylabel(f"Correct final verdicts (out of {n})")
     ax.set_title('Final-verdict accuracy ("vernietigbaar") against gold')
     ax.legend(title="Model")
-    fig.savefig(path, bbox_inches="tight")
+    for path in paths:
+        fig.savefig(path, bbox_inches="tight")
 
 
 def main(argv: list[str] | None = None) -> None:
@@ -258,6 +265,12 @@ def main(argv: list[str] | None = None) -> None:
         "--output",
         required=True,
         help="PDF path for the final-verdict accuracy bar chart.",
+    )
+    ap.add_argument(
+        "-s",
+        "--svg",
+        action="store_true",
+        help="Also write an SVG next to the PDF output (same stem).",
     )
     args = ap.parse_args(argv)
 
@@ -298,8 +311,11 @@ def main(argv: list[str] | None = None) -> None:
     print("\n\nThe same, but grouped per subroutine:\n")
     print_grouped(grouped, ks, label_w)
 
-    save_verdict_plot(verdict_counts(runs, gold), ks, len(gold), args.output)
-    print(f"\n\nwrote final-verdict accuracy plot to {args.output}")
+    out_paths = [args.output]
+    if args.svg:
+        out_paths.append(os.path.splitext(args.output)[0] + ".svg")
+    save_verdict_plot(verdict_counts(runs, gold), ks, len(gold), out_paths)
+    print(f"\n\nwrote final-verdict accuracy plot to {', '.join(out_paths)}")
 
 
 if __name__ == "__main__":
