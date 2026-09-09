@@ -1,65 +1,17 @@
 {
   "model": "gemini-3.5-flash",
   "k": 10,
+  "ablation": {
+    "ECLI_NL_GHARL_2013_822": [
+      "ECLI:NL:RBARN:2011:BQ8538"
+    ],
+    "ECLI_NL_GHARL_2025_4787": [
+      "ECLI:NL:RBOVE:2024:1822"
+    ]
+  },
   "results": {
-    "ECLI_NL_GHAMS_2015_5433": {
-      "wetenschap_overwegingen": "In deze casus is sprake van een onverplichte rechtshandeling anders dan om niet (het overwaarde-arrangement) die op 29 juli 2010 mondeling is overeengekomen. Omdat het faillissement van Thieme-groep op 5 december 2010 is uitgesproken, is de rechtshandeling verricht binnen de jaartermijn van art. 43 Fw. Drieakker is een gelieerde partij in de zin van art. 43 lid 1 sub 5° onder c Fw, aangezien haar bestuurder en enig aandeelhouder (Groen) tevens president-commissaris van de schuldenaar (Thieme-groep) was. Hierdoor geldt het wettelijk bewijsvermoeden van wetenschap van benadeling aan beide zijden. Hoewel de rechtbank en het hof oordeelden dat dit vermoeden was ontzenuwd, heeft de Hoge Raad in ECLI:NL:HR:2017:635 geoordeeld dat het hof een onjuiste maatstaf heeft aangelegd door te toetsen of het faillissement 'onafwendbaar' was. De juiste maatstaf is of het faillissement en een tekort daarin met een redelijke mate van waarschijnlijkheid waren te voorzien. Omdat het tegenbewijs onder de juiste maatstaf faalt of althans opnieuw moet worden beoordeeld, is het vermoeden niet met succes ontzenuwd. Directe wetenschap (los van het vermoeden) is niet rechtstreeks aangetoond.",
-      "wetenschap_schuldenaar_aangetoond": false,
-      "wetenschap_wederpartij_aangetoond": false,
-      "vermoeden_wetenschap_schuldenaar_tegenbewijs": false,
-      "vermoeden_wetenschap_wederpartij_tegenbewijs": false,
-      "tegen_onderwaarde": null,
-      "voldoening_of_zekerheid_niet_opeisbare_schuld": null,
-      "gelieerde_partij": true,
-      "reeds_verplicht_voor_aanvang_termijn": false,
-      "benadeling_schuldeisers_overwegingen": "De aangevallen rechtshandeling, het overwaarde-arrangement, heeft ertoe geleid dat de overwaarde van de door Thieme-groep aan de bank verstrekte zekerheden is belast met een regresvordering van de bank ter zake van de door Drieakker gestelde bankgarantie. Zonder deze rechtshandeling zou de overwaarde van de zekerheden na uitwinning door de bank in de boedel zijn gevallen en beschikbaar zijn geweest voor de gezamenlijke schuldeisers. Door het arrangement is deze overwaarde (tot een bedrag van € 500.000,-) feitelijk onttrokken aan de boedel ten gunste van Drieakker, die anders slechts een concurrente regresvordering op Thieme-groep zou hebben gehad. Hoewel het arrangement Thieme-groep in staat stelde de bedrijfsvoering tijdelijk voort te zetten door het verkrijgen van de bankgarantie ten behoeve van PGB, heeft deze tijdelijke voortzetting niet geleid tot een zodanig gunstig resultaat voor de gezamenlijke schuldeisers dat de benadeling op het moment dat de curator zijn rechten geldend maakte was opgeheven. Er is derhalve sprake van een vermindering van het actieve boedelbestanddeel en een verstoring van de rangorde van schuldeisers, hetgeen benadeling in de zin van artikel 42 Fw oplevert.",
-      "benadeling_schuldeisers": true,
-      "handeling": {
-        "onverplicht_overwegingen": "Het overwaarde-arrangement (inclusief de door Thieme-groep verstrekte contragarantie) is een onverplichte rechtshandeling. Er bestond voor Thieme-groep geen reeds bestaande, in rechte afdwingbare verplichting op grond van de wet of een eerdere overeenkomst om deze contragarantie te verstrekken of aan dit arrangement deel te nemen. De afspraken zijn op 29 juli 2010 gemaakt om een oplossing te vinden voor de dreigende faillissementsaanvraag door PGB. Hoewel er sprake was van grote economische en feitelijke druk om een faillissement af te wenden, schept dergelijke druk geen rechtsplicht. Bovendien is tussen partijen niet in geschil dat het overwaarde-arrangement een onverplicht verrichte rechtshandeling is.",
-        "onverplicht": true,
-        "is_rechtshandeling_overwegingen": "Het overwaarde-arrangement betreft een meerzijdige overeenkomst waarbij partijen (Thieme-groep, Drieakker en de bank) over en weer verplichtingen op zich nemen. Dit is een op rechtsgevolg gerichte wilsuiting en dus een rechtshandeling.",
-        "is_rechtshandeling": true,
-        "datum_rechtshandeling": "2010-07-29",
-        "verricht_door_de_schuldenaar_overwegingen": "De schuldenaar, Thieme-groep, heeft zelf deelgenomen aan de totstandkoming van het overwaarde-arrangement en heeft zich daarbij verbonden tot het verstrekken van een contragarantie.",
-        "verricht_door_de_schuldenaar": true,
-        "om_niet_overwegingen": "In de casus is onder 3.3 uitdrukkelijk vermeld dat tussen partijen niet in geschil is dat het overwaarde-arrangement een rechtshandeling 'anders dan om niet' (dus om baat) is.",
-        "om_niet": false
-      },
-      "faillissement": {
-        "datum_faillietverklaring": "2010-12-05"
-      },
-      "vernietigbaar": true
-    },
-    "ECLI_NL_GHARL_2013_822": {
-      "wetenschap_overwegingen": "De rechtshandelingen (de borgtocht en verpanding) zijn verricht op 30 december 2005, terwijl het faillissement van de Vennootschap pas op 23 juni 2009 is uitgesproken. Omdat deze rechtshandelingen ruim drieënhalf jaar vóór de faillietverklaring hebben plaatsgevonden (en dus ver buiten de jaartermijn), zijn de wettelijke bewijsvermoedens van artikel 43 Fw en artikel 45 Fw niet van toepassing. De curator draagt daarom de volledige bewijslast om de wetenschap van benadeling rechtstreeks aan te tonen op grond van de hoofdregel van artikel 42 Fw. Hiervoor moet worden bewezen dat ten tijde van de rechtshandeling (30 december 2005) het faillissement en een tekort daarin met een redelijke mate van waarschijnlijkheid waren te voorzien. Gelet op het grote tijdsverloop en het ontbreken van concrete aanwijzingen dat de Vennootschap eind 2005 al in een insolvente of uitzichtloze situatie verkeerde, is deze wetenschap van benadeling aan de zijde van zowel de schuldenaar als de wederpartij niet aangetoond.",
-      "wetenschap_schuldenaar_aangetoond": false,
-      "wetenschap_wederpartij_aangetoond": false,
-      "vermoeden_wetenschap_schuldenaar_tegenbewijs": null,
-      "vermoeden_wetenschap_wederpartij_tegenbewijs": null,
-      "tegen_onderwaarde": null,
-      "voldoening_of_zekerheid_niet_opeisbare_schuld": null,
-      "gelieerde_partij": null,
-      "reeds_verplicht_voor_aanvang_termijn": null,
-      "benadeling_schuldeisers_overwegingen": "Er is sprake van benadeling van de schuldeisers in de zin van artikel 42 Fw. De Vennootschap heeft zich onverplicht borg gesteld en haar belangrijkste activa (inventaris en debiteuren) verpand aan Van Doorn Beheer tot zekerheid voor een schuld van een derde, te weten haar nieuwe aandeelhouder Vewa Beheer B.V. Door deze rechtshandelingen is het verhaalsactief van de Vennootschap bezwaard ten behoeve van een schuldeiser van een derde, zonder dat de Vennootschap daar zelf een reële tegenprestatie voor heeft ontvangen. In de hypothetische situatie zonder deze rechtshandelingen zouden de inventaris en debiteuren vrij van pandrecht in de boedel zijn gevallen en beschikbaar zijn geweest voor verhaal door de gezamenlijke schuldeisers, en zou de boedel niet zijn belast met een borgtochtschuld. In de feitelijke situatie zijn deze activa door de verpanding aan het verhaal van de gezamenlijke schuldeisers onttrokken, wat leidt tot een rechtstreekse vermindering van het actief en een verstoring van de rangorde.",
-      "benadeling_schuldeisers": true,
-      "handeling": {
-        "onverplicht_overwegingen": "De rechtshandelingen van de Vennootschap (het aangaan van de borgtocht en de verpanding van haar activa ten behoeve van de schuld van Vewa aan Van Doorn Beheer) zijn onverplicht verricht. Er bestond voor de Vennootschap geen op de wet of een overeenkomst berustende rechtsplicht om zich borg te stellen voor de schuld van haar nieuwe aandeelhouder Vewa of om haar eigen activa (debiteuren en inventaris) aan Van Doorn Beheer te verpanden. De verplichting tot het stellen van zekerheid was overeengekomen tussen Van Doorn Beheer en Vewa in hun onderlinge koop- en leningsovereenkomst; deze overeenkomst schiep geen rechtsplicht voor de Vennootschap zelf. Bovendien is het verstrekken van zekerheid door een dochtervennootschap met het oog op de verkrijging van haar aandelen door een derde in strijd met het wettelijke steunverbod van artikel 2:207c BW (oud), waardoor de nakoming van deze verplichtingen eveneens als onverplicht moet worden aangemerkt (overeenkomstig ECLI:NL:RBARN:2011:BQ8538).",
-        "onverplicht": true,
-        "is_rechtshandeling_overwegingen": "De rechtshandelingen betreffen het aangaan van een borgtocht en het verstrekken van een pandrecht op de inventaris en debiteuren door de Vennootschap aan Van Doorn Beheer. Dit zijn handelingen gericht op rechtsgevolg en kwalificeren derhalve als rechtshandelingen.",
-        "is_rechtshandeling": true,
-        "datum_rechtshandeling": "2005-12-30",
-        "verricht_door_de_schuldenaar_overwegingen": "De borgtocht en de verpanding zijn aangegaan en verricht door de Vennootschap (de latere failliet) zelf, blijkens de overeenkomst van verpanding van 30 december 2005.",
-        "verricht_door_de_schuldenaar": true,
-        "om_niet_overwegingen": "De Vennootschap heeft zich borg gesteld en haar activa verpand ten behoeve van een schuld van een derde (Vewa Beheer B.V.) aan Van Doorn Beheer. Nu de Vennootschap hiervoor zelf geen tegenprestatie heeft bedongen of ontvangen, is de rechtshandeling aan te merken als om niet.",
-        "om_niet": true
-      },
-      "faillissement": {
-        "datum_faillietverklaring": "2009-06-23"
-      },
-      "vernietigbaar": false
-    },
-    "ECLI_NL_GHARL_2025_4787": {
-      "wetenschap_overwegingen": "De betalingen door Durisol aan haar groepsvennootschap Mevriet Vastgoed B.V. vonden plaats binnen de jaartermijn voorafgaand aan het faillissement en waren onverplicht. Omdat Mevriet Vastgoed een groepsvennootschap is, geldt het wettelijk vermoeden van wetenschap van benadeling aan beide zijden ex art. 43 lid 1 sub 6° Fw. Dit vermoeden is niet ontzenuwd. Bovendien is de wetenschap ook rechtstreeks aangetoond: de (indirecte) bestuurders van Durisol en Mevriet Vastgoed waren dezelfde personen, waardoor de wetenschap van de penibele financiële situatie van Durisol en het aanstaande faillissement (dat twee maanden later werd aangevraagd) aan beide zijden aanwezig was. De boedel is benadeeld omdat de foutieve overboeking door Rabobank aan Durisol vóór faillissement leidde tot een concurrente vordering van Rabobank op de boedel, terwijl het doorstorten van dit bedrag aan Mevriet Vastgoed een actief uit de boedel heeft onttrokken ten gunste van een gelieerde partij (vergelijk ECLI:NL:GHSHE:2014:4568).",
+    "ECLI_NL_RBAMS_2026_3787": {
+      "wetenschap_overwegingen": "De wetenschap van benadeling aan de zijde van de schuldenaren (Eiser 1 en Eiser 2) is rechtstreeks aangetoond. De extern boekhouder had de bestuurders (Gedaagde 1 en Gedaagde 2) al in januari en september 2020 expliciet gewaarschuwd dat de continuïteit in gevaar was en een faillissement ondenkbaar was, waarna de administratie zelfs werd gemanipuleerd om verliezen te verhullen. De wetenschap van de wederpartij (Gedaagde 3) is eveneens rechtstreeks aangetoond, aangezien Gedaagde 3 is opgericht en wordt geleid door Gedaagde 2, die tevens bestuurder was van de schuldenaren; deze wetenschap wordt aan de rechtspersoon toegerekend. Daarnaast is sprake van een bewijsvermoeden op grond van art. 43 lid 1 sub 5 Fw (gelieerde partijen) omdat de rechtshandelingen binnen een jaar voor faillissement zijn verricht tussen vennootschappen met dezelfde (indirecte) bestuurder. Dit vermoeden is niet ontzenuwd.",
       "wetenschap_schuldenaar_aangetoond": true,
       "wetenschap_wederpartij_aangetoond": true,
       "vermoeden_wetenschap_schuldenaar_tegenbewijs": false,
@@ -68,23 +20,135 @@
       "voldoening_of_zekerheid_niet_opeisbare_schuld": null,
       "gelieerde_partij": true,
       "reeds_verplicht_voor_aanvang_termijn": false,
-      "benadeling_schuldeisers_overwegingen": "Om te bepalen of de schuldeisers zijn benadeeld in de zin van artikel 42 Fw, moet een vergelijking worden gemaakt tussen de hypothetische situatie waarin de schuldeisers zouden hebben verkeerd zonder de gewraakte rechtshandeling (de doorbetalingen van in totaal € 293.143,81 aan Mevriet Vastgoed) en de feitelijke situatie waarin zij verkeren nu deze handeling in stand blijft. De betaling door Rabobank aan Durisol was onverschuldigd. Omdat deze onverschuldigde betaling vóór het faillissement van Durisol heeft plaatsgevonden, is het ontvangen bedrag gaan deel uitmaken van het vermogen van Durisol (conform ECLI:NL:GHSHE:2014:4568). Mevriet Vastgoed verkreeg hierdoor een vordering uit onverschuldigde betaling op Durisol. Na het faillissement van Durisol zou deze vordering slechts een concurrente faillissementsvordering zijn; er is immers geen sprake van een superpreferente boedelschuld nu de onverschuldigde betaling vóór de faillietverklaring is verricht. Door het bedrag voorafgaand aan het faillissement volledig aan Mevriet Vastgoed door te betalen, heeft Durisol een concurrente schuld volledig voldaan ten nadele van de overige schuldeisers. In de hypothetische situatie zonder deze betalingen zou het bedrag van € 293.143,81 in de boedel zijn gevallen en beschikbaar zijn geweest voor de gezamenlijke schuldeisers, terwijl Mevriet Vastgoed haar vordering als concurrent had moeten indienen. De schuldeisers zijn derhalve in hun verhaalsmogelijkheden benadeeld.",
+      "benadeling_schuldeisers_overwegingen": "Op basis van de casus is er sprake van benadeling van de schuldeisers in de zin van artikel 42 Faillissementswet (Fw). De vennootschappen [eiser 1] en [eiser 2] hebben waardevolle activa, waaronder domeinnamen en de rechten uit huurovereenkomsten, overgedragen aan [gedaagde 3]. Daarnaast is het personeel overgegaan naar [gedaagde 3], waarbij de salariskosten via de rekening-courant ten laste van [eiser 2] zijn gebracht. De curator stelt dat voor deze overdrachten, die samenhangen met een oneigenlijke doorstart, geen enkele tegenprestatie is verricht. Door een vermogensvergelijking toe te passen tussen de feitelijke situatie en de hypothetische situatie waarin de overdrachten niet zouden hebben plaatsgevonden, blijkt dat het verhaalsactief van de schuldenaren substantieel is verminderd. Er zijn immers vermogensbestanddelen uit het vermogen van de schuldenaren verdwenen zonder dat daar actieve, gelijkwaardige middelen voor in de plaats zijn gekomen waarop schuldeisers zich hadden kunnen verhalen. Dit sluit aan bij de lijn in de rechtspraak (zoals ECLI:NL:RBNNE:2021:3917 en ECLI:NL:RBGEL:2015:6805), waarin wordt geoordeeld dat het overhevelen van activa of het bewerkstelligen van een doorstart zonder reële vergoeding leidt tot daadwerkelijke benadeling van de gezamenlijke schuldeisers.",
       "benadeling_schuldeisers": true,
       "handeling": {
-        "onverplicht_overwegingen": "De rechtbank Overijssel heeft in de uitspraak van 3 april 2024 (ECLI:NL:RBOVE:2024:1822), die betrekking heeft op deze specifieke casus, geoordeeld dat de betalingen door Durisol aan Mevriet Vastgoed geen onverplichte rechtshandelingen waren in de zin van artikel 42 Fw. Rabobank had per vergissing een bedrag van € 349.981,74 overgemaakt naar de rekening van Durisol, terwijl dit surplus uit de verkoop van het bedrijfsterrein toekwam aan Mevriet Vastgoed als eigenaar en hypotheekgever. Hierdoor had Durisol een opeisbare schuld aan Rabobank uit onverschuldigde betaling ter hoogte van € 293.143,81. Durisol mocht er op grond van artikel 6:34 BW redelijkerwijs van uitgaan dat Mevriet Vastgoed gerechtigd was tot dit bedrag. Door de betalingen aan Mevriet Vastgoed te verrichten, heeft Durisol haar opeisbare schuld aan Rabobank voldaan. Omdat de betalingen strekten tot voldoening van een opeisbare schuld, zijn ze niet onverplicht verricht.",
-        "onverplicht": false,
-        "is_rechtshandeling_overwegingen": "De overboekingen van in totaal € 293.143,81 door Durisol naar de rekening van Mevriet Vastgoed B.V. betreffen betalingen. Een betaling is een rechtshandeling, aangezien deze gericht is op het teweegbrengen van een rechtsgevolg, te weten het overdragen van geldmiddelen en het voldoen aan een (vermeende) verbintenis.",
+        "onverplicht_overwegingen": "Het samenstel van rechtshandelingen waarbij [eiser 1] en [eiser 2] vermogensbestanddelen (zoals domeinnamen en huurrechten) hebben overgedragen aan [gedaagde 3] ten behoeve van een doorstart, is onverplicht verricht. Er bestond geen op de wet of een voorafgaande overeenkomst berustende rechtsplicht die [eiser 1] en [eiser 2] verplichtte tot deze overdrachten, waardoor de prestaties niet in rechte konden worden afgedwongen.",
+        "onverplicht": true,
+        "is_rechtshandeling_overwegingen": "De overdracht van domeinnamen, huurrechten en de overgang van personeel betreffen rechtshandelingen, aangezien deze gericht zijn op het bewerkstelligen van rechtsgevolgen (de overgang van eigendom en contractuele posities).",
+        "is_rechtshandeling": true,
+        "datum_rechtshandeling": "2021-01-21",
+        "verricht_door_de_schuldenaar_overwegingen": "De overdrachten van de domeinnamen en de huurrechten zijn verricht door de schuldenaren [eiser 1] en [eiser 2] zelf.",
+        "verricht_door_de_schuldenaar": true,
+        "om_niet_overwegingen": "De curator stelt dat de overdracht van de vermogensbestanddelen heeft plaatsgevonden zonder dat [gedaagde 3] daarvoor enige tegenprestatie heeft verricht, waardoor de rechtshandelingen om niet zijn verricht.",
+        "om_niet": true
+      },
+      "faillissement": {
+        "datum_faillietverklaring": "2021-07-13"
+      },
+      "vernietigbaar": true
+    },
+    "ECLI_NL_RBOVE_2026_4561": {
+      "wetenschap_overwegingen": "De betaling van € 3.050,00 op 23 oktober 2023 is aangemerkt als een schenking, wat een rechtshandeling om niet is. Omdat deze rechtshandeling is verricht binnen één jaar vóór de faillietverklaring van de schuldenaar (20 augustus 2024), is het wettelijk bewijsvermoeden van artikel 45 Fw van toepassing. Hierdoor wordt vermoed dat de schuldenaar wist of behoorde te weten dat benadeling van de schuldeisers het gevolg zou zijn. Er zijn geen feiten gesteld die dit vermoeden ontzenuwen, waardoor het tegenbewijs niet slaagt. Omdat het een rechtshandeling om niet betreft, is de wetenschap van de wederpartij (de gedaagde) niet vereist voor vernietiging onder artikel 42 Fw. De bewijsvermoedens van artikel 43 Fw zijn hier niet aan de orde.",
+      "wetenschap_schuldenaar_aangetoond": false,
+      "wetenschap_wederpartij_aangetoond": null,
+      "vermoeden_wetenschap_schuldenaar_tegenbewijs": false,
+      "vermoeden_wetenschap_wederpartij_tegenbewijs": null,
+      "tegen_onderwaarde": null,
+      "voldoening_of_zekerheid_niet_opeisbare_schuld": null,
+      "gelieerde_partij": null,
+      "reeds_verplicht_voor_aanvang_termijn": null,
+      "benadeling_schuldeisers_overwegingen": "De overboeking van € 3.050,00 door [naam 1] aan [gedaagde] is verricht onder de omschrijving 'schenking' en kwalificeert derhalve als een rechtshandeling om niet. Om te bepalen of er sprake is van benadeling van de schuldeisers in de zin van artikel 42 Fw, dient een vermogensvergelijking te worden gemaakt tussen de hypothetische situatie waarin de schuldeisers zouden hebben verkeerd zonder de schenking, en de feitelijke situatie waarin zij verkeren nu de schenking heeft plaatsgevonden. Door de schenking is het actieve vermogen van de schuldenaar met € 3.050,00 verminderd zonder dat daar enige tegenprestatie tegenover stond. Hierdoor is het voor verhaal beschikbare actief van de schuldenaar rechtstreeks afgenomen, wat leidt tot een verslechtering van de verhaalsmogelijkheden van de schuldeisers. In lijn met vaste rechtspraak (zoals ECLI:NL:GHSHE:2006:BC2959, r.o. 7.7 en ECLI:NL:RBGEL:2022:6533, r.o. 4.20) brengt een dergelijke onverplichte vermogensvermindering om niet benadeling van de schuldeisers met zich mee, aangezien het actieve boedelvolume hiermee is verkleind.",
+      "benadeling_schuldeisers": true,
+      "handeling": {
+        "onverplicht_overwegingen": "De betaling van € 3.050,00 door de schuldenaar ([naam 1]) aan zijn zoon ([gedaagde]) is verricht onder de omschrijving 'schenking'. Een schenking is een rechtshandeling om niet. Er bestond voor de schuldenaar geen enkele op de wet of een overeenkomst berustende rechtsplicht om dit bedrag aan gedaagde te betalen. De rechtshandeling kon derhalve niet in rechte worden afgedwongen. Zelfs indien er sprake zou zijn van het voldoen aan een morele plicht of natuurlijke verbintenis, neemt dit het onverplichte karakter van de rechtshandeling niet weg (overeenkomstig ECLI:NL:GHSHE:2006:BC2959). De schenking is dan ook een onverplichte rechtshandeling in de zin van artikel 42 Faillissementswet.",
+        "onverplicht": true,
+        "is_rechtshandeling_overwegingen": "De overboeking van een geldbedrag van € 3.050,00 met de omschrijving 'schenking' betreft een rechtshandeling (schenking en de goederenrechtelijke levering van het geld), aangezien deze gericht is op het rechtsgevolg van eigendomsoverdracht.",
+        "is_rechtshandeling": true,
+        "datum_rechtshandeling": "2023-10-23",
+        "verricht_door_de_schuldenaar_overwegingen": "De overboeking is verricht door de schuldenaar zelf, te weten de heer [naam 1], voorafgaand aan zijn faillissement.",
+        "verricht_door_de_schuldenaar": true,
+        "om_niet_overwegingen": "De rechtshandeling is aangemerkt als een 'schenking', waarbij geen sprake is van een tegenprestatie. De handeling is derhalve om niet verricht.",
+        "om_niet": true
+      },
+      "faillissement": {
+        "datum_faillietverklaring": "2024-08-20"
+      },
+      "vernietigbaar": true
+    },
+    "ECLI_NL_RBZWB_2026_4349": {
+      "wetenschap_overwegingen": "De betaling van € 552.500,- door Concepts aan haar groepsmaatschappij Profundo op 1 augustus 2019 vond materieel plaats ter voldoening van een niet-opeisbare schuld (art. 43 lid 1 sub 2 Fw), aangezien de lening geen aflossingstermijnen kende en niet was opgezegd met inachtneming van de opzegtermijn van 6 maanden. Er bestond geen eerdere verplichting tot deze betaling. Hoewel sprake is van een groepsmaatschappij (art. 43 lid 1 sub 6 Fw), is de wetenschap van benadeling aan beide zijden niet rechtstreeks aangetoond en zijn de bewijsvermoedens succesvol ontzenuwd. Uit de onweersproken feiten blijkt namelijk dat Concepts na de betaling nog circa € 2,5 miljoen aan financiering heeft ontvangen en € 3,3 miljoen aan schuldeisers heeft betaald, en dat de financiering pas in april 2020 werd gestaakt. Ten tijde van de rechtshandeling in augustus 2019 waren het faillissement en een tekort daarin dan ook niet met een redelijke mate van waarschijnlijkheid te voorzien.",
+      "wetenschap_schuldenaar_aangetoond": false,
+      "wetenschap_wederpartij_aangetoond": false,
+      "vermoeden_wetenschap_schuldenaar_tegenbewijs": true,
+      "vermoeden_wetenschap_wederpartij_tegenbewijs": true,
+      "tegen_onderwaarde": null,
+      "voldoening_of_zekerheid_niet_opeisbare_schuld": true,
+      "gelieerde_partij": true,
+      "reeds_verplicht_voor_aanvang_termijn": false,
+      "benadeling_schuldeisers_overwegingen": "De beoordeling van de benadeling van schuldeisers in de zin van artikel 42 Faillissementswet (Fw) vindt plaats door middel van een vermogensvergelijking. Hierbij wordt de hypothetische situatie waarin de schuldeisers zouden hebben verkeerd zonder de gewraakte rechtshandeling vergeleken met de feitelijke situatie waarin zij verkeren nu de handeling in stand blijft. De rechtshandeling betreft hier de betaling van € 552.500,00 door Concepts aan Profundo op 1 augustus 2019, als sluitstuk van een kasronde binnen de groep. In de feitelijke situatie is het actief van Concepts verminderd met € 552.500,00 (althans is de vordering op Construction tenietgegaan door betaling, waarna de ontvangen middelen direct zijn doorbetaald aan Profundo) en is de schuld aan Profundo met een gelijke omvang verminderd. In de hypothetische situatie waarin de betaling aan Profundo achterwege was gebleven, zou Concepts de van Construction ontvangen € 552.500,00 hebben behouden (of zou de vordering op Construction nog hebben bestaan). Deze middelen zouden dan beschikbaar zijn geweest voor de gezamenlijke schuldeisers. Nu er sprake is van een faillissement met een aanzienlijk tekort, leidt de betaling aan één specifieke schuldeiser (Profundo) tot een directe vermindering van het voor de gezamenlijke schuldeisers beschikbare actieve boedelvolume en een verstoring van de paritas creditorum (de rangorde en gelijkheid van schuldeisers). De omstandigheid dat Concepts na de betaling nog maanden is voortgezet, € 2,5 miljoen aan nieuwe financiering heeft ontvangen en € 3,3 miljoen aan andere crediteuren heeft betaald, heft deze benadeling niet op. De benadeling dient immers te worden beoordeeld op het moment dat de curator de vernietiging inroept (juli 2024), op welk moment het tekort in de boedel onverminderd aanwezig is. Zonder de betaling zou de boedel wegens het ontbreken van die € 552.500,00 thans ongunstiger gepositioneerd zijn. Er is derhalve sprake van benadeling van de schuldeisers.",
+      "benadeling_schuldeisers": true,
+      "handeling": {
+        "onverplicht_overwegingen": "De betaling van € 552.500,00 door Concepts aan Profundo op 1 augustus 2019 is onverplicht verricht. Een rechtshandeling is onverplicht wanneer daartoe geen op de wet of een overeenkomst berustende rechtsplicht bestond die in rechte kon worden afgedwongen. Het betalen van een niet-opeisbare schuld is in beginsel onverplicht. Uit de overeenkomst van geldlening van 13 juli 2017 blijkt dat aan de lening geen looptijd of aflossingstermijnen waren verbonden. Profundo kon de lening weliswaar opzeggen, maar met inachtneming van een opzegtermijn van 6 maanden, en er is niet gesteld of gebleken dat een dergelijke opzegging heeft plaatsgevonden. Daarnaast deden de in artikel 4 van de overeenkomst genoemde situaties voor directe opeisbaarheid (zoals faillissement of beslag) zich op 1 augustus 2019 niet voor. De schuld was op het moment van de betaling dan ook niet opeisbaar. De omstandigheid dat de betaling plaatsvond in het kader van een kasronde binnen de groep creëert bovendien geen in rechte afdwingbare rechtsplicht tot betaling.",
+        "onverplicht": true,
+        "is_rechtshandeling_overwegingen": "De betaling van een bedrag van € 552.500,00 door Concepts aan Profundo ter aflossing van een lening is een rechtshandeling, aangezien deze gericht is op het rechtsgevolg van het tenietgaan van een verbintenis (nakoming).",
+        "is_rechtshandeling": true,
+        "datum_rechtshandeling": "2019-08-01",
+        "verricht_door_de_schuldenaar_overwegingen": "De betaling is rechtstreeks verricht door de schuldenaar, Concepts, aan haar schuldeiser Profundo.",
+        "verricht_door_de_schuldenaar": true,
+        "om_niet_overwegingen": "De betaling betreft de aflossing van een lening (terugbetaling op de lening), waardoor een schuld van Concepts aan Profundo tenietgaat. Er staat derhalve een prestatie tegenover (bevrijding uit de schuld), waardoor de handeling om baat (anders dan om niet) is.",
+        "om_niet": false
+      },
+      "faillissement": {
+        "datum_faillietverklaring": "2020-08-04"
+      },
+      "vernietigbaar": false
+    },
+    "ECLI_NL_GHARL_2013_822": {
+      "wetenschap_overwegingen": "De rechtshandelingen (de borgtocht en verpanding) zijn verricht op 30 december 2005, terwijl het faillissement van de Vennootschap pas op 23 juni 2009 is uitgesproken. Omdat deze handelingen ruim buiten de jaartermijn van art. 43 en 45 Fw vallen, zijn de wettelijke bewijsvermoedens niet van toepassing. De curator moet de wetenschap van benadeling derhalve rechtstreeks aantonen op grond van art. 42 Fw. Hiervoor is vereist dat ten tijde van de rechtshandelingen het faillissement en een tekort daarin met een redelijke mate van waarschijnlijkheid voorzienbaar waren. Gelet op het tijdsverloop van circa 3,5 jaar en het feit dat de Vennootschap pas veel later insolvent is geraakt, is deze wetenschap van benadeling aan beide zijden niet aangetoond.",
+      "wetenschap_schuldenaar_aangetoond": false,
+      "wetenschap_wederpartij_aangetoond": false,
+      "vermoeden_wetenschap_schuldenaar_tegenbewijs": null,
+      "vermoeden_wetenschap_wederpartij_tegenbewijs": null,
+      "tegen_onderwaarde": null,
+      "voldoening_of_zekerheid_niet_opeisbare_schuld": null,
+      "gelieerde_partij": null,
+      "reeds_verplicht_voor_aanvang_termijn": null,
+      "benadeling_schuldeisers_overwegingen": "De aangevochten rechtshandelingen betreffen de door de Vennootschap verstrekte borgtocht en de verpanding van haar inventaris en debiteuren aan Van Doorn Beheer, tot zekerheid van een geldlening van € 150.000,- die Van Doorn Beheer heeft verstrekt aan de koper van de aandelen (Vewa). Dit is een onverplichte rechtshandeling waarbij de Vennootschap haar eigen activa bezwaart voor een schuld van een derde (haar nieuwe moedermaatschappij), zonder dat daar voor de Vennootschap zelf een reële tegenprestatie of bedrijfseconomisch voordeel tegenover staat. Door deze verpanding zijn de belangrijkste verhaalscomponenten van de Vennootschap (inventaris en debiteuren) bezwaard met een pandrecht. Bij een vergelijking tussen de hypothetische situatie zonder deze rechtshandelingen (waarin deze activa onbezwaard in de boedel zouden vallen) en de feitelijke situatie (waarin de activa bij voorrang toekomen aan de pandhouder), staat vast dat de verhaalsmogelijkheden van de gezamenlijke schuldeisers zijn verminderd. Er is derhalve sprake van daadwerkelijke benadeling van de schuldeisers in de zin van artikel 42 Fw.",
+      "benadeling_schuldeisers": true,
+      "handeling": {
+        "onverplicht_overwegingen": "De rechtshandelingen van de Vennootschap (F. van Doorn B.V.) bestaande uit het verstrekken van een borgtocht en het vestigen van pandrechten op haar debiteuren en inventaris ten behoeve van Van Doorn Beheer B.V. zijn onverplicht verricht. Er bestond voor de Vennootschap geen eerdere, op de wet of een overeenkomst berustende rechtsplicht om zich jegens Van Doorn Beheer te verbinden voor de schuld van de koper (Vewa Beheer B.V.). De verplichting om deze zekerheden te stellen was weliswaar overeengekomen in de koopovereenkomst en de leningsovereenkomst, maar deze overeenkomsten waren gesloten tussen Van Doorn Beheer en Vewa. De Vennootschap was hierbij geen partij en kon derhalve niet in rechte worden gedwongen om deze zekerheden te verstrekken. Het verstrekken van zekerheid voor de schuld van een derde zonder eerdere eigen rechtsplicht is onverplicht (vergelijk ECLI:NL:RBOVE:2018:1717 en ECLI:NL:RBROT:2009:BH6448).",
+        "onverplicht": true,
+        "is_rechtshandeling_overwegingen": "De overeenkomst van verpanding en de daarin opgenomen borgtocht d.d. 30 december 2005 zijn rechtshandelingen, aangezien zij gericht zijn op het in het leven roepen van goederenrechtelijke en obligatoire rechtsgevolgen (het vestigen van een pandrecht en het aangaan van een borgtocht).",
+        "is_rechtshandeling": true,
+        "datum_rechtshandeling": "2005-12-30",
+        "verricht_door_de_schuldenaar_overwegingen": "De overeenkomst van verpanding en de borgtocht zijn aangegaan en verricht door de Vennootschap (de latere failliet) zelf als pandgever en borg.",
+        "verricht_door_de_schuldenaar": true,
+        "om_niet_overwegingen": "De Vennootschap heeft zich borg gesteld en haar activa verpand ten behoeve van een schuld van een derde (Vewa Beheer B.V.) aan Van Doorn Beheer, zonder dat de Vennootschap daar zelf een reële tegenprestatie voor ontving. De rechtshandeling is derhalve om niet verricht.",
+        "om_niet": true
+      },
+      "faillissement": {
+        "datum_faillietverklaring": "2009-06-23"
+      },
+      "vernietigbaar": false
+    },
+    "ECLI_NL_GHARL_2025_4787": {
+      "wetenschap_overwegingen": "De betalingen van Durisol aan haar groepsvennootschap Mevriet Vastgoed ter correctie van de foutieve overboeking door Rabobank zijn onverplicht. Conform de lijn uit ECLI:NL:GHSHE:2014:4568 (Studio '83) leidt het terugstorten van een vóór faillissement abusievelijk ontvangen bedrag tot benadeling van de schuldeisers, omdat de werkelijke rechthebbende (Mevriet Vastgoed) na faillissement slechts een concurrente vordering op de boedel zou hebben. Omdat de rechtshandeling binnen een jaar voor de faillietverklaring is verricht met een groepsmaatschappij, geldt het wettelijk bewijsvermoeden van art. 43 lid 1 sub 6° Fw. Dit vermoeden is niet ontzenuwd. Daarnaast is de wetenschap van benadeling aan beide zijden ook rechtstreeks aangetoond: de vennootschappen zijn nauw verweven via gemeenschappelijke bestuurders en het faillissement werd kort daarna (binnen twee maanden) door Durisol zelf aangevraagd, waardoor het faillissement en een tekort daarin destijds met een redelijke mate van waarschijnlijkheid voorzienbaar waren.",
+      "wetenschap_schuldenaar_aangetoond": true,
+      "wetenschap_wederpartij_aangetoond": true,
+      "vermoeden_wetenschap_schuldenaar_tegenbewijs": false,
+      "vermoeden_wetenschap_wederpartij_tegenbewijs": false,
+      "tegen_onderwaarde": null,
+      "voldoening_of_zekerheid_niet_opeisbare_schuld": null,
+      "gelieerde_partij": true,
+      "reeds_verplicht_voor_aanvang_termijn": false,
+      "benadeling_schuldeisers_overwegingen": "Om te bepalen of er sprake is van benadeling van schuldeisers in de zin van artikel 42 Fw, moet een vergelijking worden gemaakt tussen de feitelijke situatie waarin de schuldeisers verkeren en de hypothetische situatie zonder de betalingen van in totaal € 293.143,81 aan Mevriet Vastgoed. Indien de betalingen niet waren verricht, zou dit bedrag (dat door Rabobank per abuis aan Durisol was overgemaakt) in het vermogen van Durisol zijn achtergebleven. Mevriet Vastgoed zou wegens deze foutieve betaling een vordering uit onverschuldigde betaling of ongerechtvaardigde verrijking hebben op Durisol. Omdat deze onverschuldigde betaling voorafgaand aan het faillissement heeft plaatsgevonden, zou de vordering van Mevriet Vastgoed in het faillissement van Durisol slechts een concurrente vordering zijn (conform ECLI:NL:GHSHE:2014:4568). Door de betalingen is de concurrente vordering van Mevriet Vastgoed volledig voldaan, waardoor het actieve boedelvermogen met € 293.143,81 is verminderd. Hierdoor is de verhaalsruimte voor de overige schuldeisers verkleind, wat leidt tot een feitelijke benadeling van de schuldeisers.",
+      "benadeling_schuldeisers": true,
+      "handeling": {
+        "onverplicht_overwegingen": "De betalingen door Durisol aan Mevriet Vastgoed B.V. zijn onverplicht verricht. Een rechtshandeling is onverplicht wanneer daartoe geen op de wet of een overeenkomst berustende rechtsplicht bestond die in rechte kon worden afgedwongen. Hoewel Rabobank per abuis het surplus van de verkoopopbrengst (dat toebehoorde aan Mevriet Vastgoed) aan Durisol had overgemaakt, creëerde dit enkel een verbintenis uit onverschuldigde betaling tussen Rabobank en Durisol. Er bestond geen directe contractuele of wettelijke rechtsbetrekking tussen Durisol en Mevriet Vastgoed op grond waarvan Mevriet Vastgoed betaling van Durisol kon afdwingen. De omstandigheid dat Rabobank achteraf heeft ingestemd met de rechtstreekse overboekingen ter aflossing van haar eigen schuld aan Mevriet Vastgoed en haar vordering op Durisol, maakt de betalingen jegens Mevriet Vastgoed niet verplicht. Nu Mevriet Vastgoed de betalingen niet in rechte van Durisol kon afdwingen, zijn de overboekingen onverplicht verricht.",
+        "onverplicht": true,
+        "is_rechtshandeling_overwegingen": "De overboekingen van in totaal € 293.143,81 door Durisol aan Mevriet Vastgoed zijn rechtshandelingen, aangezien deze betalingen gericht zijn op het teweegbrengen van een rechtsgevolg, namelijk het overdragen van vermogensbestanddelen ter voldoening van een vermeende schuld.",
         "is_rechtshandeling": true,
         "datum_rechtshandeling": "2022-02-04",
-        "verricht_door_de_schuldenaar_overwegingen": "De overboekingen zijn verricht door Durisol, de schuldenaar die naderhand failliet is verklaard, vanaf haar eigen bankrekening.",
+        "verricht_door_de_schuldenaar_overwegingen": "De overboekingen zijn verricht door Durisol, de schuldenaar die naderhand failliet is verklaard.",
         "verricht_door_de_schuldenaar": true,
-        "om_niet_overwegingen": "De betalingen zijn verricht ter terugbetaling van het surplus dat Rabobank abusievelijk naar Durisol had overgemaakt in plaats van naar Mevriet Vastgoed. De betalingen dienden ter aflossing van een vordering uit onverschuldigde betaling. Omdat de betalingen strekten tot bevrijding van een schuld (en dus niet zonder tegenprestatie/om niet geschiedden), is er sprake van een rechtshandeling om baat (anders dan om niet).",
+        "om_niet_overwegingen": "De rechtshandeling is anders dan om niet (om baat). De betalingen vonden plaats ter aflossing van een vordering uit onverschuldigde betaling c.q. ter doorstorting van gelden die Rabobank per abuis aan Durisol had overgemaakt maar die toebehoorden aan Mevriet Vastgoed. Er stond derhalve een prestatie (bevrijding van een schuld/verplichting) tegenover.",
         "om_niet": false
       },
       "faillissement": {
         "datum_faillietverklaring": "2022-05-02"
       },
-      "vernietigbaar": false
+      "vernietigbaar": true
     },
     "JOR_2009_46": {
       "wetenschap_overwegingen": "In deze casus is sprake van onverplichte betalingen door ECPE aan haar meerderheidsaandeelhouder ECP (65%) binnen een maand voor het faillissement. Omdat ECP een gelieerde partij is (groepsmaatschappij in de zin van art. 43 lid 1 sub 6 Fw), geldt het wettelijk bewijsvermoeden van art. 43 lid 1 Fw. Dit vermoeden is niet ontzenuwd. Bovendien is de wetenschap van benadeling aan beide zijden rechtstreeks aangetoond. Uit de verklaring van interim-manager Fontijn blijkt immers dat de gelden bewust zijn overgeboekt naar ECP 'uit voorzorg voor het geval crediteuren beslag zouden leggen'. Zowel de schuldenaar (ECPE via Fontijn) als de wederpartij (ECP via haar bestuurder Hoeksema, die de betalingen coördineerde) wisten derhalve dat het faillissement en een tekort daarin met een redelijke mate van waarschijnlijkheid te voorzien waren en dat crediteuren hierdoor zouden worden benadeeld.",

@@ -1,0 +1,2 @@
+# Exclude data, gold standards and model outputs from GitHub's language statistics
+data/** linguist-vendored

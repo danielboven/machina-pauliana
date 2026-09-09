@@ -1,3 +1,10 @@
+---
+ecli: ECLI:NL:GHARL:2013:822
+jurisprudence_journal: JOR 2014/78
+judgment_date: 12-02-2013
+ablation: ECLI:NL:RBARN:2011:BQ8538
+---
+
 3.1. Tussen partijen staan, als enerzijds gesteld en anderzijds niet althans onvoldoende gemotiveerd betwist, de volgende feiten vast.
 
 3.2. Van Doorn Beheer was aandeelhouder van de Vennootschap. Op 9 respectievelijk 28 december 2005 heeft Van Doorn Beheer de aandelen in de Vennootschap verkocht en geleverd aan Vewa Beheer B.V. (hierna: Vewa).

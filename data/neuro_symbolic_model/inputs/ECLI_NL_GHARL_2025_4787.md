@@ -1,3 +1,10 @@
+---
+ecli: ECLI:NL:GHARL:2025:4787
+jurisprudence_journal: JOR 2026/137
+judgment_date: 08-07-2025
+ablation: ECLI:NL:RBOVE:2024:1822
+---
+
 2.1. Het gaat in deze zaak om de vraag of boekingen die Durisol enkele maanden voor haar faillissement op de rekening van een van haar groepsvennootschappen heeft gedaan door de curator kunnen worden vernietigd, of dat de curator althans een schadevordering op Mevriet c.s. heeft die op deze betalingen is gebaseerd. Dat geschil heeft de volgende feitelijke achtergrond.
 
 2.2. [geïntimeerde6] en [geïntimeerde5] zijn bestuurders en enig aandeelhouders van respectievelijk B2R en [geïntimeerde4]. Deze vennootschappen zijn of waren op hun beurt bestuurders en aandeelhouders van Mevriet, Mevriet Vastgoed en (voorheen) van Durisol.

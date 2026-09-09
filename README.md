@@ -2,7 +2,7 @@
 
 Daan Boven
 
-Machina Pauliana is a BSc thesis project (Computer Science, University of Amsterdam)
+Machina Pauliana is a research project from the University of Amsterdam
 on the neuro-symbolic modelling of transaction avoidance (actio pauliana of Article 42 Fw) in Dutch insolvency law.
 It combines a formal, rule-based model of the statutory provision with a data-driven pipeline that retrieves,
 segments, and embeds Dutch case law from [rechtspraak.nl](https://rechtspraak.nl), used as a neural subroutine
@@ -25,7 +25,7 @@ the details.
 | [`rag/`](rag/) | Stores, annotates and embeds the segmented judgments, then retrieves similar cases and their procedural relations. |
 | [`neuro_symbolic_model/`](neuro_symbolic_model/) | Resolves the open-textured inputs with LLM routines and lets the Catala model decide whether the act is voidable. |
 | [`evaluation/`](evaluation/) | Builds the validation datasets and evaluates segmentation, pre-retrieval annotation and the final model. |
-| [`data/`](data/) | Contains the corpus data, database snapshot, gold standards, model outputs and generated figures used in the thesis. |
+| [`data/`](data/) | Contains the corpus data, database snapshot, gold standards, model outputs and generated figures used in the research paper. |
 
 ## Requirements
 
