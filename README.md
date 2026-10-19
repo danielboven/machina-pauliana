@@ -2,10 +2,13 @@
 
 Daan Boven
 
+This repository accompanies the paper *Machina Pauliana: A neuro-symbolic approach to the actio pauliana in Dutch insolvency law*
+by Daan Boven, Gregor Behnke and David Graus, accepted at JURIX 2026.
+
 Machina Pauliana is a research project from the University of Amsterdam
 on the neuro-symbolic modelling of transaction avoidance (actio pauliana of Article 42 Fw) in Dutch insolvency law.
 It combines a formal, rule-based model of the statutory provision with a data-driven pipeline that retrieves,
-segments, and embeds Dutch case law from [rechtspraak.nl](https://rechtspraak.nl), used as a neural subroutine
+segments, and embeds Dutch case law from [rechtspraak.nl](https://rechtspraak.nl), used as a neural CBR subroutine
 to interpret the open-textured elements. The aim is to assess how well this hybrid approach produces judicial
 reasoning in (possible) actio pauliana cases.
 
@@ -14,7 +17,7 @@ reasoning in (possible) actio pauliana cases.
 The corpus construction, survey and segmentation stages prepare the case law
 for RAG. The Catala model supplies the formal legal rules, and the
 neuro-symbolic model combines both sides. Each folder has its own README with
-the details.
+the details. All LLM prompts are listed in [`PROMPTS.md`](PROMPTS.md).
 
 | directory | purpose |
 |---|---|

@@ -29,7 +29,7 @@ ablate from retrieval, e.g. the other proceedings of the case being resolved.
 
 ## The four routines
 
-One coroutine and three RAG subroutines that use case-based reasoning.
+One factual-extraction routine (coroutine) and three RAG CBR subroutines that use case-based reasoning.
 Schemas are all defined as a Pydantic schema based on [`catala_json_schema/*.json`](./catala_json_schema/)
 and the LLM prompts are also defined in the Python files:
 

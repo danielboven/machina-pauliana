@@ -1,0 +1,82 @@
+cff-version: 1.2.0
+message: >-
+  If you use this software or data, please cite the accompanying JURIX 2026
+  paper below.
+type: software
+title: "Machina Pauliana: Modelling actio pauliana in Dutch insolvency law"
+abstract: >-
+  A neuro-symbolic model of the actio pauliana of Article 42 of the Dutch
+  Bankruptcy Act (Faillissementswet, Fw), which allows an insolvency
+  practitioner to avoid transactions that prejudice creditors. Its symbolic
+  core is written in Catala in a literate style that keeps statute and
+  formalisation aligned, with open-textured terms represented as boolean inputs
+  where neural components couple to the symbolic solver. A neural routine
+  structures a case's natural-language facts into boolean and date inputs.
+  Neural subroutines resolve the open-textured terms through case-based
+  reasoning over Dutch civil judgments from rechtspraak.nl, retrieved through a
+  pipeline that filters on the requirement being resolved and expands along the
+  procedural chain of a case. The repository also contains the pipeline that
+  segments and labels those judgments, together with the evaluation scripts,
+  gold standards and model outputs.
+authors:
+  - given-names: Daan
+    family-names: Boven
+    affiliation: University of Amsterdam
+    orcid: "https://orcid.org/0009-0003-5031-9634"
+repository-code: "https://github.com/danielboven/machina-pauliana"
+license: BSD-3-Clause
+keywords:
+  - neuro-symbolic AI
+  - case-based reasoning
+  - retrieval-augmented generation
+  - large language models
+  - rules as code
+preferred-citation:
+  type: conference-paper
+  title: "Machina Pauliana: A neuro-symbolic approach to the actio pauliana in Dutch insolvency law"
+  authors:
+    - given-names: Daan
+      family-names: Boven
+      affiliation: University of Amsterdam
+      orcid: "https://orcid.org/0009-0003-5031-9634"
+    - given-names: Gregor
+      family-names: Behnke
+      affiliation: University of Amsterdam
+      orcid: "https://orcid.org/0000-0002-1445-9934"
+    - given-names: David
+      family-names: Graus
+      affiliation: University of Amsterdam
+      orcid: "https://orcid.org/0000-0002-6245-0870"
+  collection-title: "Legal Knowledge and Information Systems: JURIX 2026"
+  conference:
+    name: "JURIX 2026"
+  publisher:
+    name: IOS Press
+  year: 2026
+  abstract: >-
+    Applying a legal provision frequently requires both structured rule-based
+    reasoning and sensitivity to open-textured terms developed in case law. The
+    actio pauliana of Article 42 of the Dutch Bankruptcy Act
+    (Faillissementswet, Fw), which allows an insolvency practitioner to avoid
+    transactions that prejudice creditors, requires both. We present a
+    neuro-symbolic model of Article 42 Fw. Its symbolic core is written in
+    Catala in a literate style that keeps statute and formalisation aligned and
+    was developed through pair programming, with open-textured terms
+    represented as boolean inputs where neural components couple to the
+    symbolic solver. A neural routine structures a case's natural-language
+    facts into boolean and date inputs. Neural subroutines resolve the
+    open-textured terms through case-based reasoning over Dutch civil
+    judgments, retrieved through a pipeline that filters on the requirement
+    being resolved and expands along the procedural chain of a case.
+    Segmenting and labelling those judgments attains high precision and recall
+    against a manually annotated gold standard of 100 judgments. On ten
+    hand-annotated cases the neuro-symbolic model handles most criteria
+    reasonably but struggles with the knowledge requirement. Retrieval depth
+    shows no clear quantitative effect, although retrieved judgments provide
+    explicit grounding in prior case law.
+  keywords:
+    - neuro-symbolic AI
+    - case-based reasoning
+    - retrieval-augmented generation
+    - large language models
+    - rules as code

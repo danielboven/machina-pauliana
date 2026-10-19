@@ -61,7 +61,7 @@ whether the contested transaction is voidable. Neural routines supply the inputs
 that require either structuring natural-language facts or interpreting
 open-textured terms developed in case law.
 
-The neural coroutine and case-based subroutines supply these structured inputs
+The neural factual-extraction routine (coroutine) and CBR subroutines supply these structured inputs
 from the natural language facts and retrieved decisions. The division of tasks and schemas are
 documented in the [final neuro-symbolic model](../neuro_symbolic_model/README.md).
 

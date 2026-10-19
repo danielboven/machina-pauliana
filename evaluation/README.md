@@ -100,7 +100,7 @@ ablation: ECLI:NL:RBARN:2011:BQ8538
 
 naming one ECLI (or a list) to remove from RAG retrieval for that case. This is
 for the other proceedings in the same case. Ablated judgments are dropped from
-the candidate pool *before* ranking, so each subroutine still receives `k`
+the candidate pool *before* ranking, so each CBR subroutine still receives `k`
 example judgments: the next-ranked judgment moves up. Pass `--no-ablation` to
 ignore the key and retrieve over the full corpus. At `k = 0` nothing is
 retrieved, so the key is ignored as well. When at least one case is ablated,

@@ -1,6 +1,6 @@
 # rag
 
-The retrieval store and advanced RAG behind the three case-based subroutines of
+The retrieval store and advanced RAG behind the three case-based reasoning (CBR) subroutines of
 the [`neuro_symbolic_model`](../neuro_symbolic_model/). It holds the segmented
 judgments (as Markdown sections), their section embeddings and the relations of
 their procedural chain (i.e. "eerdere aanleg") in one Postgres/pgvector
