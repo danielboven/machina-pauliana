@@ -3,6 +3,8 @@ message: >-
   If you use this software or data, please cite the accompanying JURIX 2026
   paper below.
 type: software
+version: 1.0.0
+date-released: 2026-10-19
 title: "Machina Pauliana: Modelling actio pauliana in Dutch insolvency law"
 abstract: >-
   A neuro-symbolic model of the actio pauliana of Article 42 of the Dutch
